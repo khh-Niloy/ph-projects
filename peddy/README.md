@@ -2,6 +2,8 @@
 
 Peddy is a dynamic and responsive pet adoption platform that allows users to browse and adopt their favorite pets. The platform fetches real-time pet data from an API and offers users a seamless experience with a clean interface and easy-to-use features.
 
+![Screenshot](images/peddy.png)
+
 ## Key Features
 1. **Responsive Navbar**: A sleek and fully responsive navigation bar
 2. **Dynamic Pet Display**: Pets are fetched and displayed dynamically with real-time API integration.
@@ -16,6 +18,4 @@ Peddy is a dynamic and responsive pet adoption platform that allows users to bro
 - Template Literals
 
 ## Live Demo
-1. [Netlify](https://stellular-vacherin-74d8a7.netlify.app/)
-2. [Github live site (created by me)](https://khh-niloy.github.io/peddy-a6/)
-3. [Vercel](https://peddy-a6-k32zpprh8-hasib-hossain-niloys-projects.vercel.app/)
+[Netlify](https://peddy-a5.netlify.app/)
