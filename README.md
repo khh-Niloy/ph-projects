@@ -3,8 +3,7 @@ A cutting-edge, responsive pet adoption platform leveraging Tailwind CSS, ES6+ J
 ### Source Code: [Peddy](https://github.com/khh-Niloy/ph-projects/tree/main/peddy) | Live demo: [Peddy](https://peddy-a5.netlify.app/)
 ![Screenshot](thumb-images/peddy.png)
 
-##
-##
+<hr/>
 
 # Rinterio – Interior Design Solutions
 Crafting modern, functional spaces with a responsive design powered by Tailwind CSS and intuitive web technologies for a seamless user experience.
