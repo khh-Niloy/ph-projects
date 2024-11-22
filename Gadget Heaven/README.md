@@ -4,8 +4,7 @@ Gadget Heaven is a user-friendly web application that showcases a curated select
 
 ## Live Demo
 
-- [Netlify](https://frolicking-cobbler-ba11bc.netlify.app/)
-- [Surge](https://past-nighst.surge.sh/)
+- [Netlify](https://imaginative-semolina-e3f9d0.netlify.app/)
 
 ## Documentation
 
