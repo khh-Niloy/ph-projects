@@ -4,6 +4,9 @@ A cutting-edge, responsive pet adoption platform leveraging Tailwind CSS, ES6+ J
 ![Screenshot](thumb-images/peddy.png)
 
 ##
+##
 
-### Project: [Rinterio](https://github.com/khh-Niloy/ph-projects/tree/main/rinterio) | Live demo: [Rinterio](https://rinterio-a3.netlify.app/)
+# Rinterio – Interior Design Solutions
+Crafting modern, functional spaces with a responsive design powered by Tailwind CSS and intuitive web technologies for a seamless user experience.
+### Source Code: [Rinterio](https://github.com/khh-Niloy/ph-projects/tree/main/rinterio) | Live demo: [Rinterio](https://rinterio-a3.netlify.app/)
 ![Screenshot](thumb-images/rinterio.png)
