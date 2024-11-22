@@ -1,7 +1,7 @@
 # Rinterio – Interior Design Solutions
 Crafting modern, functional spaces with a responsive design powered by Tailwind CSS and intuitive web technologies for a seamless user experience.
 # Live demo: [Rinterio](https://rinterio-a3.netlify.app/)
-![Screenshot](images/rinterio.png)
+![Screenshot](rinterio.png)
 
 ## Key Features:
 1. **Home**: Showcases the firm's design philosophy and highlights their latest projects.
