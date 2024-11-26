@@ -1,0 +1,40 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build and Dependency Folders
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment files
+.env
+.env.*
+
+# Temporary and backup files
+*~
+*.bak
+
+# Test Coverage (optional, if using Jest or Mocha)
+coverage/
+
+# OS-specific files
+Thumbs.db
+Desktop.ini
