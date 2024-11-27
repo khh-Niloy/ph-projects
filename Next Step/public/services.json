@@ -1,0 +1,101 @@
+[
+  {
+    "id": "1",
+    "image": "https://img.freepik.com/free-photo/close-up-people-meeting_23-2148686500.jpg?t=st=1731855402~exp=1731859002~hmac=1d946e72c46be2ab5a466e1e7c33cb36a2b4e43bfeb7234f0772584650e11268&w=740",
+    "serviceName": "Counseling Sessions",
+    "category": "Online",
+    "description": "Our Career Counseling Sessions provide personalized advice to help you identify your strengths, passions, and the best career path suited to your skills. Whether you're a fresh graduate or looking to make a career change, our experienced counselors will guide you through the process, helping you set achievable career goals.",
+    "pricing": "$100 per session",
+    "duration": "5 Dec - 5-6pm",
+    "counselor": "John Doe",
+    "rating": 4.8
+  },
+  {
+    "id": "2",
+    "image": "https://img.freepik.com/free-photo/resume-apply-work-form-concept_53876-132737.jpg?t=st=1731857171~exp=1731860771~hmac=efb1d54b114a36dec7efd8880ea8c3ce75e227a158d7bb446ca5644513e3f14c&w=740",
+    "serviceName": "Resume Review",
+    "category": "Offline",
+    "description": "Our Resume Review service offers professional feedback on your resume's structure, content, and formatting. We’ll help you highlight your achievements and ensure that your resume catches the attention of recruiters, maximizing your chances of landing your desired job.",
+    "pricing": "$50 per review",
+    "duration": "4 Dec - 2-3pm",
+    "counselor": "Jane Smith",
+    "rating": 4.5
+  },
+  {
+    "id": "3",
+    "image": "https://img.freepik.com/free-photo/businessman-sitting-with-laptop-talking-other-colleagues_1262-809.jpg?t=st=1731855528~exp=1731859128~hmac=6c9a3b67efde15f79ea1e284fbdc24376ed04601ea703cfd3c00bf3c8fe87ed3&w=900",
+    "serviceName": "Interview Preparation",
+    "category": "Group",
+    "description": "Join a group session for in-depth interview preparation. This service includes mock interviews, feedback from industry experts, and tips on how to present yourself confidently. Our goal is to help you excel in interviews and secure your dream job by providing tailored coaching based on your career aspirations.",
+    "pricing": "$75 per session",
+    "duration": "6 Dec - 4-5pm",
+    "counselor": "Michael Brown",
+    "rating": 4.7
+  },
+  {
+    "id": "4",
+    "image": "https://img.freepik.com/free-photo/production-manufacture-process-chart-diagram_53876-120646.jpg?t=st=1731855645~exp=1731859245~hmac=0a9a6a04f510ef757adf4c33bc563ece41393f6d495ea74adeee353129807a27&w=900",
+    "serviceName": "Portfolio Review",
+    "category": "Online",
+    "description": "A well-structured portfolio is key to showcasing your skills. Our Portfolio Review service provides expert feedback on your online portfolio, including design, content, and overall presentation. We’ll guide you on how to improve your portfolio to make a lasting impression on potential employers or clients.",
+    "pricing": "$60 per review",
+    "duration": "10 Dec - 10-11am",
+    "counselor": "Sarah Lee",
+    "rating": 4.6
+  },
+  {
+    "id": "5",
+    "image": "https://img.freepik.com/free-photo/front-view-smiley-man-holding-paper_23-2150171318.jpg?t=st=1731856450~exp=1731860050~hmac=d685ff0a0faf5be430415bb6b869a136be3d2354c0579d266885c7120f531681&w=900",
+    "serviceName": "Guidance for Students",
+    "category": "Offline",
+    "description": "This service is tailored for students who are unsure about their career path. We provide guidance on choosing a suitable career, finding internships, and preparing for post-graduation opportunities. Our counselors will help you discover your passions and create a roadmap for your career after school.",
+    "pricing": "$80 per session",
+    "duration": "17 Dec - 1-2pm",
+    "counselor": "Emily Clark",
+    "rating": 4.9
+  },
+  {
+    "id": "6",
+    "image": "https://img.freepik.com/free-photo/development-knowledge-study-education-concept_53876-165265.jpg?t=st=1731855747~exp=1731859347~hmac=eb4599bc8e3e908d468c1f0b5879d2b21c3c12742dc0d2649617935ecf69cf91&w=900",
+    "serviceName": "Skills Assessment",
+    "category": "Online",
+    "description": "Our Skills Assessment service evaluates your current abilities and identifies areas for improvement. Whether you're looking to advance in your current career or shift to a new field, we'll help you understand your strengths and weaknesses and offer advice on how to enhance your skill set.",
+    "pricing": "$40 per assessment",
+    "duration": "8 Dec - 9-10am",
+    "counselor": "David Wilson",
+    "rating": 4.4
+  },
+  {
+    "id": "7",
+    "image": "https://img.freepik.com/free-photo/cropped-photo-attractive-young-man-office-working_171337-17342.jpg?t=st=1731856554~exp=1731860154~hmac=d12123d37e0c0ee42375cdace14487385b6f0b56bd234539ad7ed71b39e6fe52&w=900",
+    "serviceName": "Cover Letter Review",
+    "category": "Offline",
+    "description": "Our Cover Letter Review service will help you write a compelling cover letter that effectively communicates your qualifications and enthusiasm for the role. Our counselors provide personalized feedback on the tone, structure, and content of your cover letter, ensuring it aligns with job requirements.",
+    "pricing": "$45 per review",
+    "duration": "20 Dec - 3-4pm",
+    "counselor": "Olivia Turner",
+    "rating": 4.7
+  },
+  {
+    "id": "8",
+    "image": "https://img.freepik.com/free-photo/leader-authority-boss-coach-director-manager-concept_53876-133859.jpg?t=st=1731856559~exp=1731860159~hmac=955d425a26940dc5b4b14d2c7f0aa9ca488d1e9630c1d2fc8c1a76d9395daa50&w=826",
+    "serviceName": "Leadership Coaching",
+    "category": "Group",
+    "description": "Our Leadership Coaching program is designed for individuals looking to enhance their leadership skills. This group coaching session will teach you essential leadership principles, team management strategies, and how to inspire and motivate your team. Ideal for managers, aspiring leaders, and entrepreneurs.",
+    "pricing": "$150 per session",
+    "duration": "21 Dec - 6-7pm",
+    "counselor": "James Taylor",
+    "rating": 5.0
+  },
+  {
+    "id": "9",
+    "image": "https://img.freepik.com/free-photo/group-creative-people-analyzing-result-work_329181-15495.jpg?t=st=1731857244~exp=1731860844~hmac=bdf0aa91a2f81e11b620c0ac84c0fbddfc812cae8154c009c07ec33992c21564&w=900",
+    "serviceName": "Career Transition",
+    "category": "Online",
+    "description": "Our Career Transition Coaching service is designed for professionals looking to pivot to a new career path. Whether you are changing industries or roles, our expert counselors will help you assess your transferable skills, craft an effective strategy, and successfully navigate the transition with confidence.",
+    "pricing": "$120 per session",
+    "duration": "22 Dec - 11-12pm",
+    "counselor": "Laura Green",
+    "rating": 4.9
+  }
+]

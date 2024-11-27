@@ -1,0 +1,30 @@
+[
+  {
+    "image": "https://i.ibb.co.com/48tzbN8/Screenshot-2024-11-18-155002.png",
+    "website_name": "The Muse",
+    "short_description": "Offers job search advice, career development articles, and interview tips for professionals.",
+    "min": 15,
+    "link": "https://www.themuse.com/"
+  },
+  {
+    "image": "https://i.ibb.co.com/BnzGxCc/Screenshot-2024-11-18-155241.png",
+    "website_name": "Indeed Career Guide",
+    "short_description": "Provides articles on job search strategies, resume writing, and career advice from experts.",
+    "min": 17,
+    "link": "https://www.indeed.com/career-advice"
+  },
+  {
+    "image": "https://i.ibb.co.com/80kXTtm/Screenshot-2024-11-18-155348.png",
+    "website_name": "Glassdoor Advice",
+    "short_description": "Offers job search guidance, company reviews, and career tips for job seekers and professionals.",
+    "min": 11,
+    "link": "https://www.glassdoor.com/blog/guides/"
+  },
+  {
+    "image": "https://i.ibb.co.com/tsBYgbv/Screenshot-2024-11-18-155439.png",
+    "website_name": "Career Contessa",
+    "short_description": "A platform focused on career advice and resources specifically for women professionals.",
+    "min": 13,
+    "link": "https://www.careercontessa.com/"
+  }
+]
