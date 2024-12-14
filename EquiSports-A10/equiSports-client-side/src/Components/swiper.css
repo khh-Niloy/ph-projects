@@ -1,0 +1,35 @@
+/* Example for moving navigation buttons */
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: 50%; /* Adjust this value to move up/down */
+    left: 10px; /* Adjust this value to move left */
+    z-index: 10;
+  }
+  
+  .swiper-button-prev {
+    left: 10px; /* Position the "previous" button to the left */
+  }
+  
+  .swiper-button-next {
+    right: 10px; /* Position the "next" button to the right */
+  }
+  
+  /* Example for adjusting pagination */
+  .swiper-pagination {
+    position: absolute;
+    bottom: 10px; /* Adjust this value to move up/down */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center the pagination */
+  }
+  
+  /* Optional: Change appearance of buttons or pagination */
+  .swiper-button-next, .swiper-button-prev {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+  }
+  
+  .swiper-pagination-fraction {
+    font-size: 16px;
+    color: white;
+  }

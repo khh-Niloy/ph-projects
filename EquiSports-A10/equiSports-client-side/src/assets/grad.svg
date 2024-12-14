@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#555f6d"/>
+      <stop offset="1" stop-color="#3e4959" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip-SPRK_default_preset_name_custom_1">
+      <rect width="300" height="300"/>
+    </clipPath>
+  </defs>
+  <g id="SPRK_default_preset_name_custom_1" data-name="SPRK_default_preset_name_custom – 1" clip-path="url(#clip-SPRK_default_preset_name_custom_1)">
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="300" height="300" fill="url(#radial-gradient)"/>
+  </g>
+</svg>
