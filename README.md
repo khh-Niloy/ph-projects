@@ -1,3 +1,10 @@
+# EquiSports – Redefining Sports Management
+A Comprehensive Sports Management Platform Built with **React**, **React Router**, **Firebase**, **Tailwind CSS**, **Context API**, and **NPM Packages** on the Client Side, Offering Secure Authentication, Dynamic Features, and a Fully **Responsive** Design. Powered by **Express.js**, **Middleware (CORS)**, and **MongoDB** on the Server Side, Deployed to Vercel for Seamless Performance Across All Devices.
+### Source Code: [EquiSports](https://github.com/khh-Niloy/ph-projects/tree/main/EquiSports-A10) | Live demo: [EquiSports](https://reliable-beijinho-b77bf7.netlify.app/)
+![Screenshot](thumb-images/EquiSports.png)
+
+<hr/>
+
 # NextStep – Empowering Your Career Journey
 A Modern Career Counseling Platform Built with **React**, **React Router**, **Firebase**, and **NPM Packages**, Offering Secure **Authentication**, Dynamic Features, and a Fully **Responsive** Design for an Intuitive User Experience Across All Devices.
 ### Source Code: [NextStep](https://github.com/khh-Niloy/ph-projects/tree/main/Next%20Step) | Live demo: [NextStep](https://thriving-starlight-762625.netlify.app/)
