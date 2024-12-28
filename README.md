@@ -1,6 +1,6 @@
 # MadChef - Crafting Flavor Magic
 A Full-Stack Restaurant Management Platform Built with **React.js**, **React Router**, **Firebase Authentication**, **Tailwind CSS**, **Context API**, and **JWT** (storing and sending tokens) and a Fully **Responsive** Design. Powered by **Express.js**, **MongoDB**, **JWT** (used for token verification on the backend), and **CORS** Middleware.
-## Live demo: [MadChef](https://storied-halva-b354f3.netlify.app/)
+## Live demo: [MadChef](https://madchef-1487d.web.app/)
 ![Screenshot](thumb-images/madchef.png)
 
 <hr/>
