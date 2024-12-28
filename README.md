@@ -1,3 +1,10 @@
+# MadChef - Crafting Flavor Magic
+A Full-Stack Restaurant Management Platform Built with **React.js**, **React Router**, **Firebase Authentication**, **Tailwind CSS**, **Context API**, and **JWT** (storing and sending tokens) and a Fully **Responsive** Design. Powered by **Express.js**, **MongoDB**, **JWT** (used for token verification on the backend), and **CORS** Middleware.
+## Live demo: [MadChef](https://storied-halva-b354f3.netlify.app/)
+![Screenshot](thumb-images/madchef.png)
+
+<hr/>
+
 # EquiSports – Redefining Sports Management
 A Comprehensive Sports Management Platform Built with **React**, **React Router**, **Firebase**, **Tailwind CSS**, **Context API**, and **NPM Packages** on the Client Side, Offering Secure Authentication, Dynamic Features, and a Fully **Responsive** Design. Powered by **Express.js**, **Middleware (CORS)**, and **MongoDB** on the Server Side, Deployed to Vercel for Seamless Performance Across All Devices.
 ## Live demo: [EquiSports](https://reliable-beijinho-b77bf7.netlify.app/)
