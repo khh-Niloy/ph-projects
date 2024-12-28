@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font {
+  font-family: "Inter", sans-serif;
+}
+
+.light-mode {
+  background-color: white;
+  color: black;
+  transition-duration: 300ms;
+}
+
+.dark-mode {
+  background-color: #191a23;
+  color: white;
+  transition-duration: 300ms;
+}
