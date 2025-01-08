@@ -2,15 +2,31 @@
 
 Gadget Heaven is a user-friendly web application that showcases a curated selection of gadgets. It allows users to browse various categories, view detailed specifications, and manage their favorite items. With intuitive navigation, Gadget Heaven is the perfect destination for tech enthusiasts exploring the latest gadgets.
 
-## Live Demo
+## Live Site
 
 - [Netlify](https://imaginative-semolina-e3f9d0.netlify.app/)
 
-## Documentation
+![Screenshot](gadget.png)
 
-- [Requirement Document Link (1)](https://github.com/ProgrammingHero1/B10-A8-gadget-heaven/blob/main/Batch-10_Assignment-08.pdf)
+## Technologies Used:
 
-- [Requirement Document Link (2)](https://github.com/programming-hero-web-course-4/b10a8-gadget-heaven-khh-Niloy/blob/main/ReqFile.pdf)
+- **React.js**: A JavaScript library for building user interfaces.
+- **Context API**: A React API for managing global state across components.
+- **React Router**: A library for handling routing and navigation in React apps.
+- **Tailwind CSS**: A utility-first CSS framework for creating custom designs.
+
+## Features
+
+1. **Dynamic Gadget Listings**: Users can browse a curated collection of gadgets organized by categories, each with detailed specifications.
+
+2. **Favorite Management**: Users can tap the heart icon to save gadgets to a favorites list for easy access and comparison later.
+
+3. **Detailed Views**: Each gadget has a dedicated page displaying comprehensive information, including images, descriptions, and specifications.
+
+4. **Intuitive Navigation**: The application features a user-friendly navigation system with NavLink, making it easy for users to access different sections and enhancing their overall experience.
+
+5. **Purchase Functionality**: Users can easily add gadgets to their cart and proceed to checkout, streamlining the purchasing process directly through the app.
+
 
 ## React Fundamental Concepts Used
 
@@ -38,14 +54,46 @@ Gadget Heaven is a user-friendly web application that showcases a curated select
 
 I have used Context API for managing global state across components, enabling seamless data sharing without prop drilling. This approach helps maintain a consistent state throughout the application, particularly for user preferences and selected gadgets.
 
-## Features
+## Dependencies:
 
-1. **Dynamic Gadget Listings**: Users can browse a curated collection of gadgets organized by categories, each with detailed specifications.
+The following dependencies are used in this project:
 
-2. **Favorite Management**: Users can tap the heart icon to save gadgets to a favorites list for easy access and comparison later.
+- **react**: ^18.3.1
+- **react-dom**: ^18.3.1
+- **react-helmet-async**: ^2.0.5
+- **react-icons**: ^5.3.0
+- **react-rating-stars-component**: ^2.2.0
+- **react-router-dom**: ^6.27.0
+- **react-tabs**: ^6.0.2
+- **react-toastify**: ^10.0.6
+- **recharts**: ^2.13.3
 
-3. **Detailed Views**: Each gadget has a dedicated page displaying comprehensive information, including images, descriptions, and specifications.
+## Local Setup
 
-4. **Intuitive Navigation**: The application features a user-friendly navigation system with NavLink, making it easy for users to access different sections and enhancing their overall experience.
+To run this project locally, follow the steps below:
 
-5. **Purchase Functionality**: Users can easily add gadgets to their cart and proceed to checkout, streamlining the purchasing process directly through the app.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/your-repository-name.git
+    ```
+
+2. Navigate into the project directory:
+    ```bash
+    cd your-repository-name
+    ```
+
+3. Install dependencies:
+   Make sure you have `Node.js` installed, then run:
+    ```bash
+    npm install
+    ```
+
+4. Start the development server:
+    ```bash
+    npm start
+    ```
+
+5. Open the project in your browser:
+   Go to `http://localhost:3000` in your browser to see the project running.
+
+Make sure to replace `your-username/your-repository-name` with your actual GitHub username and repository name.
