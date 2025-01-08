@@ -2,7 +2,7 @@
 
 This project aims to develop a full-stack Restaurant Management website using the MERN Stack (MongoDB, Express.js, React.js, Node.js). The platform is designed to enhance both the customer and staff experience, with a user-friendly and engaging interface. Key features will focus on improving the restaurant's online presence, enabling seamless customer interaction, and streamlining internal management processes. The goal is to provide an efficient, scalable, and easy-to-manage solution for restaurant operations.
 
-## Live Demo
+## Live Site
 
 - [Firebase-1](https://madchef-1487d.web.app/)
 - [Firebase-2](https://madchef-1487d.firebaseapp.com/)
