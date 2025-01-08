@@ -9,3 +9,9 @@ Crafting modern, functional spaces with a responsive design powered by Tailwind 
 3. **Portfolio**: Features a selection of recent projects, such as a barn house design that blends rustic charm with modern sophistication.
 4. **Blogs**: Provides insights and updates on interior design trends and company news.
 5. **Contact Us**: Offers a form for potential clients to initiate consultations.
+
+## Technologies Used:
+
+- **Tailwind CSS**: A utility-first CSS framework for building responsive, custom designs with ease.
+- **ES6+ JavaScript**: Modern JavaScript features like arrow functions, promises, and async/await for clean and efficient code.
+
