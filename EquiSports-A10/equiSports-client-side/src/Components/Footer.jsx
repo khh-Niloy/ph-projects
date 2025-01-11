@@ -5,9 +5,36 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import gradient from "../assets/grad.svg";
 import logo from "../assets/logo.svg";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContextProvider";
 
 const Footer = () => {
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
+  const { user } = useContext(AuthContext);
+
+  const links = (
+    <>
+      <NavLink to={`/allsportsequipment`}>
+        <li className="underline opacity-80 cursor-pointer hover:font-bold hover:opacity-100 transition-all">
+          All Sports Equipment
+        </li>
+      </NavLink>
+      {user && (
+        <>
+          <NavLink to={`/addequipment`}>
+            <li className="underline opacity-80 cursor-pointer hover:font-bold hover:opacity-100 transition-all">
+              Add Equipment
+            </li>
+          </NavLink>
+          <NavLink to={`/mylist`}>
+            <li className="underline opacity-80 cursor-pointer hover:font-bold hover:opacity-100 transition-all">
+              My Equipment List
+            </li>
+          </NavLink>
+        </>
+      )}
+    </>
+  );
 
   return (
     <div>
@@ -32,39 +59,12 @@ const Footer = () => {
               <img className="w-[20%]" src={logo} alt="" />
               <h1 className="text-3xl font-bold">EquiSports</h1>
             </div>
-
-            <h1
-              className={`text-xl ${
-                isDarkMode ? "text-white" : " text-black/60"
-              }`}
-            >
-              <span
-                className={`font-medium ${
-                  isDarkMode ? "text-white" : "text-black"
-                }`}
-              >
-                Mail
-              </span>{" "}
-              for any query
-            </h1>
-
-            <form className="shadow-xl text-black">
-              <fieldset className=" bg-white">
-                <div className="">
-                  <input
-                    type="text"
-                    placeholder="enter your email"
-                    className="p-2 placeholder:text-xs"
-                  />
-                  <button className="bg-[#007CF5] text-white text-xs mr-2 px-3 mb-1.5 py-2">
-                    Submit
-                  </button>
-                </div>
-              </fieldset>
-            </form>
           </aside>
 
-          <div className="flex lg:flex-row flex-col lg:gap-20 gap-10 mt-10 lg:mt-16 z-20 relative">
+          <div
+            id="contact"
+            className="flex lg:flex-row flex-col lg:gap-20 gap-10 mt-10 lg:mt-16 z-20 relative"
+          >
             <nav className="flex flex-col">
               <h6
                 className={`text-[19px] font-semibold mb-4 ${
@@ -93,18 +93,10 @@ const Footer = () => {
                   isDarkMode ? "text-[#FFC383]" : "text-black"
                 }`}
               >
-                social media links
+                Relevant Links
               </h1>
-              <ul className="flex items-center gap-2 text-2xl">
-                <li>
-                  <FaFacebook className="text-blue-600 cursor-pointer"></FaFacebook>
-                </li>
-                <li>
-                  <FaXTwitter className=" cursor-pointer"></FaXTwitter>
-                </li>
-                <li>
-                  <FaLinkedinIn className="text-[#057AB9] cursor-pointer"></FaLinkedinIn>
-                </li>
+              <ul className="flex flex-col text-left list-disc text-sm list-inside gap-3 underline">
+                {links}
               </ul>
             </nav>
           </div>

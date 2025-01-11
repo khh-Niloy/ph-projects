@@ -7,6 +7,7 @@ import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import { IoMoon } from "react-icons/io5";
 import { PiSunFill } from "react-icons/pi";
 import logo from "../assets/logo.svg";
+import { Link as ScrollLink } from "react-scroll";
 
 const Navbar = () => {
   const { user, signOutUser, toastShow } = useContext(AuthContext);
@@ -40,46 +41,73 @@ const Navbar = () => {
               : ""
           }
         >
-          All Sports Equipment
+          All Equipment
         </NavLink>
       </li>
-      <li className={`${isDarkMode ? "z-50 relative" : ""}`}>
-        <NavLink
-          to="/addequipment"
-          className={({ isActive }) =>
-            isActive
-              ? `${
-                  isDarkMode ? "text-white" : "text-blue-600"
-                } font-semibold underline text-sm duration-300`
-              : ""
-          }
-        >
-          Add Equipment
-        </NavLink>
-      </li>
-      <li className={`${isDarkMode ? "z-50 relative" : ""}`}>
-        <NavLink
-          to="/mylist"
-          className={({ isActive }) =>
-            isActive
-              ? `${
-                  isDarkMode ? "text-white" : "text-blue-600"
-                } font-semibold underline text-sm duration-300 z-50 relative`
-              : ""
-          }
-        >
-          My Equipment List
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li className={`${isDarkMode ? "z-50 relative" : ""}`}>
+            <NavLink
+              to="/addequipment"
+              className={({ isActive }) =>
+                isActive
+                  ? `${
+                      isDarkMode ? "text-white" : "text-blue-600"
+                    } font-semibold underline text-sm duration-300`
+                  : ""
+              }
+            >
+              Add Equipment
+            </NavLink>
+          </li>
+          <li className={`${isDarkMode ? "z-50 relative" : ""}`}>
+            <NavLink
+              to="/mylist"
+              className={({ isActive }) =>
+                isActive
+                  ? `${
+                      isDarkMode ? "text-white" : "text-blue-600"
+                    } font-semibold underline text-sm duration-300 z-50 relative`
+                  : ""
+              }
+            >
+              My Equipment List
+            </NavLink>
+          </li>
+        </>
+      )}
+      <ScrollLink to="contact" smooth={true} duration={500}>
+        <li className={`${isDarkMode ? "z-50 relative" : ""} cursor-pointer`}>
+          <a
+            className={({ isActive }) =>
+              isActive
+                ? `${
+                    isDarkMode ? "text-white" : "text-blue-600"
+                  } font-semibold underline text-sm duration-300 z-50 relative cursor-pointer`
+                : ""
+            }
+          >
+            Contact
+          </a>
+        </li>
+      </ScrollLink>
     </>
   );
 
   return (
-    <div className="">
+    <div
+      className={`duration-300 flex items-center justify-center ${
+        isDarkMode
+          ? "bg-[#191A23]"
+          : "bg-gradient-to-r from-white/95 to-white/90"
+      }  w-full fixed top-0 z-50 shadow-sm`}
+    >
       <div
-        className={`navbar ${
-          isDarkMode ? "bg-[#191A23]" : "bg-base-100"
-        } xl:w-[85%] lg:w-[90%] mx-auto pt-6 pb-4 w-[95%]`}
+        className={`duration-300 navbar ${
+          isDarkMode
+            ? "bg-[#191A23] text-white"
+            : "bg-gradient-to-r from-white/95 to-white/90 backdrop-blur-md shadow-sm"
+        }xl:w-[85%] lg:w-[90%] sm:w-[90%] w-[100%] pt-5 pb-4`}
       >
         <div className="navbar-start ">
           <div className="dropdown">
@@ -136,7 +164,7 @@ const Navbar = () => {
                 ? "bg-gradient-to-t from-[#fc8f9a] to-[#F4BD6D] text-black/85"
                 : "bg-gradient-to-r from-[#007CF5] to-[#007bf5c9] text-white"
             }
-                rounded-full py-1.5 text-sm font-semibold cursor-pointer`}
+                  rounded-full py-1.5 text-sm font-semibold cursor-pointer`}
           >
             {user ? "logout" : "login"}
           </button>
@@ -150,7 +178,7 @@ const Navbar = () => {
                       ? "bg-gradient-to-t from-[#fc8f9a] to-[#F4BD6D] text-black/85"
                       : "bg-gradient-to-r from-[#007CF5] to-[#007bf5c9] text-white"
                   }
-                      rounded-full py-1.5 text-sm font-semibold cursor-pointer`}
+                        rounded-full py-1.5 text-sm font-semibold cursor-pointer`}
                 >
                   Register
                 </button>

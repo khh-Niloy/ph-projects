@@ -36,7 +36,7 @@ const Slider = () => {
       >
         {/* Static slides */}
         <SwiperSlide>
-          <div className="w-full rounded-xl lg:h-[19rem] overflow-hidden">
+          <div className="w-full rounded-xl  overflow-hidden  ">
             <img
               src="https://i.ibb.co.com/rp2k0g0/s1.jpg"
               alt=""
@@ -45,7 +45,7 @@ const Slider = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="w-full rounded-xl lg:h-[18.5rem] h-[9rem] overflow-hidden">
+          <div className="w-full rounded-xl overflow-hidden">
             <img
               src="https://i.ibb.co.com/zSNFR14/s3.jpg"
               alt=""
@@ -79,7 +79,7 @@ const Slider = () => {
             onClick={handlePrev}
             className={`cursor-pointer ${
               isDarkMode ? "bg-[#FFC383] text-black" : "bg-black/80 text-white"
-            } p-2 text-4xl rounded-full rotate-180 custom-prev absolute lg:-top-[13rem] top-[1.5rem] right-[0.5rem] xl:right-[27rem] lg:right-[23rem]`}
+            } p-2 text-4xl rounded-full rotate-180 custom-prev absolute lg:-top-[8rem] top-[1.5rem] right-[0.5rem] xl:right-[30rem] lg:right-[23rem]`}
           >
             <button className="custom-prev">&lt;</button>
           </FiChevronRight>
@@ -88,7 +88,7 @@ const Slider = () => {
             onClick={handleNext}
             className={`cursor-pointer ${
               isDarkMode ? "bg-[#FFC383] text-black" : "bg-black/80 text-white"
-            } p-2 text-4xl rounded-full custom-next absolute lg:-top-[13rem] top-[1.5rem] -right-[2.5rem] xl:left-[27rem] lg:left-[23rem]`}
+            } p-2 text-4xl rounded-full custom-next absolute lg:-top-[8rem] top-[1.5rem] -right-[2.5rem] xl:left-[30rem] lg:left-[23rem]`}
           >
             <button className="custom-next">&gt;</button>
           </FiChevronRight>

@@ -6,13 +6,9 @@ import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import { Helmet } from "react-helmet";
 
 const MyList = () => {
-  // const data = useLoaderData();
   const { user } = useContext(AuthContext);
   const [equipementData, setequipementData] = useState([]);
-  // const loggedInUserItems = data.filter((e) => e.userEmail === user?.email);
-  // const [cardData, setcardData] = useState(equipementData);
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
-  // console.log(user);
 
   useEffect(() => {
     fetch(
@@ -65,54 +61,74 @@ const MyList = () => {
           </span>
         </h1>
 
-        <div>
-          <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 pt-8 pb-16 relative">
-            {equipementData.map((e) => (
-              <div
-                key={e._id}
-                className={`card card-compact ${
-                  isDarkMode ? "bg-[#242532]" : "bg-base-100"
-                } shadow-sm border border-black/10 hover:shadow-xl hover:border-none duration-300`}
+        <div className="flex items-center justify-center text-center flex-col mb-10">
+          <h1 className="text-3xl font-bold lg:mt-0 mt-10">My List</h1>
+        </div>
+
+        <div className="overflow-x-auto pb-20">
+          <table className="table">
+            <thead>
+              <tr
+                className={`${
+                  isDarkMode ? "text-[#FFC383] border-b border-[#FFC383]" : ""
+                }`}
               >
-                <figure>
-                  <img
-                    src={e.image}
-                    className="h-[7rem] object-cover mt-4 rounded-xl"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div
-                  className={`p-4 ${
-                    isDarkMode ? "text-[#E4E4EB]" : "text-black"
+                <th>Serial</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Rating</th>
+                <th>Stock Status</th>
+                <th>Processing Time</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipementData.map((e, index) => (
+                <tr
+                  key={e._id}
+                  className={`${
+                    isDarkMode
+                      ? "text-[#E4E4EB] hover:bg-[#FFC383]/10 border-t border-[#FFC383]/20"
+                      : "text-black hover"
                   }`}
                 >
-                  <h2 className="text-sm">{e.itemName}</h2>
-                  <div className="flex gap-2">
-                    <h2 className="text-xs">Price: {e.price}$</h2>
-                    <h2 className="text-xs">Rating: {e.rating}/5</h2>
-                    <h2 className="text-xs">
-                      Stock status: {e.stockStatus} ...
-                    </h2>
-                  </div>
-                  <div className="grid grid-cols-2 mt-3 gap-2 w-full">
+                  <th>{index + 1}</th>
+                  <td>{e.itemName}</td>
+                  <td>{e.categoryName}</td>
+                  <td>{e.price}$</td>
+                  <td>{e.rating}/5</td>
+                  <td>{e.stockStatus} available</td>
+                  <td>{e.processingTime} days</td>
+                  <td className="flex gap-3 items-center">
+                    <Link to={`/update/${e._id}`}>
+                      <button
+                        className={`px-3 ${
+                          isDarkMode
+                            ? "hover:bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] hover:text-black/85 border border-[#F4BD6D] text-[#F4BD6D]"
+                            : "bg-gradient-to-b from-[#3871FF] to-[#3036CC] text-white"
+                        } rounded-full py-1 font-semibold cursor-pointer text-[10px] active:scale-[0.1] transition-all hover:scale-[1.1] duration-300`}
+                      >
+                        Update
+                      </button>
+                    </Link>
                     <button
                       onClick={() => {
                         handleDelete(e._id);
                       }}
-                      className="btn bg-[#fe2f2f] text-white"
+                      className={`px-3 ${
+                        isDarkMode
+                          ? "hover:bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] hover:text-black/85 border border-[#F4BD6D] text-[#F4BD6D]"
+                          : "bg-gradient-to-b from-[#ff3838] to-[#b52c2c] text-white"
+                      } rounded-full py-1 font-semibold cursor-pointer text-[10px] active:scale-[0.1] transition-all hover:scale-[1.1] duration-300`}
                     >
                       Delete
                     </button>
-                    <Link to={`/update/${e._id}`}>
-                      <button className="btn w-full btn-primary text-white">
-                        Update
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </>

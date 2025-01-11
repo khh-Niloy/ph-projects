@@ -31,7 +31,7 @@ const Root = () => {
           <span className="loading loading-spinner loading-lg"></span>
         </div>
       )}
-      <Outlet />
+      <div className="pt-16"><Outlet /></div>
       <Footer></Footer>
     </div>
   );

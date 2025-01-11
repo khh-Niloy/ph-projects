@@ -12,7 +12,8 @@ import bat from "../assets/bat.json";
 import ball from "../assets/ball.json";
 import Customer from "../Components/Customer";
 import About from "../Components/About";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import TopSelling from "./TopSelling";
 
 const Home = () => {
   const data = useLoaderData();
@@ -40,20 +41,17 @@ const Home = () => {
       const filteredData = data.filter((e) => e.categoryName === name);
       setcardData(filteredData);
     }
-
-    // console.log(name);
   }
 
   return (
-
     <>
       <Helmet>
-          <title>Home - EquiSports</title>
-        </Helmet>
-  
+        <title>Home - EquiSports</title>
+      </Helmet>
+
       <div className="">
         <Banner></Banner>
-  
+
         <img
           src={bannerbg}
           className={`lg:w-[36%] absolute lg:top-20 lg:-left-52 top-16 -left-52 rotate-45 ${
@@ -68,7 +66,7 @@ const Home = () => {
           }`}
           alt=""
         />
-  
+
         <img
           className={`absolute lg:-top-[18rem] -top-24 w-full -left-12 lg:left-[5rem] z-0 lg:w-[60%] ${
             isDarkMode ? "flex" : "hidden"
@@ -76,13 +74,13 @@ const Home = () => {
           src={gradient}
           alt=""
         />
-  
+
         <div className="w-[85%] mx-auto">
-          <div className="flex items-center justify-center text-center flex-col lg:mt-10 mt-32 mb-10">
-            <h1 className="lg:text-3xl text-2xl font-semibold">
+          <div className="flex items-center justify-center text-center flex-col lg:mt-[4rem] mt-32 mb-10">
+            <h1 className="lg:text-2xl text-2xl font-semibold">
               Discover Premium Sports Gear <br /> for Every Athlete!
             </h1>
-  
+
             <p className="lg:text-sm text-xs mt-2">
               Explore a wide range of top-tier equipment designed to enhance{" "}
               <br /> your performance and support your athletic journey
@@ -110,10 +108,10 @@ const Home = () => {
             />
           </div>
         </div>
-  
-        <div className="w-[85%] mx-auto mt-20">
+
+        <div className="w-[85%] mx-auto mt-16">
           <div className="flex flex-col items-center justify-center mb-10">
-            <h1 className="lg:text-3xl text-2xl font-semibold">
+            <h1 className="lg:text-2xl text-2xl font-semibold">
               Gear Up for Excellence
             </h1>
             <p className="lg:text-sm text-xs text-center mt-2">
@@ -123,11 +121,11 @@ const Home = () => {
           </div>
           <About></About>
         </div>
-  
-        <div className="mt-32 mx-auto w-[85%]">
+
+        <div className="mt-24 mx-auto w-[85%]">
           <div className="flex items-center justify-center flex-col mb-12">
-            <h1 className="lg:text-2xl text-xl text-center">
-              <span className="lg:text-3xl text-2xl font-semibold">
+            <h1 className="lg:text-xl text-xl text-center">
+              <span className="lg:text-2xl text-2xl font-semibold">
                 Explore and Shop
               </span>{" "}
               <br /> the Finest Sports Gear for Your Journey!
@@ -135,11 +133,11 @@ const Home = () => {
             <p className="text-center lg:text-sm text-xs mt-2">
               {" "}
               Explore a wide range of high-quality sports products tailored to
-              meet your needs. <br /> Choose your favorites and make your purchase
-              with ease!
+              meet your needs. <br /> Choose your favorites and make your
+              purchase with ease!
             </p>
           </div>
-  
+
           {category.map((e) => (
             <>
               <button
@@ -165,17 +163,17 @@ const Home = () => {
             </>
           ))}
         </div>
-  
+
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-[85%] mx-auto pb-20 pt-7 gap-5">
           {cardData.map((e) => (
             <div
               key={e._id}
-              className={`card card-compact ${
+              className={`hover:scale-[1.03] duration-300 card card-compact ${
                 isDarkMode ? "bg-[#242532]" : "bg-base-100"
               } shadow-xl`}
             >
               <figure>
-                <div className="w-full lg:h-[8.8rem] xl:h-[10.5] h-[10.5]">
+                <div className="w-full lg:h-[8.8rem] xl:h-[12rem] md:h-[13rem] h-[16rem] sm:h-[10.5rem]">
                   <img
                     src={e.image}
                     alt="Shoes"
@@ -184,18 +182,14 @@ const Home = () => {
                 </div>
               </figure>
               <div
-                className={`p-4 ${isDarkMode ? "text-[#E4E4EB]" : "text-black"}`}
+                className={`p-4 flex flex-col flex-grow justify-between ${
+                  isDarkMode ? "text-[#E4E4EB]" : "text-black"
+                }`}
               >
-                <h2 className="text-[15px]">{e.itemName}</h2>
-                <h2 className="text-xs">Category: {e.categoryName}</h2>
-                <div className="flex lg:gap-2 xl:gap-3 gap-3">
-                  <p className="text-[14px] mt-1">
-                    <span className="font-medium">Price:</span> {e.price}$
-                  </p>
-                  <p className="text-[14px] mt-1">
-                    <span className="font-medium">Rating:</span> {e.rating}/5
-                  </p>
-                </div>
+                <h2 className="text-[15px] font-normal mb-2">{e.itemName}</h2>
+                <h2 className="text-sm font-light leading-[1.4] line-clamp-3">
+                  {e.description}
+                </h2>
                 <Link to={`/detailes/${e._id}`}>
                   <button
                     className={`${
@@ -203,19 +197,32 @@ const Home = () => {
                         ? "bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] text-black/85"
                         : "bg-gradient-to-b from-[#3871FF] to-[#3036CC] text-white"
                     } 
-                    rounded-full w-full py-2 mt-2.5 font-semibold cursor-pointer text-sm`}
+                    rounded-lg w-full py-2 mt-2.5 font-normal active:scale-95 transition-all cursor-pointer text-sm`}
                   >
-                    Detailes
+                    See More
                   </button>
                 </Link>
               </div>
             </div>
           ))}
         </div>
-  
+
+        <div className="w-[80%] mx-auto relative pb-24 mt-10">
+          <div className="flex items-center justify-center mt-2 mb-10 flex-col">
+            <h1 className="lg:text-2xl text-2xl font-semibold text-center">
+              Top Selling Products
+            </h1>
+            <p className="text-center lg:text-sm text-xs mt-2">
+              Discover Our Most Popular Picks Loved by Athletes and Enthusiasts
+              Alike. <br /> Shop the Best in Sports Gear Today!
+            </p>
+          </div>
+          <TopSelling data={data}></TopSelling>
+        </div>
+
         <div className="w-[80%] mx-auto relative pb-32">
-          <div className="flex items-center justify-center mt-20 mb-10 flex-col">
-            <h1 className="lg:text-3xl text-2xl font-semibold text-center">
+          <div className="flex items-center justify-center mt-2 mb-10 flex-col">
+            <h1 className="lg:text-2xl text-2xl font-semibold text-center">
               What Our Customers Say
             </h1>
             <p className="text-center lg:text-sm text-xs mt-2">

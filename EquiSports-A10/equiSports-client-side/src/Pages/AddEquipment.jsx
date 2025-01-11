@@ -22,6 +22,7 @@ const AddEquipment = () => {
     const customization = e.target.customization.value;
     const processingTime = e.target.processingTime.value;
     const stockStatus = e.target.stockStatus.value;
+    const briefdescription = e.target.briefdescription.value;
     const userEmail = user.email;
     const userName = user.displayName;
 
@@ -37,6 +38,7 @@ const AddEquipment = () => {
       customization,
       processingTime,
       stockStatus,
+      briefdescription,
       userEmail,
       userName,
     };
@@ -65,7 +67,7 @@ const AddEquipment = () => {
         <title>Add Equipement - EquiSports</title>
       </Helmet>
 
-      <div className="pb-20 pt-8 w-[80%] mx-auto">
+      <div className="pb-20 pt-8 mx-auto">
         <div className="flex items-center justify-center flex-col mb-10">
           <h1 className="text-3xl font-bold">Add Equipment</h1>
           <p className="text-xs text-center">
@@ -74,8 +76,8 @@ const AddEquipment = () => {
         </div>
 
         <div className="hero">
-          <div className="hero-content flex-col">
-            <div className="card bg-base-100 w-full  shrink-0 shadow-2xl">
+          <div className="hero-content flex-col sm:w-[90%]">
+            <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
               <form onSubmit={handleSubmit} className="card-body text-black">
                 <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
                   <div className="form-control lg:col-span-3">
@@ -139,7 +141,7 @@ const AddEquipment = () => {
                   <div className="form-control lg:col-span-3">
                     <label className="label">
                       <span className="label-text">
-                        Description
+                        Short Description
                         <span className="text-red-600 text-xs">*</span>
                       </span>
                     </label>
@@ -207,6 +209,22 @@ const AddEquipment = () => {
                     <textarea
                       className="border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
                       name="customization"
+                      id=""
+                      cols="30"
+                      rows="3"
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="form-control lg:col-span-3">
+                    <label className="label">
+                      <span className="label-text">
+                        Brief Description
+                        <span className="text-red-600 text-xs">*</span>
+                      </span>
+                    </label>
+                    <textarea
+                      name="briefdescription"
+                      className="border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
                       id=""
                       cols="30"
                       rows="3"
