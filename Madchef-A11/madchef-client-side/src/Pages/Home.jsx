@@ -30,7 +30,7 @@ const Home = () => {
     .sort(function (a, b) {
       return b.purchase_count - a.purchase_count;
     })
-    .slice(0, 6);
+    .slice(0, 8);
 
   if (isLoading) {
     return (
@@ -42,9 +42,9 @@ const Home = () => {
 
   return (
     <div>
-      <div className="relative flex items-center justify-center lg:h-[32rem] h-[26rem] w-full">
+      <div className="relative flex items-center justify-center lg:h-[24.5rem] h-[26rem] w-full">
         <img
-          className="object-cover lg:h-[32rem] h-[26rem] w-full"
+          className="object-cover lg:h-[27rem] h-[26rem] w-full"
           src="https://i.ibb.co.com/nLdV4bS/content.png"
           alt=""
         />
@@ -69,16 +69,19 @@ const Home = () => {
           </p>
 
           <Link to="/allfood">
-            <button className="bg-[#FF2727] text-white text-xs px-3 py-1.5 mt-3 rounded-full">
+            <button
+              className="bg-[#FF2727] text-white text-xs px-3 py-1.5 mt-3 rounded-full cursor-pointer
+            active:scale-95 transition-all hover:scale-[1.1] duration-300"
+            >
               See All Foods
             </button>
           </Link>
         </div>
       </div>
 
-      <div className="w-[90%] lg:w-[75%] mx-auto mt-20 mb-20">
+      <div className="w-[90%] lg:w-[75%] mx-auto mt-10 sm:mt-20 mb-20">
         <div className="text-center mb-8">
-          <h1 className="lg:text-4xl text-2xl font-semibold">
+          <h1 className="lg:text-3xl text-2xl font-semibold">
             Tempt Your Taste Buds
           </h1>
           <p className="lg:text-sm text-xs mt-2">
@@ -90,9 +93,9 @@ const Home = () => {
         <Slider></Slider>
       </div>
 
-      <div className="w-[90%] lg:w-[80%] mx-auto pb-20 lg:pt-8 pt-16">
+      <div className="w-[90%] lg:w-[80%] mx-auto pb-20 lg:pt-2 pt-10 sm:pt-12">
         <div className="mb-12 text-center">
-          <h1 className="text-center font-semibold lg:text-4xl text-2xl">
+          <h1 className="text-center font-semibold lg:text-3xl text-2xl">
             Top 6 best-selling food items{" "}
             <span className="text-xs font-normal">(by purchase count)</span>
           </h1>
@@ -103,11 +106,11 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-5 w-[90%] lg:w-[80%] mx-auto">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-5 w-[90%] lg:w-[100%] mx-auto">
           {filterData.map((e) => (
             <div
               key={e._id}
-              className={`card card-compact bg-base-100 shadow-xl ${
+              className={`card card-compact bg-base-100 hover:scale-[1.02] duration-300 shadow-xl ${
                 isDarkMode && "text-black"
               }`}
             >
@@ -121,17 +124,20 @@ const Home = () => {
                   alt="Shoes"
                 />
               </figure>
-              <div key={e._id} className="p-4">
+              <div key={e._id} className="p-4 justify-between">
                 <h2 className="card-title">{e.foodname}</h2>
                 <p className="text-sm">Price: ${e.price}</p>
                 <p className="line-clamp-2 text-sm mt-1">{e.description}</p>
-                <div className="card-actions justify-end">
+                <div className="card-actions justify-end ">
                   <Link
                     className="w-full"
                     to={`/allfood/foodDetailes/${e._id}`}
                   >
-                    <button className="btn hover:bg-[#FF2727] btn-neutral hover:border-none text-white w-full mt-2">
-                      Details
+                    <button
+                      className="hover:bg-[#FF2727] bg-[#191A23] text-white
+                    rounded-lg w-full py-2 mt-3 font-normal cursor-pointer text-sm active:scale-95 transition-all"
+                    >
+                      See More
                     </button>
                   </Link>
                 </div>
@@ -140,7 +146,7 @@ const Home = () => {
           ))}
         </div>
 
-        <div className="flex items-center justify-center mt-20">
+        <div className="flex items-center justify-center mt-14">
           <Link to={`/allfood`}>
             <button className="px-5 py-2 text-white rounded-lg bg-[#FF2727] hover:bg-[#FF2727]/80">
               See All
@@ -148,7 +154,7 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="w-[85%] mx-auto mt-24">
+        <div className="w-[85%] mx-auto mt-16">
           <div className="flex flex-col items-center justify-center mb-10">
             <h1 className="lg:text-3xl text-2xl font-semibold">
               Savor the Excellence
@@ -161,9 +167,9 @@ const Home = () => {
           <About></About>
         </div>
 
-        <div className="w-[100%] lg:w-[80%] mx-auto pb-10">
-          <div className="flex items-center justify-center mt-28 mb-10 flex-col">
-            <h1 className="lg:text-4xl text-2xl font-semibold text-center">
+        <div className="w-[100%] lg:w-[80%] mx-auto">
+          <div className="flex items-center justify-center mt-20 mb-10 flex-col">
+            <h1 className="lg:text-3xl text-2xl font-semibold text-center">
               What Our Customers Say
             </h1>
             <p className="text-center lg:text-sm text-xs mt-2">

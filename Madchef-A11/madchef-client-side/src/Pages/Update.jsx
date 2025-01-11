@@ -42,7 +42,7 @@ const Update = () => {
               </h1>
             </div>
             <div
-              className={`card bg-base-100 w-[80%] shrink-0 shadow-2xl ${
+              className={`card bg-base-100 sm:w-[80%] shrink-0 shadow-2xl ${
                 isDarkMode && "text-black"
               }`}
             >

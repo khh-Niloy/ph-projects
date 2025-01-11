@@ -16,7 +16,7 @@ const Navbar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-white font-semibold underline text-md duration-300"
+              ? "text-white font-semibold underline text-sm duration-300"
               : "text-white font-light duration-300"
           }
           to="/"
@@ -28,8 +28,8 @@ const Navbar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-white font-semibold underline text-md duration-300 ml-9"
-              : "text-white font-light duration-300 ml-9"
+              ? ` font-semibold underline text-sm duration-300 ml-9 text-white`
+              : ` font-light duration-300 ml-9 text-white text-sm`
           }
           to="/allfood"
         >
@@ -40,18 +40,139 @@ const Navbar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-white font-semibold underline text-md duration-300 ml-9"
-              : "text-white font-light duration-300 ml-9"
+              ? "text-white font-semibold underline text-sm duration-300 ml-9"
+              : "text-white font-light duration-300 ml-9 text-sm"
           }
           to="/gallery"
         >
           Gallery
         </NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white font-semibold underline text-sm duration-300 ml-9"
+                  : "text-white font-light duration-300 ml-9 text-sm"
+              }
+              to="/myfood"
+            >
+              My Foods
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white font-semibold underline text-sm duration-300 ml-9"
+                  : "text-white font-light duration-300 ml-9 text-sm"
+              }
+              to="/addfood"
+            >
+              Add Food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white font-semibold underline text-sm duration-300 ml-9"
+                  : "text-white font-light duration-300 ml-9 text-sm"
+              }
+              to="/myorder"
+            >
+              My Orders
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
   const menubarLinks = (
+    <>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-black font-semibold underline text-sm duration-300"
+              : "text-black font-light duration-300"
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-black font-semibold underline text-sm duration-300"
+              : "text-black font-light duration-300"
+          }
+          to="/allfood"
+        >
+          All Foods
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-black font-semibold underline text-sm duration-300"
+              : "text-black font-light duration-300 text-sm"
+          }
+          to="/gallery"
+        >
+          Gallery
+        </NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-black font-semibold underline text-sm duration-300"
+                  : "text-black font-light duration-300"
+              }
+              to="/myfood"
+            >
+              My Foods
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-black font-semibold underline text-sm duration-300"
+                  : "text-black font-light duration-300"
+              }
+              to="/addfood"
+            >
+              Add Food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-black font-semibold underline text-sm duration-300"
+                  : "text-black font-light duration-300"
+              }
+              to="/myorder"
+            >
+              My Orders
+            </NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
+
+  /* const menubarLinks = (
     <>
       <li>
         <NavLink
@@ -90,7 +211,7 @@ const Navbar = () => {
         </NavLink>
       </li>
     </>
-  );
+  ); */
 
   const profileLinks = (
     <>
@@ -135,7 +256,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div>
+      <div className="fixed z-50 w-full">
         <div
           className={`navbar ${
             isDarkMode
@@ -169,7 +290,7 @@ const Navbar = () => {
               </ul>
             </div>
             <img
-              className="lg:w-[8%] md:w-[12%] sm:w-[13%] w-[17%] ml-5"
+              className="lg:w-[12%] md:w-[12%] sm:w-[13%] w-[17%] ml-5 xl:w-[9%]"
               src="/logowhite.svg"
               alt=""
             />

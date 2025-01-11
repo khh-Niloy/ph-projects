@@ -24,14 +24,14 @@ const Gallery = () => {
         subtext="Discover a Vibrant Gallery of Culinary Masterpieces from Around the World"
       ></PageTitle>
 
-      <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-5 w-[80%] mx-auto pt-10 pb-20">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-5 w-[85%] mx-auto pt-10 pb-20">
         {foodData.map((e, index) => (
           <div>
             <div
               onClick={() => setopen(index)}
-              className="card h-32 overflow-hidden hover:scale-105 duration-300"
+              className="card gl:h-32 sm:h-44 h-52 overflow-hidden hover:scale-105 duration-300"
             >
-              <figure className="rounded-xl hover:scale-105 duration-300">
+              <figure className="rounded-xl hover:scale-105 h-full  duration-300">
                 <div
                   className="bg-gradient-to-t from-[#000000] to-[#00000055] opacity-0 hover:opacity-100 duration-300
                     absolute w-full h-full rounded-xl flex flex-col items-center justify-center"
@@ -48,7 +48,7 @@ const Gallery = () => {
                   </div>
                 </div>
                 <img
-                  className="rounded-xl object-cover"
+                  className="rounded-xl object-cover h-full w-full"
                   src={e.photo}
                   alt="Shoes"
                 />

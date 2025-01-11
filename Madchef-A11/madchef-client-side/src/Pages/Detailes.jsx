@@ -20,14 +20,14 @@ const Detailes = () => {
 
   return (
     <div className="px-16 pt-10 pb-20">
-      <div className="food-details-container lg:w-[80%] w-[90%] mx-auto">
-        <div className="flex items-center flex-col sm:flex-row">
+      <div className="food-details-container lg:w-[80%] w-[100%] mx-auto">
+        <div className="flex items-start flex-col sm:flex-row">
           <img
             src={foodData.photo}
             alt={foodData.foodname}
             className="food-image w-66 h-44 object-cover rounded-xl"
           />
-          <div className="sm:ml-5 mt-5 lg:mt-0 flex flex-col gap-1">
+          <div className="sm:ml-5 sm:mt-0 mt-5 lg:mt-0 flex flex-col  gap-1">
             <div className={`${isDarkMode ? "text-white" : "text-black"}`}>
               <h2 className="food-name text-4xl font-bold mt-0.5">
                 {foodData.foodname}

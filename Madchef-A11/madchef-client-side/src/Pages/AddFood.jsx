@@ -48,10 +48,10 @@ const AddFood = () => {
       >
         <div className="hero-content flex-col w-full">
           <div className="text-center lg:text-left">
-            <h1 className="text-3xl font-bold mb-3">Add New Food</h1>
+            <h1 className="text-2xl font-bold mb-3">Add New Food</h1>
           </div>
           <div
-            className={`card bg-base-100 w-[80%] shrink-0 duration-300 shadow-2xl ${
+            className={`card bg-base-100 sm:w-[80%] shrink-0 duration-300 shadow-2xl ${
               isDarkMode && "text-black"
             }`}
           >

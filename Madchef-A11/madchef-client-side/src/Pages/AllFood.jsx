@@ -10,6 +10,7 @@ const AllFood = () => {
   const { user } = useContext(AuthContext);
   const [searchText, setsearchText] = useState("");
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
+  // const [sortOprion, setsortOprion] = useState("");
 
   useEffect(() => {
     axios
@@ -20,6 +21,20 @@ const AllFood = () => {
         setallFood(data.data);
       });
   }, [searchText]);
+
+  function handleSort(sortName) {
+    if (sortName === "low-to-high") {
+      const sortedFood = [...allFood].sort(function (a, b) {
+        return a.price - b.price;
+      });
+      setallFood(sortedFood);
+    } else if (sortName === "high-to-low") {
+      const sortedFood2 = [...allFood].sort(function (a, b) {
+        return b.price - a.price;
+      });
+      setallFood(sortedFood2);
+    }
+  }
 
   return (
     <div>
@@ -58,7 +73,20 @@ const AllFood = () => {
         </label>
       </div>
 
-      <div className="w-[80%] mx-auto pb-20 pt-10 grid lg:grid-cols-4 sm:grid-cols-2 gap-5">
+      <div className="w-[80%] mx-auto mt-10 text-black">
+        <select
+          onChange={(e) => handleSort(e.target.value)}
+          className="duration-300 select select-bordered w-full max-w-xs"
+        >
+          <option disabled selected>
+            Sort by
+          </option>
+          <option value="low-to-high">Price: Low to High</option>
+          <option value="high-to-low">Price: High to Low</option>
+        </select>
+      </div>
+
+      <div className="w-[80%] mx-auto pb-20 pt-10 grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-5">
         {allFood.map((e) => (
           <div
             key={e._id}
@@ -83,8 +111,11 @@ const AllFood = () => {
               <p className="line-clamp-2 text-sm mt-1">{e.description}</p>
               <div className="card-actions justify-end">
                 <Link className="w-full" to={`/allfood/foodDetailes/${e._id}`}>
-                  <button className="btn hover:bg-[#FF2727] hover:border-none btn-neutral text-white w-full mt-2">
-                    Details
+                  <button
+                    className="hover:bg-[#FF2727] bg-[#191A23] text-white
+                    rounded-lg w-full py-2 mt-3 font-normal cursor-pointer text-sm active:scale-95 transition-all"
+                  >
+                    See More
                   </button>
                 </Link>
               </div>

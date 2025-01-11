@@ -6,6 +6,7 @@ import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../Custom/useAxiosSecure";
 import { RxCross2 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 
 const MyOrder = () => {
@@ -38,51 +39,61 @@ const MyOrder = () => {
   return (
     <div>
       <div className="w-[80%] mx-auto text-center mt-10">
-        <h1 className="text-3xl font-semibold">My Orders</h1>
+        <h1 className="text-2xl font-semibold">My Orders</h1>
         <p className="text-sm mt-1">
           Track Your Favorite Meals and Relive the Flavorful Moments
         </p>
       </div>
 
-      <div className="w-[80%] mx-auto pb-20 pt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {myorder.map((e) => (
-          <div
-            key={e._id}
-            className={`relative card card-compact bg-base-100 shadow-xl ${
-              isDarkMode && "text-black"
-            }`}
-          >
-            <figure className="rounded-2xl shadow-xl h-[10rem]">
-              <img
-                src={e.photo}
-                className="object-cover w-full h-[10rem]"
-                alt="Shoes"
-              />
-              <RxCross2
-                onClick={() => {
-                  handleDelete(e._id);
-                }}
-                className="bg-[#E8252E] border-[5px] hover:scale-[1.2] duration-300 border-white text-4xl cursor-pointer
-                rounded-full p-1.5 text-white -top-2 -right-2 absolute"
-              ></RxCross2>
-            </figure>
-            <div key={e._id} className="p-4">
-              <h2 className="card-title">{e.foodname}</h2>
-              <p className="text-sm">
-                <span className="font-semibold">Price:</span> ${e.price}
-              </p>
-              <p className="text-sm">
-                <span className="font-semibold">Food Owner:</span> {e.useremail}
-              </p>
-              <p className="text-sm">
-                <span className="font-semibold">Buying time:</span>{" "}
-                {moment(e.buyingdate).format("MMMM Do YYYY, h:mm:ss")}
-              </p>
-              <p className="line-clamp-1">{e.description}</p>
-              <div className="card-actions justify-end"></div>
-            </div>
-          </div>
-        ))}
+      <div
+        className={`overflow-x-auto lg:w-[80%] w-[90%] mx-auto pb-20 ${
+          myorder == 0 && "h-screen"
+        } pt-10`}
+      >
+        <table className="table">
+          <thead>
+            <tr className={`${isDarkMode ? "text-white" : "text-black/60"}`}>
+              <th></th>
+              <th>Image</th>
+              <th>Food Name</th>
+              <th>Price</th>
+              <th>Food Owner</th>
+              <th>Buying time</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myorder.map((e, index) => (
+              <tr className={`${isDarkMode ? "hover:bg-[black]/20" : "hover"}`}>
+                <th>{index + 1}</th>
+                <td className="xl:w-[16%] lg:w-[20%] w-full h-20 p-0 md:p-3">
+                  <img
+                    className="rounded-xl p-0 w-full h-20 object-cover"
+                    src={e.photo}
+                    alt=""
+                  />
+                </td>
+                <td>{e.foodname}</td>
+                <td>${e.price}</td>
+                <td>{e.useremail}</td>
+                <td>{moment(e.buyingdate).format("MMMM Do YYYY, h:mm:ss")}</td>
+                <td>
+                  <Link to={`/updatefood/${e._id}`}>
+                    <button
+                      className={`px-3 ${
+                        isDarkMode
+                          ? "hover:bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] hover:text-black/85 border border-[#F4BD6D] text-[#F4BD6D]"
+                          : "bg-gradient-to-b from-[#ff3838] to-[#b52c2c] text-white"
+                      } rounded-full py-1 font-semibold cursor-pointer text-[10px] active:scale-[0.1] transition-all hover:scale-[1.1] duration-300`}
+                    >
+                      Delete
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -24,42 +24,61 @@ const MyFood = () => {
 
   return (
     <div>
-      <div className="w-[80%] mx-auto flex items-center mt-10 justify-center flex-col">
-        <h1 className="text-3xl font-semibold">My Food Items</h1>
+      <div
+        className={`w-[80%] mx-auto flex items-center mt-10 justify-center flex-col`}
+      >
+        <h1 className="text-2xl font-semibold">My Food Items</h1>
         <p className="text-sm text-center">
           Manage and review all the food items you've added to the menu.
         </p>
       </div>
-      <div className="w-[80%] mx-auto pb-20 pt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {myfood.map((e) => (
-          <div
-            key={e._id}
-            className={`relative card card-compact bg-base-100 shadow-xl ${
-              isDarkMode && "text-black"
-            }`}
-          >
-            <figure className="rounded-2xl shadow-xl h-[10rem]">
-              <img
-                className="object-cover w-full h-[10rem]"
-                src={e.photo}
-                alt="Shoes"
-              />
-              <Link to={`/updatefood/${e._id}`}>
-                <TbEdit
-                  className="bg-blue-600 border-[5px] hover:scale-[1.2] duration-300 border-white text-4xl cursor-pointer
-                rounded-full p-1.5 text-white -top-2 -right-2 absolute"
-                ></TbEdit>
-              </Link>
-            </figure>
-            <div key={e._id} className="p-4">
-              <h2 className="card-title">{e.foodname}</h2>
-              <p className="text-sm my-1">Price: ${e.price}</p>
-              <p className="text-sm my-1">Origin: {e.origin}</p>
-              <p className="line-clamp-1 text-sm">{e.description}</p>
-              <div className="card-actions justify-end"></div>
-            </div>
-          </div>
-        ))}
+
+      <div
+        className={`overflow-x-auto lg:w-[80%] w-[90%] mx-auto pb-20 ${
+          myfood == 0 && "h-screen"
+        } pt-10`}
+      >
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr className={`${isDarkMode ? "text-white" : "text-black/60"}`}>
+              <th></th>
+              <th>Image</th>
+              <th>Food Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Purchase count</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myfood.map((e, index) => (
+              <tr className={`${isDarkMode ? "hover:bg-[black]/20" : "hover"}`}>
+                <th>{index + 1}</th>
+                <td className="xl:w-[16%] lg:w-[20%] w-full p-0 md:p-3">
+                  <img className="rounded-xl p-0 w-full" src={e.photo} alt="" />
+                </td>
+                <td>{e.foodname}</td>
+                <td>${e.price}</td>
+                <td>{e.quantity}</td>
+                <td>{e.purchase_count}</td>
+                <td>
+                  <Link to={`/updatefood/${e._id}`}>
+                    <button
+                      className={`px-3 ${
+                        isDarkMode
+                          ? "hover:bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] hover:text-black/85 border border-[#F4BD6D] text-[#F4BD6D]"
+                          : "bg-gradient-to-b from-[#3871FF] to-[#3036CC] text-white"
+                      } rounded-full py-1 font-semibold cursor-pointer text-[10px] active:scale-[0.1] transition-all hover:scale-[1.1] duration-300`}
+                    >
+                      Update
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

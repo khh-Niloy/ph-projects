@@ -228,7 +228,7 @@ const Customer = () => {
         </Swiper>
 
         <div className="flex items-center justify-center mt-[3rem]">
-          <div className="custom-navigation absolute gap-2 flex z-50 -translate-y-10">
+          <div className="custom-navigation absolute gap-2 flex z-40 -translate-y-10">
             <FiChevronRight
               onClick={handlePrev}
               className={`cursor-pointer ${
