@@ -5,6 +5,7 @@ import { FaEye } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { DarkModeContext } from "../../DarkModeProvider/DarkModeProvider";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
   const { createUser, profileInfo, googleSignIn } = useContext(AuthContext);
@@ -13,60 +14,52 @@ const Register = () => {
   const [isClicked, setisClicked] = useState(false);
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const { register, handleSubmit } = useForm();
 
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const photo = e.target.photo.value;
-    const password = e.target.password.value;
-
+  const regSubmit = async (data) => {
     const hasUppercase = /(?=.*[A-Z])/;
     const hasLowercase = /(?=.*[a-z])/;
     const isAtLeast6Chars = /.{6,}/;
 
-    if (!hasUppercase.test(password)) {
+    if (!hasUppercase.test(data.password)) {
       seterror("*at least one uppercase letter");
       return;
     }
 
-    if (!hasLowercase.test(password)) {
+    if (!hasLowercase.test(data.password)) {
       seterror("*at least one lowercase letter");
       return;
     }
 
-    if (!isAtLeast6Chars.test(password)) {
+    if (!isAtLeast6Chars.test(data.password)) {
       seterror("*at least 6 characters long");
       return;
     }
 
-    seterror("")
-
+    seterror("");
     const profile = {
-      displayName: name,
-      photoURL: photo,
+      displayName: data.name,
+      photoURL: data.photo,
     };
 
-    createUser(email, password)
-      .then((res) => {
-        profileInfo(profile);
-        toast.success("Account Created!");
-        navigate("/");
-      })
-      .catch((err) => {
-        toast.error(`${err}`);
-      });
-  }
+    try {
+      await createUser(data.email, data.password);
+      await profileInfo(profile);
+      toast.success("Account Created!");
+      navigate("/");
+    } catch (err) {
+      toast.error(`${err}`);
+    }
+  };
 
-  function handleGoogle() {
-    googleSignIn()
-      .then((res) => {
-        toast.success("Welcome back!");
-        navigate("/");
-      })
-      .catch((err) => {
-        toast.error(`${err}`);
-      });
+  async function handleGoogle() {
+    try {
+      await googleSignIn();
+      toast.success("Welcome back!");
+      navigate("/");
+    } catch (err) {
+      toast.error(`${err}`);
+    }
   }
 
   return (
@@ -93,7 +86,7 @@ const Register = () => {
             <h1 className="text-4xl font-bold">Create Your Account </h1>
             <p className="text-xs">Register below to get started.</p>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(regSubmit)}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -101,7 +94,8 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="Name"
-                name="name"
+                // name="name"
+                {...register("name")}
                 className="input input-bordered"
                 required
               />
@@ -113,7 +107,7 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="email"
-                name="email"
+                {...register("email")}
                 className="input input-bordered"
                 required
               />
@@ -125,7 +119,7 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="photo"
-                name="photo"
+                {...register("photo")}
                 className="input input-bordered"
                 required
               />
@@ -138,7 +132,7 @@ const Register = () => {
                 type={isClicked ? "text" : "password"}
                 placeholder="password"
                 className="input input-bordered"
-                name="password"
+                {...register("password")}
                 required
               />
               <FaEye

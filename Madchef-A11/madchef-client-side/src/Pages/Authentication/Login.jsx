@@ -5,6 +5,7 @@ import { FaEye } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { DarkModeContext } from "../../DarkModeProvider/DarkModeProvider";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -13,31 +14,26 @@ const Login = () => {
   const location = useLocation();
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const { register, handleSubmit } = useForm();
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+  const loginSubmit = async (data) => {
+    try {
+      await signInUser(data.email, data.password);
+      toast.success("Welcome back!");
+      location.state ? navigate(`${location.state}`) : navigate(`/`);
+    } catch (err) {
+      toast.error(`${err}`);
+    }
+  };
 
-    signInUser(email, password)
-      .then((res) => {
-        toast.success("Welcome back!");
-        location.state ? navigate(`${location.state}`) : navigate(`/`);
-      })
-      .catch((err) => {
-        toast.error(`${err}`);
-      });
-  }
-
-  function handleGoogle() {
-    googleSignIn()
-      .then((res) => {
-        toast.success("Welcome back!");
-        location.state ? navigate(`${location.state}`) : navigate(`/`);
-      })
-      .catch((err) => {
-        toast.error(`${err}`);
-      });
+  async function handleGoogle() {
+    try {
+      await googleSignIn();
+      toast.success("Welcome back!");
+      location.state ? navigate(`${location.state}`) : navigate(`/`);
+    } catch (err) {
+      toast.error(`${err}`);
+    }
   }
 
   return (
@@ -64,7 +60,7 @@ const Login = () => {
             <h1 className="text-4xl font-bold">Welcome!</h1>
             <p className="text-xs">Please login to your account</p>
           </div>
-          <form onSubmit={handleSubmit} className="">
+          <form onSubmit={handleSubmit(loginSubmit)} className="">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -72,7 +68,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="email"
-                name="email"
+                {...register("email")}
                 className="input input-bordered"
                 required
               />
@@ -84,7 +80,7 @@ const Login = () => {
               <input
                 type={isClicked ? "text" : "password"}
                 name="password"
-                placeholder="password"
+                {...register("password")}
                 className="input input-bordered"
                 required
               />
