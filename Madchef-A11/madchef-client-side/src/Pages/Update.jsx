@@ -1,31 +1,36 @@
 import axios from "axios";
-import React, { isValidElement, useContext } from "react";
+import React, { isValidElement, useContext, useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
+import { useForm } from "react-hook-form";
 
 const Update = () => {
   const data = useLoaderData();
-  const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
+  const { isDarkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const { register, handleSubmit, reset, setValue } = useForm();
+  useEffect(() => {
+    setValue("foodname", data.foodname);
+    setValue("photo", data.photo);
+    setValue("category", data.category);
+    setValue("quantity", data.quantity);
+    setValue("price", data.price);
+    setValue("username", data.username);
+    setValue("useremail", data.useremail);
+    setValue("origin", data.origin);
+    setValue("description", data.description);
+  }, [data, setValue]);
 
-    const inititalData = new FormData(e.target);
-    const updatedFormObjData = Object.fromEntries(inititalData.entries());
-    updatedFormObjData.quantity = parseInt(updatedFormObjData.quantity);
-
-    axios
-      .put(
-        `https://madchef-server-side.vercel.app/allfood/updatefood/${data._id}`,
-        updatedFormObjData
-      )
-      .then((res) => {
-        toast.success("Updated");
-        navigate("/myfood");
-      });
-  }
+  const updateSubmit = async (formData) => {
+    await axios.put(
+      `https://madchef-server-side.vercel.app/allfood/updatefood/${data._id}`,
+      formData
+    );
+    toast.success("Updated");
+    navigate("/myfood");
+  };
 
   return (
     <div>
@@ -46,7 +51,7 @@ const Update = () => {
                 isDarkMode && "text-black"
               }`}
             >
-              <form onSubmit={handleSubmit} className="card-body">
+              <form onSubmit={handleSubmit(updateSubmit)} className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Food Name</span>
@@ -54,8 +59,9 @@ const Update = () => {
                   <input
                     type="text"
                     placeholder="Food Name"
-                    name="foodname"
-                    defaultValue={data.foodname}
+                    {...register("foodname")}
+                    // name="foodname"
+                    // defaultValue={data.foodname}
                     className="input input-bordered"
                     required
                   />
@@ -68,8 +74,9 @@ const Update = () => {
                     type="url"
                     placeholder="Food Image"
                     className="input input-bordered"
-                    name="photo"
-                    defaultValue={data.photo}
+                    // name="photo"
+                    // defaultValue={data.photo}
+                    {...register("photo")}
                     required
                   />
                 </div>
@@ -79,9 +86,8 @@ const Update = () => {
                   </label>
                   <input
                     type="text"
-                    name="category"
+                    {...register("category")}
                     placeholder="Food Category"
-                    defaultValue={data.category}
                     className="input input-bordered"
                     required
                   />
@@ -92,8 +98,7 @@ const Update = () => {
                   </label>
                   <input
                     type="number"
-                    defaultValue={data.quantity}
-                    name="quantity"
+                    {...register("quantity", { valueAsNumber: true })}
                     placeholder="Quantity"
                     className="input input-bordered"
                     required
@@ -105,8 +110,7 @@ const Update = () => {
                   </label>
                   <input
                     type="number"
-                    name="price"
-                    defaultValue={data.price}
+                    {...register("price", { valueAsNumber: true })}
                     placeholder="Price"
                     className="input input-bordered"
                     step="0.01"
@@ -123,8 +127,7 @@ const Update = () => {
                   </label>
                   <input
                     type="text"
-                    name="username"
-                    defaultValue={data.username}
+                    {...register("username")}
                     placeholder="Name"
                     className="input input-bordered"
                     required
@@ -134,8 +137,7 @@ const Update = () => {
                   </label>
                   <input
                     type="email"
-                    name="useremail"
-                    defaultValue={data.useremail}
+                    {...register("useremail")}
                     placeholder="Email"
                     className="input input-bordered"
                     required
@@ -147,8 +149,7 @@ const Update = () => {
                   </label>
                   <input
                     type="text"
-                    name="origin"
-                    defaultValue={data.origin}
+                    {...register("origin")}
                     placeholder="Add By"
                     className="input input-bordered"
                     required
@@ -159,9 +160,8 @@ const Update = () => {
                     <span className="label-text">Description</span>
                   </label>
                   <textarea
-                    name="description"
+                    {...register("description")}
                     id=""
-                    defaultValue={data.description}
                     cols="30"
                     rows="5"
                     className="border border-black/15 rounded-md p-3"

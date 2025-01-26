@@ -36,11 +36,7 @@ const Purchase = () => {
     });
   }
 
-  // console.log(data);
-
   const purchaseSubmit = async (formData) => {
-    console.log(formData);
-
     if (formData.purchaseQuantity > parseInt(data.quantity)) {
       toast.error("Purchase failed! Quantity exceeds available stock.");
       return;
@@ -50,36 +46,10 @@ const Purchase = () => {
       `https://madchef-server-side.vercel.app/addorder`,
       formData
     );
-    console.log(res);
     reset();
     navigate("/allfood");
     toast.success("Order placed successfully!");
   };
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   const purchaseQuantity = e.target.purchaseQuantity.value;
-  //   if (parseInt(purchaseQuantity) > parseInt(data.quantity)) {
-  //     toast.error("Purchase failed! Quantity exceeds available stock.");
-  //     return;
-  //   }
-
-  //   const inititalData = new FormData(e.target);
-  //   const formObjData = Object.fromEntries(inititalData.entries());
-  //   formObjData.foodid = data._id;
-  //   formObjData.purchaseQuantity = parseInt(formObjData.purchaseQuantity);
-
-  //   console.log(formObjData)
-
-  // axios
-  //   .post(`https://madchef-server-side.vercel.app/addorder`, formObjData)
-  //   .then((res) => {
-  //     e.target.reset();
-  //     navigate("/allfood");
-  //     toast.success("Order placed successfully!");
-  //   });
-  // }
 
   return (
     <div>

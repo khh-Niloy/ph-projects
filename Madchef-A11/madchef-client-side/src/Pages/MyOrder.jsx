@@ -64,7 +64,10 @@ const MyOrder = () => {
           </thead>
           <tbody>
             {myorder.map((e, index) => (
-              <tr className={`${isDarkMode ? "hover:bg-[black]/20" : "hover"}`}>
+              <tr
+                key={index}
+                className={`${isDarkMode ? "hover:bg-[black]/20" : "hover"}`}
+              >
                 <th>{index + 1}</th>
                 <td className="xl:w-[16%] lg:w-[20%] w-full h-20 p-0 md:p-3">
                   <img
