@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import useAxiosSecure from "../Custom/useAxiosSecure";
+import { useForm } from "react-hook-form";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
@@ -22,22 +23,15 @@ const AddFood = () => {
     );
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const { register, handleSubmit, reset } = useForm();
 
-    const inititalData = new FormData(e.target);
-    const formObjData = Object.fromEntries(inititalData.entries());
-    formObjData.quantity = parseInt(formObjData.quantity);
-    formObjData.purchase_count = 0;
-
-    axios
-      .post(`https://madchef-server-side.vercel.app/addfood`, formObjData)
-      .then((res) => {
-        e.target.reset();
-        toast.success("New food item added successfully!");
-        navigate("/myfood");
-      });
-  }
+  const addFoodSubmit = async (data) => {
+    data.purchase_count = 0;
+    await axios.post(`https://madchef-server-side.vercel.app/addfood`, data);
+    reset();
+    toast.success("New food item added successfully!");
+    navigate("/myfood");
+  };
 
   return (
     <div>
@@ -55,7 +49,7 @@ const AddFood = () => {
               isDarkMode && "text-black"
             }`}
           >
-            <form onSubmit={handleSubmit} className="card-body">
+            <form onSubmit={handleSubmit(addFoodSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Food Name</span>
@@ -63,7 +57,7 @@ const AddFood = () => {
                 <input
                   type="text"
                   placeholder="Food Name"
-                  name="foodname"
+                  {...register("foodname")}
                   className="input input-bordered"
                   required
                 />
@@ -76,7 +70,7 @@ const AddFood = () => {
                   type="url"
                   placeholder="Food Image"
                   className="input input-bordered"
-                  name="photo"
+                  {...register("photo")}
                   required
                 />
               </div>
@@ -86,7 +80,7 @@ const AddFood = () => {
                 </label>
                 <input
                   type="text"
-                  name="category"
+                  {...register("category")}
                   placeholder="Food Category"
                   className="input input-bordered"
                   required
@@ -98,7 +92,7 @@ const AddFood = () => {
                 </label>
                 <input
                   type="number"
-                  name="quantity"
+                  {...register("quantity", { valueAsNumber: true })}
                   placeholder="Quantity"
                   className="input input-bordered"
                   required
@@ -110,10 +104,10 @@ const AddFood = () => {
                 </label>
                 <input
                   type="number"
-                  name="price"
+                  {...register("price", { valueAsNumber: true })}
                   placeholder="Price"
                   className="input input-bordered"
-                  step="0.01"
+                  step="any"
                   required
                 />
               </div>
@@ -128,7 +122,7 @@ const AddFood = () => {
                 <input
                   type="text"
                   value={user?.displayName}
-                  name="username"
+                  {...register("username")}
                   placeholder="Name"
                   className="input input-bordered"
                   required
@@ -139,7 +133,7 @@ const AddFood = () => {
                 </label>
                 <input
                   type="email"
-                  name="useremail"
+                  {...register("useremail")}
                   value={user?.email}
                   placeholder="Email"
                   className="input input-bordered"
@@ -153,7 +147,7 @@ const AddFood = () => {
                 </label>
                 <input
                   type="text"
-                  name="origin"
+                  {...register("origin")}
                   placeholder="Add By"
                   className="input input-bordered"
                   required
@@ -164,7 +158,7 @@ const AddFood = () => {
                   <span className="label-text">Description</span>
                 </label>
                 <textarea
-                  name="description"
+                  {...register("description")}
                   id=""
                   cols="30"
                   rows="5"

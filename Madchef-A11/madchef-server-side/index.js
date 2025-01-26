@@ -14,7 +14,7 @@ app.use(
       "https://madchef-server-side.vercel.app",
       "https://madchef-1487d.web.app",
       "https://madchef-1487d.firebaseapp.com",
-      "https://storied-halva-b354f3.netlify.app/"
+      "https://storied-halva-b354f3.netlify.app/",
     ],
     credentials: true,
   })

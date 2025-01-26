@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import useAxiosSecure from "../Custom/useAxiosSecure";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
+import { useForm } from "react-hook-form";
 
 const Purchase = () => {
   const { user } = useContext(AuthContext);
@@ -25,34 +26,60 @@ const Purchase = () => {
     fetchData();
   }, [id]);
 
+  const { register, handleSubmit, reset, setValue } = useForm();
+
   function fetchData() {
     axiosSecure.get(`/allfood/fooddetailes/purchase/${id}`).then((data) => {
       setdata(data.data);
+      setValue("foodname", data.data.foodname);
+      setValue("price", data.data.price);
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  // console.log(data);
 
-    const purchaseQuantity = e.target.purchaseQuantity.value;
-    if (parseInt(purchaseQuantity) > parseInt(data.quantity)) {
+  const purchaseSubmit = async (formData) => {
+    console.log(formData);
+
+    if (formData.purchaseQuantity > parseInt(data.quantity)) {
       toast.error("Purchase failed! Quantity exceeds available stock.");
       return;
     }
+    formData.foodid = data._id;
+    const res = await axios.post(
+      `https://madchef-server-side.vercel.app/addorder`,
+      formData
+    );
+    console.log(res);
+    reset();
+    navigate("/allfood");
+    toast.success("Order placed successfully!");
+  };
 
-    const inititalData = new FormData(e.target);
-    const formObjData = Object.fromEntries(inititalData.entries());
-    formObjData.foodid = data._id;
-    formObjData.purchaseQuantity = parseInt(formObjData.purchaseQuantity);
+  // function handleSubmit(e) {
+  //   e.preventDefault();
 
-    axios
-      .post(`https://madchef-server-side.vercel.app/addorder`, formObjData)
-      .then((res) => {
-        e.target.reset();
-        navigate("/allfood");
-        toast.success("Order placed successfully!");
-      });
-  }
+  //   const purchaseQuantity = e.target.purchaseQuantity.value;
+  //   if (parseInt(purchaseQuantity) > parseInt(data.quantity)) {
+  //     toast.error("Purchase failed! Quantity exceeds available stock.");
+  //     return;
+  //   }
+
+  //   const inititalData = new FormData(e.target);
+  //   const formObjData = Object.fromEntries(inititalData.entries());
+  //   formObjData.foodid = data._id;
+  //   formObjData.purchaseQuantity = parseInt(formObjData.purchaseQuantity);
+
+  //   console.log(formObjData)
+
+  // axios
+  //   .post(`https://madchef-server-side.vercel.app/addorder`, formObjData)
+  //   .then((res) => {
+  //     e.target.reset();
+  //     navigate("/allfood");
+  //     toast.success("Order placed successfully!");
+  //   });
+  // }
 
   return (
     <div>
@@ -71,7 +98,10 @@ const Purchase = () => {
                 isDarkMode && "text-black"
               }`}
             >
-              <form onSubmit={handleSubmit} className="card-body">
+              <form
+                onSubmit={handleSubmit(purchaseSubmit)}
+                className="card-body"
+              >
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Food Name</span>
@@ -79,9 +109,8 @@ const Purchase = () => {
                   <input
                     type="text"
                     placeholder="Food Name"
-                    name="foodname"
+                    {...register("foodname")}
                     // value={data.foodname}
-                    defaultValue={data.foodname}
                     className="input input-bordered"
                     required
                   />
@@ -94,7 +123,8 @@ const Purchase = () => {
                   </label>
                   <input
                     type="number"
-                    name="purchaseQuantity"
+                    {...register("purchaseQuantity", { valueAsNumber: true })}
+                    // name="purchaseQuantity"
                     placeholder="Purchase Quantity"
                     className="input input-bordered"
                     required
@@ -106,8 +136,9 @@ const Purchase = () => {
                   </label>
                   <input
                     type="number"
-                    name="price"
-                    defaultValue={data.price}
+                    {...register("price", { valueAsNumber: true })}
+                    // name="price"
+                    // defaultValue={data.price}
                     placeholder="Price"
                     className="input input-bordered"
                     step="0.01"
@@ -120,8 +151,9 @@ const Purchase = () => {
                   </label>
                   <input
                     type="text"
+                    {...register("buyername")}
                     defaultValue={user?.displayName}
-                    name="buyername"
+                    // name="buyername"
                     placeholder="Name"
                     className="input input-bordered"
                     required
@@ -132,7 +164,8 @@ const Purchase = () => {
                   </label>
                   <input
                     type="email"
-                    name="buyeremail"
+                    {...register("buyeremail")}
+                    // name="buyeremail"
                     defaultValue={user?.email}
                     placeholder="Email"
                     className="input input-bordered"
@@ -146,7 +179,8 @@ const Purchase = () => {
                   </label>
                   <input
                     type="text"
-                    name="buyingdate"
+                    {...register("buyingdate")}
+                    // name="buyingdate"
                     value={date}
                     placeholder=""
                     className="input input-bordered"
