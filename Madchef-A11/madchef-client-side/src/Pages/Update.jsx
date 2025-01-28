@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 
 const Update = () => {
   const data = useLoaderData();
@@ -23,13 +24,22 @@ const Update = () => {
     setValue("description", data.description);
   }, [data, setValue]);
 
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async (formData) => {
+      const res = await axios.put(
+        `https://madchef-server-side.vercel.app/allfood/updatefood/${data._id}`,
+        formData
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success("Updated");
+      navigate("/myfood");
+    },
+  });
+
   const updateSubmit = async (formData) => {
-    await axios.put(
-      `https://madchef-server-side.vercel.app/allfood/updatefood/${data._id}`,
-      formData
-    );
-    toast.success("Updated");
-    navigate("/myfood");
+    mutateAsync(formData);
   };
 
   return (
@@ -169,7 +179,11 @@ const Update = () => {
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn hover:bg-blue-600 hover:border-none btn-neutral text-white w-full mt-2">
-                    update
+                    {isPending ? (
+                      <span className="loading loading-spinner loading-md"></span>
+                    ) : (
+                      "Update"
+                    )}
                   </button>
                 </div>
               </form>

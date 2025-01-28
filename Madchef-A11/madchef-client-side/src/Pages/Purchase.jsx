@@ -6,6 +6,7 @@ import axios from "axios";
 import useAxiosSecure from "../Custom/useAxiosSecure";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import { useForm } from "react-hook-form";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const Purchase = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +14,7 @@ const Purchase = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const [data, setdata] = useState([]);
+  // const [data, setdata] = useState([]);
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
@@ -22,19 +23,32 @@ const Purchase = () => {
     );
   }, [user]);
 
-  useEffect(() => {
-    fetchData();
-  }, [id]);
-
   const { register, handleSubmit, reset, setValue } = useForm();
 
-  function fetchData() {
-    axiosSecure.get(`/allfood/fooddetailes/purchase/${id}`).then((data) => {
-      setdata(data.data);
-      setValue("foodname", data.data.foodname);
-      setValue("price", data.data.price);
-    });
-  }
+  const { data: data = [] } = useQuery({
+    queryKey: ["purchaseData"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/allfood/fooddetailes/purchase/${id}`);
+      setValue("foodname", res.data.foodname);
+      setValue("price", res.data.price);
+      return res.data;
+    },
+  });
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async (formData) => {
+      const res = await axios.post(
+        `https://madchef-server-side.vercel.app/addorder`,
+        formData
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      reset();
+      navigate("/myorder");
+      toast.success("Order placed successfully!");
+    },
+  });
 
   const purchaseSubmit = async (formData) => {
     if (formData.purchaseQuantity > parseInt(data.quantity)) {
@@ -42,13 +56,16 @@ const Purchase = () => {
       return;
     }
     formData.foodid = data._id;
-    const res = await axios.post(
-      `https://madchef-server-side.vercel.app/addorder`,
-      formData
-    );
-    reset();
-    navigate("/allfood");
-    toast.success("Order placed successfully!");
+
+    mutateAsync(formData);
+
+    // const res = await axios.post(
+    //   `https://madchef-server-side.vercel.app/addorder`,
+    //   formData
+    // );
+    // reset();
+    // navigate("/myorder");
+    // toast.success("Order placed successfully!");
   };
 
   return (
@@ -160,7 +177,11 @@ const Purchase = () => {
                 </div>
                 <div className="form-control mt-6">
                   <button className="btn hover:bg-blue-600 hover:border-none btn-neutral text-white w-full mt-2">
-                    Purchase
+                    {isPending ? (
+                      <span className="loading loading-spinner loading-md"></span>
+                    ) : (
+                      "Purchase"
+                    )}
                   </button>
                 </div>
               </form>

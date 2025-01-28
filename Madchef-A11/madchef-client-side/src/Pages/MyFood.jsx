@@ -5,22 +5,20 @@ import { TbEdit } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../Custom/useAxiosSecure";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const MyFood = () => {
   const { user } = useContext(AuthContext);
-  const [myfood, setmyfood] = useState([]);
   const axiosSecure = useAxiosSecure();
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
 
-  useEffect(() => {
-    fetchData();
-  }, [user]);
-
-  const fetchData = () => {
-    axiosSecure.get(`/allfood/adminfood/${user?.email}`).then((data) => {
-      setmyfood(data.data);
-    });
-  };
+  const { data: myfood = [] } = useQuery({
+    queryKey: ["myFoodList"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/allfood/adminfood/${user?.email}`);
+      return res.data;
+    },
+  });
 
   return (
     <div>

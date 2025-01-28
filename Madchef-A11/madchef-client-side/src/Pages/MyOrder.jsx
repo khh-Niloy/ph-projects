@@ -8,32 +8,37 @@ import useAxiosSecure from "../Custom/useAxiosSecure";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const MyOrder = () => {
   const { user } = useContext(AuthContext);
-  const [myorder, setmyorder] = useState([]);
   const axiosSecure = useAxiosSecure();
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
+  const [clickedID, setclickedID] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, [user]);
+  const { data: myorder = [], refetch } = useQuery({
+    queryKey: ["myorderList"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/allorder/buyerfood/${user?.email}`);
+      return res.data;
+    },
+  });
 
-  async function fetchData() {
-    axiosSecure.get(`/allorder/buyerfood/${user?.email}`).then((data) => {
-      setmyorder(data.data);
-    });
-  }
-
-  function handleDelete(_id) {
-    axios
-      .delete(
+  const { mutate, mutateAsync, isPending, isSuccess } = useMutation({
+    mutationFn: async (_id) => {
+      const res = await axios.delete(
         `https://madchef-server-side.vercel.app/allorder/orderdelete/${_id}`
-      )
-      .then((res) => {
-        toast.error("Order deleted");
-        fetchData();
-      });
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      refetch();
+      toast.error("Order deleted");
+    },
+  });
+
+  async function handleDelete(_id) {
+    await mutateAsync(_id);
   }
 
   return (
@@ -81,17 +86,28 @@ const MyOrder = () => {
                 <td>{e.useremail}</td>
                 <td>{moment(e.buyingdate).format("MMMM Do YYYY, h:mm:ss")}</td>
                 <td>
-                  <Link to={`/updatefood/${e._id}`}>
-                    <button
-                      className={`px-3 ${
-                        isDarkMode
-                          ? "hover:bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] hover:text-black/85 border border-[#F4BD6D] text-[#F4BD6D]"
-                          : "bg-gradient-to-b from-[#ff3838] to-[#b52c2c] text-white"
-                      } rounded-full py-1 font-semibold cursor-pointer text-[10px] active:scale-[0.1] transition-all hover:scale-[1.1] duration-300`}
-                    >
-                      Delete
-                    </button>
-                  </Link>
+                  <button
+                    key={index}
+                    onClick={() => {
+                      handleDelete(e._id);
+                      setclickedID(e._id);
+                    }}
+                    className={`px-3 ${
+                      isDarkMode
+                        ? "hover:bg-gradient-to-t from-[#fd9da7] to-[#F4BD6D] hover:text-black/85 border border-[#F4BD6D] text-[#F4BD6D]"
+                        : "bg-gradient-to-b from-[#ff3838] to-[#b52c2c] text-white"
+                    } rounded-full py-1 font-semibold cursor-pointer text-[10px] active:scale-[0.1] transition-all hover:scale-[1.1] duration-300`}
+                  >
+                    {isPending ? (
+                      clickedID === e._id ? (
+                        <span className="loading loading-spinner loading-md"></span>
+                      ) : (
+                        "Delete"
+                      )
+                    ) : (
+                      "Delete"
+                    )}
+                  </button>
                 </td>
               </tr>
             ))}

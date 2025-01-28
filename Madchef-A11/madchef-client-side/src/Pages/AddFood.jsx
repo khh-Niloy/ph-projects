@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import useAxiosSecure from "../Custom/useAxiosSecure";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
@@ -22,15 +23,25 @@ const AddFood = () => {
       `https://madchef-server-side.vercel.app/checkToken/${user?.email}`
     );
   };
-
   const { register, handleSubmit, reset } = useForm();
+
+  const { mutateAsync, isSuccess, isPending } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axios.post(
+        `https://madchef-server-side.vercel.app/addfood`,
+        data
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success("New food item added successfully!");
+      navigate("/myfood");
+    },
+  });
 
   const addFoodSubmit = async (data) => {
     data.purchase_count = 0;
-    await axios.post(`https://madchef-server-side.vercel.app/addfood`, data);
-    reset();
-    toast.success("New food item added successfully!");
-    navigate("/myfood");
+    await mutateAsync(data);
   };
 
   return (
@@ -167,7 +178,11 @@ const AddFood = () => {
               </div>
               <div className="form-control mt-6">
                 <button className="btn hover:bg-blue-600 hover:border-none btn-neutral text-white w-full mt-2">
-                  Add item
+                  {isPending ? (
+                    <span className="loading loading-spinner loading-md"></span>
+                  ) : (
+                    "Add Food"
+                  )}
                 </button>
               </div>
             </form>
