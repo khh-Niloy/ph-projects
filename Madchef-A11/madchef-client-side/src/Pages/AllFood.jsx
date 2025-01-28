@@ -4,23 +4,21 @@ import { Link, useNavigation } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
 import PageTitle from "../Components/PageTitle";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const AllFood = () => {
-  const [allFood, setallFood] = useState([]);
   const { user } = useContext(AuthContext);
   const [searchText, setsearchText] = useState("");
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
   // const [sortOprion, setsortOprion] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://madchef-server-side.vercel.app/allfood?search=${searchText}`
-      )
-      .then((data) => {
-        setallFood(data.data);
-      });
-  }, [searchText]);
+  const { data: allFood = [] } = useQuery({
+    queryKey: [searchText],
+    queryFn: async () => {
+      const res = await axios.get(`https://madchef-server-side.vercel.app/allfood?search=${searchText}`);
+      return res.data
+    },
+  });
 
   function handleSort(sortName) {
     if (sortName === "low-to-high") {
