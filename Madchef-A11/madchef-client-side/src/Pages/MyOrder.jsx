@@ -24,7 +24,7 @@ const MyOrder = () => {
     },
   });
 
-  const { mutate, mutateAsync, isPending, isSuccess } = useMutation({
+  const { mutateAsync, isPending, isSuccess } = useMutation({
     mutationFn: async (_id) => {
       const res = await axios.delete(
         `https://madchef-server-side.vercel.app/allorder/orderdelete/${_id}`
@@ -33,6 +33,7 @@ const MyOrder = () => {
     },
     onSuccess: () => {
       refetch();
+      // or, queryClient.invalidateQueries(['myorderList']);
       toast.error("Order deleted");
     },
   });
