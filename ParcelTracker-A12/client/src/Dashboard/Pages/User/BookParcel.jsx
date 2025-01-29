@@ -4,14 +4,13 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../Provider/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 import useRole from "../../../Hooks/useRole";
-import { toast } from "../../../Hooks/use-toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
-// import { ComponentContext } from "@/Provider/ComponentProvider";
+import { ComponentContext } from "@/Provider/ComponentProvider";
 
 const BookParcel = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  // const { toastMessage } = useContext(ComponentContext);
+  const { toastMessage } = useContext(ComponentContext);
   const navigate = useNavigate();
   const { role } = useRole();
 
@@ -38,39 +37,42 @@ const BookParcel = () => {
     setValue("phonenumber", userData?.phonenumber);
   }, [userData, setValue]);
 
-  const { mutateAsync: addParcel } = useMutation({
+  const { mutateAsync: addParcel, isPending } = useMutation({
     mutationFn: async (data) => {
       const response = await axiosSecure.post("/add-parcel", data);
       return response.data;
     },
   });
 
+  const { mutateAsync: updateUserData } = useMutation({
+    mutationFn: async (objInfo) => {
+      const response = await axiosSecure.patch(
+        `/update-user-data/${user?.email}`,
+        objInfo
+      );
+      return response.data;
+    },
+  });
+
   const onSubmit = async (data) => {
-    data.price = finalPrice;
     data.status = "pending";
     data.bookingDate = new Date().toISOString().split("T")[0];
-    console.log(data);
+
+    await addParcel(data);
+    const objInfo = { role: role, price: data.price };
+    await updateUserData(objInfo);
+
     reset();
     setValue("name", userData?.name);
     setValue("email", userData?.email);
     setValue("phonenumber", userData?.phonenumber);
 
-    await addParcel(data);
-
-    await axiosSecure.patch(`/update-user-data/${user?.email}`, {
-      role: role,
-      price: finalPrice,
-    });
-    toast({
-      title: <span style={{ color: "#00D26A" }}>Success!</span>,
-      description: "Your parcel has been booked successfully.",
-      variant: "default",
-      className: "bg-[black] text-white shadow-lg",
-      style: {
-        padding: "16px",
-      },
-      duration: 2000,
-    });
+    toastMessage(
+      "Success",
+      "Your parcel has been booked successfully.",
+      "#0E7537",
+      "#D6FAE4"
+    );
     navigate("/dashboard/myparcel");
   };
 
@@ -326,7 +328,11 @@ const BookParcel = () => {
                 type="submit"
                 className="px-6 w-full py-2 bg-[#E83434] text-white rounded-lg hover:bg-[#d42e2e] transition-colors"
               >
-                Book Parcel
+                {isPending ? (
+                  <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                  "Add Food"
+                )}
               </button>
             </div>
           </form>

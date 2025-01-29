@@ -6,18 +6,18 @@ import { RouterProvider } from "react-router-dom";
 import AuthContextProvider from "./Provider/AuthContextProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "./components/ui/toaster";
-// import ComponentProvider from "./Provider/ComponentProvider";
+import ComponentProvider from "./Provider/ComponentProvider";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* <ComponentProvider> */}
+      <ComponentProvider>
         <AuthContextProvider>
             <RouterProvider router={router} />
             <Toaster />
         </AuthContextProvider>
-      {/* </ComponentProvider> */}
+      </ComponentProvider>
     </QueryClientProvider>
   </StrictMode>
 );
