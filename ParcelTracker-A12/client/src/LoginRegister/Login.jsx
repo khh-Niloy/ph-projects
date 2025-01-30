@@ -9,6 +9,7 @@ import Lottie from "lottie-react";
 import { toast } from "../Hooks/use-toast";
 import useAxiosPublic from "@/Hooks/useAxiosPublic";
 import { useQueryClient } from "@tanstack/react-query";
+import { ComponentContext } from "@/Provider/ComponentProvider";
 
 const Login = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -16,25 +17,24 @@ const Login = () => {
   const [eyeIconClicked, seteyeIconClicked] = useState(false);
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
+  const { toastMessage } = useContext(ComponentContext);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    signInUser(email, password).then(() => {
+    try {
+      await signInUser(email, password);
       form.reset();
+      toastMessage("Success", "Welcome back!", "#236D86", "#E7F4F9");
       navigate("/");
-      toast({
-        title: <span style={{ color: "#00D26A" }}>Success!</span>,
-        description: "Welcome back!",
-        variant: "default",
-        className: "bg-[black] text-white shadow-lg",
-        duration: 3000,
-      });
-    });
+    } catch (err) {
+      console.log(err);
+      toastMessage("Sorry", `${err}`, "#825C0F", "#FBF2DE");
+    }
   };
 
   async function handleGoogle() {
@@ -46,32 +46,19 @@ const Login = () => {
         email: res.user.email,
         role: "user",
       };
-
       const response = await axiosPublic.post(`/all-user-info`, userInfo);
-
       if (response.status) {
         queryClient.invalidateQueries(["userrole", res?.user?.email]);
         navigate("/");
-
-        toast({
-          title: <span style={{ color: "#00D26A" }}>Success!</span>,
-          description: "Account created successfully!",
-          variant: "default",
-          className: "bg-[black] text-white shadow-lg",
-          duration: 3000,
-        });
+        toastMessage("Success", "Welcome back!", "#236D86", "#E7F4F9");
       }
     } catch (err) {
-      toast({
-        title: <span style={{ color: "#00D26A" }}>Sorry!</span>,
-        description: `${err?.response?.data?.message}`,
-        variant: "default",
-        className: "bg-[black] text-white shadow-lg",
-        style: {
-          padding: "16px",
-        },
-        duration: 3000,
-      });
+      toastMessage(
+        "Sorry",
+        `${err?.response?.data?.message}`,
+        "#825C0F",
+        "#FBF2DE"
+      );
     }
   }
 

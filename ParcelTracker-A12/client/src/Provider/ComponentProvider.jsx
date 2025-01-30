@@ -8,15 +8,19 @@ const ComponentProvider = ({ children }) => {
     toast({
       title: (
         <div
-          className={`text-[#0E7537] text-[${titleTextColor}] flex items-center gap-1 text-base`}
+          className="flex items-center gap-1 text-base"
+          style={{ color: titleTextColor }}
         >
-          <HiCheckCircle></HiCheckCircle> <span>{titleText}!</span>
+          <HiCheckCircle /> <span>{titleText}!</span>
         </div>
       ),
-      description: `${descriptionText}`,
+      description: (
+        <span style={{ color: titleTextColor }}>{descriptionText}</span>
+      ),
       variant: "default",
-      className: `bg-[${bgColor}] text-[#0E7537] p-5 shadow-lg`,
+      className: "p-5 shadow-lg",
       duration: 2000,
+      style: { backgroundColor: bgColor, color: "#0E7537" }, // Dynamic styling
     });
   }
 

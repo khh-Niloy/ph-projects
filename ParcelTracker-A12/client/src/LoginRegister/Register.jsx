@@ -9,7 +9,7 @@ import { FaEye } from "react-icons/fa";
 import safe from "../assets/gif2.json";
 import Lottie from "lottie-react";
 import { toast } from "../Hooks/use-toast";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   Select,
   SelectContent,
@@ -19,72 +19,58 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { ComponentContext } from "@/Provider/ComponentProvider";
+import { Controller, useForm } from "react-hook-form";
 
 const Register = () => {
   const { createUser, updateUserProfile, googleSignIn } =
     useContext(AuthContext);
   const [eyeIconClicked, seteyeIconClicked] = useState(false);
   const queryClient = useQueryClient();
-
+  const { toastMessage } = useContext(ComponentContext);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
 
-  const [userType, setuserType] = useState("");
+  const { register, handleSubmit, control } = useForm();
 
-  function handleUserTypeSelect(value) {
-    setuserType(value);
-  }
+  const { mutateAsync: imageUploadImagebb, isPending: imageUploadLoading } =
+    useMutation({
+      mutationFn: async (image) => {
+        return await imageUpload(image);
+      },
+    });
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  const { mutateAsync: addUser, isPending } = useMutation({
+    mutationFn: async (data) => {
+      return await axiosPublic.post(`/all-user-info`, data);
+    },
+  });
 
-    const form = event.target;
-    const name = form.name.value;
-    const image = form.image.files[0];
-    const usertype = userType;
-    const phonenumber = form.phonenumber.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    //1. send image data to imgbb
-    const photoURL = await imageUpload(image);
-
-    const userInfo = {
-      name: name,
-      image: photoURL,
-      email: email,
-      phonenumber: phonenumber,
-      role: usertype,
-    };
+  const regSubmit = async (data) => {
+    data.image = await imageUploadImagebb(data.image);
 
     try {
-      const response = await axiosPublic.post(`/all-user-info`, userInfo);
-      console.log(response);
-      const res = await createUser(email, password);
-      console.log(res?.user?.email);
+      const { password, ...userData } = data;
+      await addUser(userData);
+      const res = await createUser(data.email, data.password);
       queryClient.invalidateQueries(["userrole", res?.user?.email]);
-      await updateUserProfile(name, photoURL);
+      await updateUserProfile(data.name, data.image);
       navigate("/");
-      toast({
-        title: <span style={{ color: "#00D26A" }}>Success!</span>,
-        description: "Account created successfully!",
-        variant: "default",
-        className: "bg-[black] text-white shadow-lg",
-        duration: 2000,
-      });
+      toastMessage(
+        "Success",
+        "Account created successfully!",
+        "#236D86",
+        "#E7F4F9"
+      );
     } catch (err) {
-      // console.log(err.response.data.message);
-      toast({
-        title: <span style={{ color: "#00D26A" }}>Sorry!</span>,
-        description: `${err?.response?.data?.message}`,
-        variant: "default",
-        className: "bg-[black] text-white shadow-lg",
-        style: {
-          padding: "16px",
-        },
-        duration: 2000,
-      });
+      toastMessage(
+        "Sorry",
+        `${err.response.data.message}`,
+        "#825C0F",
+        "#FBF2DE"
+      );
     }
-  }
+  };
 
   async function handleGoogle() {
     try {
@@ -99,25 +85,15 @@ const Register = () => {
       console.log(response.status);
       if (response.status) {
         navigate("/");
-        toast({
-          title: <span style={{ color: "#00D26A" }}>Success!</span>,
-          description: "Account created successfully!",
-          variant: "default",
-          className: "bg-[black] text-white shadow-lg",
-          duration: 3000,
-        });
+        toastMessage(
+          "Success",
+          "Account created successfully!",
+          "#236D86",
+          "#E7F4F9"
+        );
       }
     } catch (err) {
-      toast({
-        title: <span style={{ color: "#00D26A" }}>Sorry!</span>,
-        description: `${err?.response?.data?.message}`,
-        variant: "default",
-        className: "bg-[black] text-white shadow-lg",
-        style: {
-          padding: "16px",
-        },
-        duration: 3000,
-      });
+      toastMessage("Sorry", `${err}`, "#825C0F", "#FBF2DE");
     }
   }
 
@@ -179,7 +155,7 @@ const Register = () => {
           <div className="pt-16 lg:pb-20 pb-10 flex-col">
             <div className="text-center lg:text-left"></div>
             <div className="rounded-md bg-base-100 w-full shrink-0 shadow-2xl">
-              <form onSubmit={handleSubmit} className=" p-6 px-8">
+              <form onSubmit={handleSubmit(regSubmit)} className=" p-6 px-8">
                 <h1 className="text-center text-lg font-semibold mb-5">
                   <span className="text-[#e83434] font-bold">Register</span> to
                   Your Account
@@ -193,7 +169,7 @@ const Register = () => {
                     placeholder="name"
                     className="border border-black/15 p-2 placeholder:text-xs py-2.5
                        rounded-md text-sm focus:outline-black/5"
-                    name="name"
+                    {...register("name")}
                     required
                   />
                 </div>
@@ -204,7 +180,7 @@ const Register = () => {
                   <input
                     type="email"
                     placeholder="email"
-                    name="email"
+                    {...register("email")}
                     className="border border-black/15 p-2 placeholder:text-xs py-2.5
                        rounded-md text-sm focus:outline-black/5"
                     required
@@ -219,7 +195,7 @@ const Register = () => {
                   <input
                     type="number"
                     placeholder="Phone Number"
-                    name="phonenumber"
+                    {...register("phonenumber")}
                     className="border border-black/15 p-2 placeholder:text-xs py-2.5
                        rounded-md text-sm focus:outline-black/5"
                     required
@@ -235,8 +211,10 @@ const Register = () => {
                   <input
                     type="file"
                     id="image"
+                    {...register("image")}
                     accept="image/*"
-                    className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full text-sm text-gray-900
+                    border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
                 <div className="form-control mt-2">
@@ -245,30 +223,40 @@ const Register = () => {
                       Choose User Type
                     </span>
                   </label>
-                  <Select onValueChange={handleUserTypeSelect}>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="User type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="user">User</SelectItem>
-                        <SelectItem value="deliverymen">
-                          Delivery Men
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <Controller
+                    name="role"
+                    control={control}
+                    defaultValue="" // Set default value
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="User type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="user">User</SelectItem>
+                            <SelectItem value="deliverymen">
+                              Delivery Men
+                            </SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
                 </div>
                 <div className="form-control mt-2 relative">
                   <label className="label">
                     <span className="label-text font-semibold">Password</span>
                   </label>
                   <input
-                    name="password"
+                    {...register("password")}
                     type={eyeIconClicked ? "text" : "password"}
                     placeholder="password"
-                    className="border border-black/15 p-2 placeholder:text-xs py-2.5
-                                         rounded-md text-sm focus:outline-black/5"
+                    className="border border-black/15 p-2 placeholder:text-xs py-2.5 
+                    rounded-md text-sm focus:outline-black/5"
                     required
                   />
                   <FaEye
@@ -285,7 +273,11 @@ const Register = () => {
                     type="submit"
                     className="bg-[#e83434] text-white py-2 rounded-sm text-sm shadow-md hover:scale-[1.03] active:scale-95 duration-300"
                   >
-                    Register
+                    {isPending || imageUploadLoading ? (
+                      <span className="loading loading-spinner loading-sm"></span>
+                    ) : (
+                      "Register"
+                    )}
                   </button>
                   <div
                     onClick={handleGoogle}
@@ -320,94 +312,3 @@ const Register = () => {
 };
 
 export default Register;
-
-{
-  /* <div>
-      <div className="hero bg-base-200">
-        <div className="hero-content flex-col">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Register</h1>
-          </div>
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSubmit} className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="name"
-                  className="input input-bordered"
-                  name="name"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="image" className="block mb-2 text-sm">
-                  Select Image:
-                </label>
-                <input type="file" id="image" accept="image/*" />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Choose User Type</span>
-                </label>
-                <select
-                  name="usertype"
-                  className="select select-bordered w-full max-w-xs"
-                >
-                  <option disabled selected>
-                    User Type
-                  </option>
-                  <option value="user">User</option>
-                  <option value="deliverymen">Delivery Men</option>
-                </select>
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Phone Number</span>
-                </label>
-                <input
-                  type="number"
-                  placeholder="Phone Number"
-                  name="phonenumber"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  name="email"
-                  className="input input-bordered"
-                  required
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  name="password"
-                  required
-                />
-              </div>
-              <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
-              </div>
-            </form>
-            <button onClick={handleGoogle} className="btn btn-neutral">
-              Google
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> */
-}

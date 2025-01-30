@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthContextProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -42,13 +42,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ComponentContext } from "@/Provider/ComponentProvider";
 
 const MyParcel = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [selectedParcelId, setSelectedParcelId] = useState(null);
+  const [loadingID, setloadingID] = useState(null);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const { toastMessage } = useContext(ComponentContext);
 
   const { data: myParcelData = [], refetch } = useQuery({
     queryKey: ["myParcel", user?.email],
@@ -59,25 +62,27 @@ const MyParcel = () => {
   });
   const [filterdData, setfilterdData] = useState(myParcelData);
 
+  const { mutateAsync: cancelDeliverStatus, isPending } = useMutation({
+    mutationFn: async (selectedParcelId) => {
+      const response = await axiosSecure.patch(
+        `/cancel-deliver-status/${selectedParcelId}`,
+        { status: "cancelled" }
+      );
+      return response.data;
+    },
+  });
+
   async function handleCancelParcel() {
     if (!selectedParcelId) return;
-
-    const updateStatus = {
-      status: "cancelled",
-    };
-    await axiosSecure.patch(
-      `/cancel-deliver-status/${selectedParcelId}`,
-      updateStatus
-    );
+    setloadingID(selectedParcelId);
+    await cancelDeliverStatus(selectedParcelId);
     refetch();
-    toast({
-      title: <span style={{ color: "#E83434" }}>Cancelled!</span>,
-      description:
-        "You've marked this delivery as cancelled. Follow up with the receiver or admin for further details.",
-      variant: "default",
-      className: "bg-[black] text-white shadow-lg",
-      duration: 2000,
-    });
+    toastMessage(
+      "Cancelled",
+      "You've marked this delivery as cancelled. Follow up with the receiver or admin for further details.",
+      "#B0233A",
+      "#FAE5E9"
+    );
     setIsAlertOpen(false);
     setSelectedParcelId(null);
   }
@@ -92,13 +97,7 @@ const MyParcel = () => {
     formObject.review_giving_date = review_giving_date;
 
     await axiosSecure.post("/add-reviews", formObject);
-    toast({
-      title: <span style={{ color: "#00D26A" }}>Success!</span>,
-      description: "Thank you for your review!",
-      variant: "default",
-      className: "bg-[black] text-white shadow-lg",
-      duration: 2000,
-    });
+    toastMessage("Success", "Thank you for your review!", "#0E7537", "#D6FAE4");
     e.target.reset();
   }
 
@@ -205,7 +204,15 @@ const MyParcel = () => {
                     setIsAlertOpen(true);
                   }}
                 >
-                  Cancel
+                  {isPending ? (
+                    loadingID === e._id ? (
+                      <span className="loading loading-spinner loading-sm"></span>
+                    ) : (
+                      "Cancel"
+                    )
+                  ) : (
+                    "Cancel"
+                  )}
                 </Button>
               </TableCell>
               <TableCell className="">

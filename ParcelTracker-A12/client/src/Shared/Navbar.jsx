@@ -13,11 +13,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "../Hooks/use-toast";
+import { ComponentContext } from "@/Provider/ComponentProvider";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
   const { role } = useRole();
   const axiosSecure = useAxiosPublic();
+  const { toastMessage } = useContext(ComponentContext);
 
   const { data: loggedInUserInfo = [], refetch } = useQuery({
     queryKey: ["userInfo"],
@@ -46,17 +48,12 @@ const Navbar = () => {
       <button
         onClick={() => {
           signOutUser();
-          toast({
-            title: <span style={{ color: "#E83434" }}>Logged out!</span>,
-            description:
-              "Logged outYou have been logged out successfully. Please log in again to continue.",
-            variant: "default",
-            className: "bg-[black] text-white shadow-lg",
-            style: {
-              padding: "16px",
-            },
-            duration: 2000,
-          });
+          toastMessage(
+            "Logged out",
+            "You have been logged out.",
+            "#825C0F",
+            "#FBF2DE"
+          );
         }}
         className="hover:font-semibold"
       >
@@ -105,8 +102,6 @@ const Navbar = () => {
               0
             </span>
           </div>
-
-          
 
           {/* Login Button */}
           {!user && (

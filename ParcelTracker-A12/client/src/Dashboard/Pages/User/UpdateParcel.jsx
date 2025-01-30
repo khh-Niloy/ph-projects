@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
-import { toast } from "../../../Hooks/use-toast";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { ComponentContext } from "@/Provider/ComponentProvider";
 
 const UpdateParcel = () => {
   const { id } = useParams();
   const productid = id;
   const axiosSecure = useAxiosSecure();
-  const [singleParcel, setsingleParcel] = useState({});
+  const { toastMessage } = useContext(ComponentContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axiosSecure.get(`/my-parcel/get-one-percel/${productid}`).then((res) => {
-      setsingleParcel(res.data);
-    });
-  }, []);
+  const { data: singleParcel = [] } = useQuery({
+    queryKey: ["singleParcel", productid],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/my-parcel/get-one-percel/${productid}`
+      );
+      return res.data;
+    },
+  });
 
   const {
     register,
@@ -42,30 +47,33 @@ const UpdateParcel = () => {
     );
   }, [singleParcel, setValue]);
 
-  const parcelWeightValue = watch("parcelWeight", 0);
-  const [finalPrice, setfinalPrice] = useState();
-
+  const parcelWeightValue = watch("parcelWeight");
   useEffect(() => {
-    if (parcelWeightValue <= 2) setfinalPrice(parseInt(parcelWeightValue * 50));
-    else if (parcelWeightValue >= 2) {
-      setfinalPrice(150);
-    }
+    setValue(
+      "price",
+      parcelWeightValue > 2 ? 150 : parcelWeightValue * 50 || 0,
+      { shouldValidate: true }
+    );
   }, [parcelWeightValue]);
 
+  const { mutateAsync: updateParcelInfo, isPending } = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosSecure.patch(
+        `/update-parcel/${productid}`,
+        data
+      );
+      return response.data;
+    },
+  });
+
   const onSubmit = async (data) => {
-    data.price = finalPrice;
-    console.log(data);
-    await axiosSecure.patch(`/update-parcel/${productid}`, data);
-    toast({
-      title: <span style={{ color: "#00D26A" }}>Updated!</span>,
-      description: "Your parcel has been updated successfully",
-      variant: "default",
-      className: "bg-[black] text-white shadow-lg",
-      style: {
-        padding: "16px",
-      },
-      duration: 2000,
-    });
+    await updateParcelInfo(data);
+    toastMessage(
+      "Updated",
+      "Your parcel has been updated successfully.",
+      "#285192",
+      "#E3EBF7"
+    );
     navigate("/dashboard/myparcel");
   };
 
@@ -178,7 +186,6 @@ const UpdateParcel = () => {
                     Price
                   </label>
                   <input
-                    value={finalPrice}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50"
                     {...register("price")}
                     readOnly
@@ -309,7 +316,11 @@ const UpdateParcel = () => {
                 type="submit"
                 className="px-6 w-full py-2 bg-[#E83434] text-white rounded-lg hover:bg-[#d42e2e] transition-colors"
               >
-                Update Information
+                {isPending ? (
+                  <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                  "Update Information"
+                )}
               </button>
             </div>
           </form>
@@ -318,196 +329,4 @@ const UpdateParcel = () => {
     </div>
   );
 };
-
 export default UpdateParcel;
-
-/* 
-<div>
-        <div className="hero bg-base-200">
-          <div className="hero-content flex-col w-full">
-            <div className="text-center lg:text-left">
-              <h1 className="text-2xl font-bold">Update info parcel</h1>
-            </div>
-            <div className="card bg-base-100 w-full  shrink-0 shadow-2xl border border-black">
-              <form onSubmit={handleSubmit(onSubmit)} className="">
-                <div className="card-body grid grid-cols-3">
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Name</span>
-                    </label>
-                    <input
-                      className="input input-bordered"
-                      {...register("name", { required: "Name is required" })}
-                      readOnly
-                    />
-                    {errors.name && <p>{errors.name.message}</p>}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Email</span>
-                    </label>
-                    <input
-                      className="input input-bordered"
-                      {...register("email", {
-                        required: "Email is required",
-                      })}
-                    />
-                    {errors.email && <p>{errors.email.message}</p>}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Phone Number</span>
-                    </label>
-                    <input
-                      className="input input-bordered"
-                      {...register("phonenumber", {
-                        required: "phonenumber is required",
-                      })}
-                    />
-                    {errors.phonenumber && <p>{errors.phonenumber.message}</p>}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Parcel Type</span>
-                    </label>
-                    <input
-                      type="text"
-                      className="input input-bordered"
-                      {...register("parcelType", {
-                        required: "phone number is required",
-                      })}
-                    />
-                    {errors.parcelType && <p>{errors.parcelType.message}</p>}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Parcel Weight</span>
-                    </label>
-                    <input
-                      type="number"
-                      className="input input-bordered"
-                      {...register("parcelWeight", {
-                        required: "Parcel Weight is required",
-                        valueAsNumber: true,
-                      })}
-                    />
-                    {errors.parcelWeight && (
-                      <p>{errors.parcelWeight.message}</p>
-                    )}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">
-                        Receiver's Phone Number
-                      </span>
-                    </label>
-                    <input
-                      className="input input-bordered"
-                      {...register("receiverPhoneNumber", {
-                        required: "Receiver's Phone Number is required",
-                      })}
-                    />
-                    {errors.receiverPhoneNumber && (
-                      <p>{errors.receiverPhoneNumber.message}</p>
-                    )}
-                  </div>
-                  <div className="form-control col-span-2">
-                    <label className="label">
-                      <span className="label-text">
-                        Parcel Delivery Address
-                      </span>
-                    </label>
-                    <textarea
-                      className="border border-black"
-                      name=""
-                      id=""
-                      cols="30"
-                      rows="5"
-                      {...register("parcelDeliveryAddress", {
-                        required: "Parcel Delivery Address is required",
-                      })}
-                    ></textarea>
-                    {errors.parcelDeliveryAddress && (
-                      <p>{errors.parcelDeliveryAddress.message}</p>
-                    )}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">
-                        Requested Delivery Date
-                      </span>
-                    </label>
-                    <input
-                      type="date"
-                      className="input input-bordered"
-                      {...register("requestedDeliveryDate", {
-                        required: "Requested Delivery Date is required",
-                      })}
-                    />
-                    {errors.requestedDeliveryDate && (
-                      <p>{errors.requestedDeliveryDate.message}</p>
-                    )}
-                  </div>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">
-                        Delivery Address Latitude
-                      </span>
-                    </label>
-                    <input
-                      type="number"
-                      step="any" // Allow any decimal precision for input
-                      className="input input-bordered"
-                      {...register("deliveryAddressLatitude", {
-                        required: "Delivery Address Latitude is required",
-                        valueAsNumber: true,
-                      })}
-                    />
-
-                    {errors.deliveryAddressLatitude && (
-                      <p>{errors.deliveryAddressLatitude.message}</p>
-                    )}
-                  </div>
-
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">
-                        Delivery Address Longitude
-                      </span>
-                    </label>
-                    <input
-                      type="number"
-                      step="any" // Allow any decimal precision for input
-                      className="input input-bordered"
-                      {...register("deliveryAddressLongitude", {
-                        required: "Delivery Address Longitude is required",
-                        valueAsNumber: true,
-                      })}
-                    />
-
-                    {errors.deliveryAddressLongitude && (
-                      <p>{errors.deliveryAddressLongitude.message}</p>
-                    )}
-                  </div>
-
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Price</span>
-                    </label>
-                    <input
-                      value={finalPrice}
-                      className="input input-bordered"
-                      {...register("price")}
-                      readOnly
-                    />
-                    {errors.price && <p>{errors.price.message}</p>}
-                  </div>
-                </div>
-                <div className="form-control mt-6">
-                  <button className="btn btn-neutral">Update Info</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div> */
