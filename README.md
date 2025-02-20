@@ -1,3 +1,12 @@
+# FastPathao - Efficient Parcel Management
+FastPathao is a full-stack parcel management system built with **React.js**, **Firebase Authentication**, **Tailwind CSS**, **Context API**, and **JWT** for secure authentication, managed via **local storage**. The backend, powered by **Express.js**, **MongoDB**, and **CORS Middleware**, ensures secure API requests and verification.
+
+It features **three role-based dashboards**: **users** can create, track, and manage parcel deliveries, **admins** oversee the system by managing users and deliveries, while **delivery man** can view assigned parcels, update statuses, and ensure timely handling.
+## Live site: [FastPathao](https://parceltracker-7e596.web.app/) | Source Code: [FastPathao](https://github.com/khh-Niloy/ph-projects/tree/main/ParcelTracker-A12)
+![Screenshot](thumb-images/FastPathao.png)
+
+<hr/>
+
 # MadChef - Crafting Flavor Magic
 A Full-Stack Restaurant Management Platform Built with **React.js**, **React Router**, **Firebase Authentication**, **Tailwind CSS**, **Context API**, and **JWT** (storing and sending tokens) and a Fully **Responsive** Design. Powered by **Express.js**, **MongoDB**, **JWT** (used for token verification on the backend), and **CORS** Middleware.
 ## Live site: [MadChef](https://madchef-1487d.web.app/) | Source Code: [MadChef](https://github.com/khh-Niloy/ph-projects/tree/main/Madchef-A11)
