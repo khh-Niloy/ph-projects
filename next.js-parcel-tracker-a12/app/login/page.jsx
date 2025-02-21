@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { BsCheckCircleFill, BsArrowRightCircle } from "react-icons/bs";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import { Inter } from "next/font/google";
@@ -29,15 +29,15 @@ export default function Login() {
         <div className="lg:w-[41%] w-full">
           <div className=" px-10 ">
             {/* Header */}
-            <div className="space-y-4 mb-5">
-              <div className="inline-flex items-center gap-2 border border-blue-100 bg-blue-50 px-4 py-2 rounded-full">
-                <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-                <span className="text-blue-700 font-medium text-sm">
+            <div className="space-y-4 mb-7">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-2 rounded-full">
+                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                <span className="text-white font-medium text-sm">
                   Enterprise Solution
                 </span>
               </div>
               <h1 className="text-3xl font-bold text-gray-900">
-                <span className="text-blue-600 relative">ParcelPro</span>
+                Meet<span className="text-blue-600 relative"> ParcelPro</span>, Ultimate Delivery Management Solution
               </h1>
               <p className="text-gray-600 text-base leading-relaxed max-w-lg">
                 Experience enterprise-grade delivery management with advanced
@@ -46,11 +46,11 @@ export default function Login() {
             </div>
 
             {/* Benefits Section */}
-            <div className="space-y-6 mb-10">
+            <div className="space-y-6 mb-8">
               <div className="transform hover:scale-[1.02] transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-5">
                   <div className="bg-blue-600/5 p-4 rounded-xl group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
-                    <BsCheckCircleFill className="text-blue-500 text-2xl group-hover:text-white" />
+                    <BsCheckCircleFill className="text-blue-600 text-2xl group-hover:text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 text-base mb-1 group-hover:text-blue-600 transition-colors">
@@ -67,7 +67,7 @@ export default function Login() {
               <div className="transform hover:scale-[1.02] transition-all duration-300 group cursor-default">
                 <div className="flex items-center gap-5">
                   <div className="bg-blue-600/5 p-4 rounded-xl group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-300">
-                    <BsCheckCircleFill className="text-blue-500 text-2xl group-hover:text-white" />
+                    <BsCheckCircleFill className="text-blue-600 text-2xl group-hover:text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 text-base mb-1 group-hover:text-blue-600 transition-colors">
@@ -85,7 +85,7 @@ export default function Login() {
             {/* Stats Section */}
             <div className="grid grid-cols-3 gap-8 mb-9">
               <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
-                <div className="text-2xl font-bold text-blue-600 mb-1">
+                <div className="text-2xl font-bold text-blue-500 mb-1">
                   99.9%
                 </div>
                 <div className="text-xs font-medium text-gray-600">
@@ -93,7 +93,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
-                <div className="text-2xl font-bold text-blue-600 mb-1">
+                <div className="text-2xl font-bold text-blue-500 mb-1">
                   24/7
                 </div>
                 <div className="text-xs font-medium text-gray-600">
@@ -101,7 +101,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
-                <div className="text-2xl font-bold text-blue-600 mb-1">
+                <div className="text-2xl font-bold text-blue-500 mb-1">
                   50K+
                 </div>
                 <div className="text-xs font-medium text-gray-600">
@@ -278,6 +278,7 @@ export default function Login() {
                   shadow-[0_6px_20px_rgba(37,99,235,0.18)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.28)]"
               >
                 Sign in to your account
+                <BsArrowRightCircle className="inline-block ml-2 text-xl" />
               </button>
             </form>
 
