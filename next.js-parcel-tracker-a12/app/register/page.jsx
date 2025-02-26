@@ -5,31 +5,65 @@ import {
   FaUser,
   FaEnvelope,
   FaLock,
-  FaShieldAlt,
   FaRocket,
   FaEye,
   FaEyeSlash,
   FaPhone,
 } from "react-icons/fa";
-import { BsArrowRightCircle, BsShieldCheck } from "react-icons/bs";
+import { BsShieldCheck } from "react-icons/bs";
 import Link from "next/link";
 import { Inter } from "next/font/google";
-
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Register() {
-  const [eyeIconClicked, seteyeIconClicked] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [eyeIconClicked1, seteyeIconClicked1] = useState(false);
+  const [eyeIconClicked2, seteyeIconClicked2] = useState(false);
+  const router = useRouter();
+  const [imagePreview, setImagePreview] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle registration logic here
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const imageFile = watch("image");
+  if (imageFile?.[0] && !imagePreview) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(imageFile[0]);
+  }
+
+  async function regSubmit(data) {
+    if (data.password !== data.confirmPassword)
+      return toast.error("Please match the password");
+    // using cloudinary
+    const formData = new FormData();
+    formData.append("file", data.image[0]);
+    formData.append("upload_preset", "my-uploads");
+
+    const res = await axios.post(
+      "https://api.cloudinary.com/v1_1/dwrvergmd/image/upload",
+      formData
+    );
+    data.image = res.data.secure_url;
+    try {
+      const response = await axios.post("/api/auth/add-new-user", data);
+      console.log(response.data);
+      toast.success("Account created successfully");
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+      toast.error("Account creation failed");
+    }
+  }
 
   return (
     <div
@@ -162,26 +196,28 @@ export default function Register() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit(regSubmit)} className="space-y-5">
               <div className="space-y-4">
                 <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Full Name
                   </label>
                   <div className="relative">
                     <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Hasib Hossain Niloy"
                       className="w-full px-11 py-3 rounded-xl bg-gray-50/30 border border-gray-200 
                       focus:border-blue-600 
                      transition-all duration-300 text-sm placeholder:text-gray-400"
-                      value={formData.username}
-                      onChange={(e) =>
-                        setFormData({ ...formData, username: e.target.value })
-                      }
+                      {...register("name", { required: "Name is required" })}
                     />
                   </div>
+                  {errors.name && (
+                    <p className="text-red-500 text-sm">
+                      {errors.name.message}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -192,16 +228,18 @@ export default function Register() {
                     <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     <input
                       type="email"
-                      placeholder="name@company.com"
+                      placeholder="niloy@gmail.com"
                       className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-gray-50/30 border border-gray-200 
                       focus:border-blue-600 
                      transition-all duration-300 text-sm placeholder:text-gray-400"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      {...register("email", { required: "Email is required" })}
                     />
                   </div>
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -216,7 +254,35 @@ export default function Register() {
                       className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-gray-50/30 border border-gray-200 
                       focus:border-blue-600 
                      transition-all duration-300 text-sm placeholder:text-gray-400"
+                      {...register("phoneNumber", {
+                        required: "Phone Number is required",
+                      })}
                     />
+                  </div>
+                  {errors.phoneNumber && (
+                    <p className="text-red-500 text-sm">
+                      {errors.phoneNumber.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    User Type
+                  </label>
+                  <div className="relative">
+                    <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <select
+                      name="role"
+                      id="role"
+                      className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-gray-50/30 border border-gray-200 
+                      focus:border-blue-600 
+                     transition-all duration-300 text-sm placeholder:text-gray-400"
+                      {...register("role", { required: "Role is required" })}
+                    >
+                      <option value="user">User</option>
+                      <option value="deliveryman">Delivery Man</option>
+                    </select>
                   </div>
                 </div>
 
@@ -224,25 +290,77 @@ export default function Register() {
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Profile Image
                   </label>
-                  <div className="relative">
-                    <FaUser className="absolute left-4 top-1/2 transform -translate-y-5 text-gray-400" />
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-gray-50/30 border border-gray-200 
-                      focus:border-blue-600 file:mr-4 file:py-2.5 file:px-4
-                      file:rounded-full file:border-0 file:font-semibold
-                      file:bg-blue-50 file:text-blue-700
-                      hover:file:bg-blue-100 file:cursor-pointer
-                      hover:border-blue-300 focus:ring-2 focus:ring-blue-200
-                      transition-all duration-300 text-sm"
-                    />
-                    <div className="flex items-center gap-2 mt-2 ml-2">
-                      <span className="text-xs text-gray-500">
-                        Supported formats: JPG, PNG, GIF
-                      </span>
-                      <span className="text-xs text-gray-400">|</span>
-                      <span className="text-xs text-gray-500">Max size: 5MB</span>
+                  <div className="relative bg-white shadow-sm rounded-xl p-4 border border-gray-100 hover:border-blue-300 transition-all duration-300">
+                    <div className="flex items-center gap-4">
+                      <div className="h-16 w-16 rounded-full border-2 border-blue-100 p-1 shadow-inner bg-white">
+                        {imagePreview ? (
+                          <img
+                            src={imagePreview}
+                            alt="Preview"
+                            className="h-full w-full object-cover rounded-full"
+                          />
+                        ) : (
+                          <div className="h-full w-full rounded-full bg-blue-50 flex items-center justify-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-8 w-8 text-blue-400"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                              />
+                            </svg>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex-1">
+                        <label
+                          htmlFor="file-upload"
+                          className="block cursor-pointer"
+                        >
+                          <div className="flex items-center justify-center px-3 py-2 bg-blue-50 hover:bg-blue-100 rounded-lg border border-dashed border-blue-200 transition-colors duration-200">
+                            <span className="text-sm flex items-center font-medium text-blue-600">
+                              <span>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-4 w-4 text-blue-600 mr-2"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                                  />
+                                </svg>
+                              </span>{" "}
+                              Upload image
+                            </span>
+                          </div>
+                          <input
+                            id="file-upload"
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            {...register("image", {
+                              required: "Image is required",
+                            })}
+                          />
+                        </label>
+                        <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                          <span>JPG, PNG</span>
+                          <span>•</span>
+                          <span>Max 5MB</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -254,23 +372,23 @@ export default function Register() {
                   <div className="relative">
                     <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     <input
-                      type={eyeIconClicked ? "text" : "password"}
+                      type={eyeIconClicked1 ? "text" : "password"}
                       placeholder="Create a strong password"
                       className="w-full pl-11 pr-12 py-3.5 rounded-xl bg-gray-50/30 border border-gray-200 
                       focus:border-blue-600 
                      transition-all duration-300 text-sm placeholder:text-gray-400"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
                     />
+
                     <button
                       type="button"
-                      onClick={() => seteyeIconClicked(!eyeIconClicked)}
+                      onClick={() => seteyeIconClicked1(!eyeIconClicked1)}
                       className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 
                                                 hover:text-gray-600 transition-colors"
                     >
-                      {eyeIconClicked ? (
+                      {eyeIconClicked1 ? (
                         <FaEyeSlash size={18} />
                       ) : (
                         <FaEye size={18} />
@@ -286,19 +404,22 @@ export default function Register() {
                   <div className="relative">
                     <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     <input
-                      type={eyeIconClicked ? "text" : "password"}
+                      type={eyeIconClicked2 ? "text" : "password"}
                       placeholder="Confirm your password"
                       className="w-full pl-11 pr-12 py-3.5 rounded-xl bg-gray-50/30 border border-gray-200 
                       focus:border-blue-600 
                      transition-all duration-300 text-sm placeholder:text-gray-400"
+                      {...register("confirmPassword", {
+                        required: "You have to match the password",
+                      })}
                     />
                     <button
                       type="button"
-                      onClick={() => seteyeIconClicked(!eyeIconClicked)}
+                      onClick={() => seteyeIconClicked2(!eyeIconClicked2)}
                       className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 
-                                                hover:text-gray-600 transition-colors"
+                      hover:text-gray-600 transition-colors"
                     >
-                      {eyeIconClicked ? (
+                      {eyeIconClicked2 ? (
                         <FaEyeSlash size={18} />
                       ) : (
                         <FaEye size={18} />
@@ -306,7 +427,6 @@ export default function Register() {
                     </button>
                   </div>
                 </div>
-
               </div>
 
               <button
@@ -317,7 +437,6 @@ export default function Register() {
                                     shadow-[0_6px_20px_rgba(37,99,235,0.18)]"
               >
                 Create Account
-                <BsArrowRightCircle className="text-xl" />
               </button>
             </form>
 

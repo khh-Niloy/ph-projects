@@ -1,23 +1,39 @@
 "use client";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { BsCheckCircleFill, BsArrowRightCircle } from "react-icons/bs";
+import { BsCheckCircleFill } from "react-icons/bs";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import { Inter } from "next/font/google";
-
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Login() {
+  const router = useRouter();
   const [eyeIconClicked, seteyeIconClicked] = useState(false);
-  const [formData, setformData] = useState({
-    email: "",
-    password: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+  const onSubmit = async (data) => {
+    console.log(data.email);
+    try {
+      const res = await axios.post(`/api/auth/login`, data);
+      console.log(res);
+      if (res.data.success) {
+        toast.success("Login successful");
+        router.push("/");
+      } else {
+        toast.error("Login failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -37,7 +53,8 @@ export default function Login() {
                 </span>
               </div>
               <h1 className="text-3xl font-bold text-gray-900">
-                Meet<span className="text-blue-600 relative"> ParcelPro</span>, Ultimate Delivery Management Solution
+                Meet<span className="text-blue-600 relative"> ParcelPro</span>,
+                Ultimate Delivery Management Solution
               </h1>
               <p className="text-gray-600 text-base leading-relaxed max-w-lg">
                 Experience enterprise-grade delivery management with advanced
@@ -187,7 +204,7 @@ export default function Login() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -197,20 +214,17 @@ export default function Login() {
                   <input
                     name="email"
                     type="email"
-                    placeholder="name@company.com"
+                    placeholder="niloy@gmail.com"
                     className="w-full px-5 py-3 rounded-xl bg-gray-50/30 border border-gray-200 
                        focus:border-blue-600 
                       transition-all duration-300 text-sm placeholder:text-gray-400"
                     required
-                    value={formData.email}
-                    onChange={(e) =>
-                      setformData({
-                        ...formData,
-                        email: e.target.value,
-                      })
-                    }
+                    {...register("email", { required: "Email is required" })}
                   />
                 </div>
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                )}
               </div>
 
               {/* Password Field */}
@@ -227,11 +241,15 @@ export default function Login() {
                     focus:border-blue-600 
                    transition-all duration-300 text-sm placeholder:text-gray-400"
                     required
-                    value={formData.password}
-                    onChange={(e) =>
-                      setformData({ ...formData, password: e.target.value })
-                    }
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
                   />
+                  {errors.password && (
+                    <p className="text-red-500 text-sm">
+                      {errors.password.message}
+                    </p>
+                  )}
                   <button
                     type="button"
                     onClick={() => seteyeIconClicked(!eyeIconClicked)}
@@ -278,7 +296,6 @@ export default function Login() {
                   shadow-[0_6px_20px_rgba(37,99,235,0.18)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.28)]"
               >
                 Sign in to your account
-                <BsArrowRightCircle className="inline-block ml-2 text-xl" />
               </button>
             </form>
 
