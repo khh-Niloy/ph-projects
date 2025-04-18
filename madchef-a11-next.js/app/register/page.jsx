@@ -1,9 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { AuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const {
@@ -12,13 +15,22 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  const { createUser } = useContext(AuthContext);
+  const navigate = useRouter();
+
   async function onSubmit(data) {
     try {
+      const { password, ...others } = data;
+      await createUser(data.email, password);
       const res = await axios.post("/api/user-register", {
-        ...data,
+        ...others,
         role: "user",
       });
-      console.log(res.data);
+      // console.log(res);
+      if (res.data.insertedId) {
+        toast.success("Created your account!");
+        navigate.push("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +50,12 @@ const Register = () => {
         <input {...register("photo")} className="border" type="text" />
         <br />
         <label htmlFor="">Password</label>
-        <input className="border" type="password" /> <br />
+        <input
+          {...register("password")}
+          className="border"
+          type="password"
+        />{" "}
+        <br />
         <Button variant="outline" size="sm" className=" cursor-pointer">
           Register
         </Button>

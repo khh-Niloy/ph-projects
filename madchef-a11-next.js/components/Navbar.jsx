@@ -1,19 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AuthContext } from "@/context/AuthContextProvider";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", link: "/" },
@@ -24,6 +21,36 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { signOutUser, user } = useContext(AuthContext);
+  // console.log(user);
+  const navigate = useRouter();
+
+  async function handleSignOut() {
+    await signOutUser();
+    navigate.push("/login");
+  }
+
+  const authButton = user ? (
+    <Button
+      variant="outline"
+      size="sm"
+      className="text-[#E8252E] cursor-pointer"
+      onClick={handleSignOut}
+    >
+      Logout
+    </Button>
+  ) : (
+    <Link href={"/login"}>
+      <Button
+        variant="outline"
+        size="sm"
+        className="text-[#E8252E] cursor-pointer"
+      >
+        Login
+      </Button>
+    </Link>
+  );
+
   return (
     <div className="flex items-center justify-between bg-[#E8252E] text-white px-8 py-2 fixed w-full">
       <div>Logo:Madchef</div>
@@ -41,15 +68,7 @@ const Navbar = () => {
         </NavigationMenu>
       </div>
       <div className="flex gap-3">
-        <Link href={"/login"}>
-          <Button
-            variant="outline"
-            size="sm"
-            className="text-[#E8252E] cursor-pointer"
-          >
-            Login
-          </Button>
-        </Link>
+        {authButton}
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
