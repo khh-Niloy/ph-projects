@@ -10,14 +10,14 @@ import ComponentProvider from "./Provider/ComponentProvider";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <>
     <QueryClientProvider client={queryClient}>
       <ComponentProvider>
         <AuthContextProvider>
-            <RouterProvider router={router} />
-            <Toaster />
+          <RouterProvider router={router} />
+          <Toaster />
         </AuthContextProvider>
       </ComponentProvider>
     </QueryClientProvider>
-  </StrictMode>
+  </>
 );

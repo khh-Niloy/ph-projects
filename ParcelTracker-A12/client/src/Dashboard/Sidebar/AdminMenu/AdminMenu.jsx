@@ -81,6 +81,20 @@ const AdminMenu = () => {
           </div>
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#E83434] font-medium duration-300 transition"
+              : "font-normal text-gray-700 hover:text-black hover:font-semibold duration-300 transition"
+          }
+          to={`/dashboard/message`}
+        >
+          <div className="flex items-center justify-start gap-3">
+            <UserRound color="#e83434" size={17} /> Messenger
+          </div>
+        </NavLink>
+      </li>
     </div>
   );
 };

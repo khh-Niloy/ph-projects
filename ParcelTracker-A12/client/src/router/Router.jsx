@@ -24,6 +24,7 @@ import PaymentSuccessPage from "@/Dashboard/Pages/User/PaymentSuccessPage";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ErrorPage from "@/Shared/ErrorPage";
+import Message from "@/Dashboard/Sidebar/CommonMenu/Message";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 export const router = createBrowserRouter([
@@ -156,6 +157,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <Profile></Profile>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/message",
+        element: (
+          <PrivateRouter>
+            <Message></Message>
           </PrivateRouter>
         ),
       },

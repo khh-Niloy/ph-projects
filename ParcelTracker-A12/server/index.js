@@ -1,6 +1,29 @@
 require("dotenv").config();
 const express = require("express");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 const app = express();
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+  socket.on("message", (data) => {
+    console.log(data)
+    socket.to(data.roomID).emit("message", data.message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("disconnected id: ", socket.id);
+  });
+});
+
 var jwt = require("jsonwebtoken");
 const morgan = require("morgan");
 const stripe = require("stripe")(process.env.PAYMENT_SECRET_KEY);
@@ -19,6 +42,7 @@ app.use(
       "https://parceltracker-7e596.firebaseapp.com",
     ],
     credentials: true,
+    methods: ["GET", "POST", "OPTIONS"],
   })
 );
 app.use(express.json());
@@ -159,7 +183,7 @@ async function run() {
         return res.status(409).send({ message: "You have already an account" });
       }
       const result = await userCollection.insertOne(userInfo);
-      res.send({ status: true, result: result});
+      res.send({ status: true, result: result });
     });
 
     //updating number of booked and price
@@ -480,6 +504,6 @@ app.get("/", (req, res) => {
   res.send("Parcel Tracker server!");
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
