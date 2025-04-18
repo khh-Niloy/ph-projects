@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   NavigationMenu,
@@ -39,9 +41,15 @@ const Navbar = () => {
         </NavigationMenu>
       </div>
       <div className="flex gap-3">
-        <Button variant="outline" size="sm" className="text-[#E8252E]">
-          Login
-        </Button>
+        <Link href={"/login"}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-[#E8252E] cursor-pointer"
+          >
+            Login
+          </Button>
+        </Link>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
