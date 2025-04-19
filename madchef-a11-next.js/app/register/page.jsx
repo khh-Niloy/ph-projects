@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import bcrypt from "bcryptjs";
 
 const Register = () => {
   const {
@@ -15,18 +16,23 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserInfo } = useContext(AuthContext);
   const navigate = useRouter();
 
   async function onSubmit(data) {
     try {
       const { password, ...others } = data;
       await createUser(data.email, password);
+      await updateUserInfo(data.name, data.photo);
+
+      let hashedPassword = await bcrypt.hash(password, 10);
+
       const res = await axios.post("/api/user-register", {
         ...others,
+        password: hashedPassword,
         role: "user",
       });
-      // console.log(res);
+      console.log(res);
       if (res.data.insertedId) {
         toast.success("Created your account!");
         navigate.push("/");
@@ -45,6 +51,9 @@ const Register = () => {
         <br />
         <label htmlFor="">Email</label>
         <input {...register("email")} className="border" type="text" />
+        <br />
+        <label htmlFor="">Phone Number</label>
+        <input {...register("phoneNumber")} className="border" type="number" />
         <br />
         <label htmlFor="">Photo</label>
         <input {...register("photo")} className="border" type="text" />

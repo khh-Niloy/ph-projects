@@ -14,16 +14,16 @@ import { useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", link: "/" },
-  { label: "All Foods", link: "/all-food" },
+  { label: "All Foods", link: "/foods" },
   { label: "Gallery", link: "/gallery" },
-  { label: "Add Food", link: "/add-food" },
+  { label: "Add Food", link: "/foods/add" },
   { label: "My Orders", link: "/my-orders" },
 ];
 
 const Navbar = () => {
   const { signOutUser, user } = useContext(AuthContext);
-  // console.log(user);
   const navigate = useRouter();
+  console.log(user)
 
   async function handleSignOut() {
     await signOutUser();
@@ -34,7 +34,7 @@ const Navbar = () => {
     <Button
       variant="outline"
       size="sm"
-      className="text-[#E8252E] cursor-pointer"
+      className="text-[#E8252E] cursor-pointer bg-white"
       onClick={handleSignOut}
     >
       Logout
@@ -44,7 +44,7 @@ const Navbar = () => {
       <Button
         variant="outline"
         size="sm"
-        className="text-[#E8252E] cursor-pointer"
+        className="text-[#E8252E] cursor-pointer bg-white"
       >
         Login
       </Button>
@@ -52,7 +52,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="flex items-center justify-between bg-[#E8252E] text-white px-8 py-2 fixed w-full">
+    <div className="flex items-center justify-between bg-[#E8252E] text-white px-8 py-2 fixed w-full z-50">
       <div>Logo:Madchef</div>
       <div className="text-sm">
         <NavigationMenu>

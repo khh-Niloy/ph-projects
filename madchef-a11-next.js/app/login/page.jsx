@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "@/context/AuthContextProvider";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
@@ -12,10 +13,14 @@ const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const navigate = useRouter();
 
-  async function onSubmit({ email, password }) {
+  async function onSubmit(data) {
     try {
-      await signInUser(email, password);
-      navigate.push("/");
+      const res = await axios.post("/api/user-login", data);
+      console.log(res);
+      if (res.data.passwordCheck) {
+        await signInUser(data.email, data.password);
+        navigate.push("/");
+      }
     } catch (error) {
       console.log(error);
     }
