@@ -2,8 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { AuthContext } from "@/context/AuthContextProvider";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const AddFood = () => {
   const { register, handleSubmit } = useForm();
@@ -15,6 +18,16 @@ const AddFood = () => {
 
   const isDarkMode = false;
   const isPending = false;
+
+  const navigate = useRouter();
+
+  async function addFoodSubmit(data) {
+    // console.log(data)
+    const res = await axios.post("/api/foods/add", data);
+    console.log(res);
+    toast.success("added your item!");
+    navigate.push("/foods");
+  }
 
   return (
     <div>
@@ -103,7 +116,9 @@ const AddFood = () => {
               <div className="form-control flex gap-5">
                 <div className="">
                   <label className="label">
-                    <span className="label-text text-black mt-2">User Name</span>
+                    <span className="label-text text-black mt-2">
+                      User Name
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -117,7 +132,9 @@ const AddFood = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-black mt-2">User Email</span>
+                    <span className="label-text text-black mt-2">
+                      User Email
+                    </span>
                   </label>
                   <input
                     type="email"

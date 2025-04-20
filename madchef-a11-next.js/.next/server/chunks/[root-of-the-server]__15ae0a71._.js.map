@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 60, "column": 0}, "map": {"version":3,"sources":["file://C%3A/ph-projects/madchef-a11-next.js/app/api/role/route.js"],"sourcesContent":["import { NextResponse } from \"next/server\";\r\nimport { getCollectionDB } from \"./db/getCollectionDB\";\r\n\r\nexport async function POST(req) {\r\n  const body = await req.json();\r\n  const { email } = body;\r\n  try {\r\n    const userCollection = await getCollectionDB(\"user\");\r\n    const result = await userCollection.findOne({ email: email });\r\n    console.log(result.role);\r\n    return NextResponse.json({ role: result.role });\r\n  } catch (error) {\r\n    return NextResponse.json({ error: error });\r\n  }\r\n}\r\n"],"names":[],"mappings":";;;AAAA;;;;;;;;AAGO,eAAe,KAAK,GAAG;IAC5B,MAAM,OAAO,MAAM,IAAI,IAAI;IAC3B,MAAM,EAAE,KAAK,EAAE,GAAG;IAClB,IAAI;QACF,MAAM,iBAAiB,MAAM,gBAAgB;QAC7C,MAAM,SAAS,MAAM,eAAe,OAAO,CAAC;YAAE,OAAO;QAAM;QAC3D,QAAQ,GAAG,CAAC,OAAO,IAAI;QACvB,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;YAAE,MAAM,OAAO,IAAI;QAAC;IAC/C,EAAE,OAAO,OAAO;QACd,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;YAAE,OAAO;QAAM;IAC1C;AACF","debugId":null}}]
+}

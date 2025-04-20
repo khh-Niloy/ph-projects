@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 52, "column": 0}, "map": {"version":3,"sources":["file://C%3A/ph-projects/madchef-a11-next.js/app/api/foods/route.js"],"sourcesContent":["export async function GET() {\r\n  try {\r\n    const foodCollection = await getCollectionDB(\"food\");\r\n    const result = await foodCollection.find().toArray();\r\n    return NextResponse.json({ data: result });\r\n  } catch (error) {\r\n    console.error(\"Error fetching food:\", error);\r\n    return NextResponse.json(\r\n      { error: \"Something went wrong\" },\r\n      { status: 500 }\r\n    );\r\n  }\r\n}\r\n"],"names":[],"mappings":";;;AAAO,eAAe;IACpB,IAAI;QACF,MAAM,iBAAiB,MAAM,gBAAgB;QAC7C,MAAM,SAAS,MAAM,eAAe,IAAI,GAAG,OAAO;QAClD,OAAO,aAAa,IAAI,CAAC;YAAE,MAAM;QAAO;IAC1C,EAAE,OAAO,OAAO;QACd,QAAQ,KAAK,CAAC,wBAAwB;QACtC,OAAO,aAAa,IAAI,CACtB;YAAE,OAAO;QAAuB,GAChC;YAAE,QAAQ;QAAI;IAElB;AACF","debugId":null}}]
+}
