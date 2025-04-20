@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { getRole } from "@/lib/getRole";
 import Image from "next/image";
+import userImage from "@/public/images/user.png";
 
 const Navbar = () => {
   const { signOutUser, user } = useContext(AuthContext);
@@ -100,23 +101,25 @@ const Navbar = () => {
       </div>
       <div className="flex gap-3 items-center">
         {authButton}
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img src={user?.photoURL} alt={user?.displayName}></img>
+        {user && (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img src={user?.photoURL} alt={user?.displayName}></img>
+              </div>
             </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              {profileItems}
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            {profileItems}
-          </ul>
-        </div>
+        )}
       </div>
     </div>
   );

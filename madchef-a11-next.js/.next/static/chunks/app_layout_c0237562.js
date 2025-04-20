@@ -7,7 +7,7 @@
   "static/chunks/node_modules_tailwind-merge_dist_bundle-mjs_mjs_b854acb4._.js",
   "static/chunks/node_modules_axios_lib_99999129._.js",
   "static/chunks/node_modules_e5191c5d._.js",
-  "static/chunks/_3212500e._.js"
+  "static/chunks/_53962586._.js"
 ],
     source: "dynamic"
 });
