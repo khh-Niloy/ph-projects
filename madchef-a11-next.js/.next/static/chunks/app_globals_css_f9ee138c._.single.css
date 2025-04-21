@@ -3573,6 +3573,10 @@
     margin-top: calc(var(--spacing) * 32);
   }
 
+  .mt-\[4rem\] {
+    margin-top: 4rem;
+  }
+
   .mt-\[5rem\] {
     margin-top: 5rem;
   }
@@ -4228,18 +4232,6 @@
     height: 26rem;
   }
 
-  .h-\[120px\] {
-    height: 120px;
-  }
-
-  .h-\[130px\] {
-    height: 130px;
-  }
-
-  .h-\[500px\] {
-    height: 500px;
-  }
-
   .h-\[var\(--radix-navigation-menu-viewport-height\)\] {
     height: var(--radix-navigation-menu-viewport-height);
   }
@@ -4323,14 +4315,6 @@
 
   .w-\[45rem\] {
     width: 45rem;
-  }
-
-  .w-\[60\%\] {
-    width: 60%;
-  }
-
-  .w-\[65\%\] {
-    width: 65%;
   }
 
   .w-\[70\%\] {
@@ -4867,16 +4851,6 @@
     border-color: var(--color-black);
   }
 
-  .border-black\/5 {
-    border-color: #0000000d;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .border-black\/5 {
-      border-color: color-mix(in oklab, var(--color-black) 5%, transparent);
-    }
-  }
-
   .border-black\/10 {
     border-color: #0000001a;
   }
@@ -4947,14 +4921,6 @@
 
   .bg-\[\#E8252E\] {
     background-color: #e8252e;
-  }
-
-  .bg-\[\#F2BD71\] {
-    background-color: #f2bd71;
-  }
-
-  .bg-\[\#F2BD71\]\/10 {
-    background-color: oklab(83.039% .0286765 .108191 / .1);
   }
 
   .bg-\[\#FF2727\] {
@@ -5033,14 +4999,6 @@
   .bg-gradient-to-br {
     --tw-gradient-position: to bottom right in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
-  }
-
-  .bg-\[url\(\'\/images\/banner\.jpg\'\)\] {
-    background-image: url("/images/banner.jpg");
-  }
-
-  .bg-\[url\(\'https\:\/\/img\.freepik\.com\/free-photo\/chicken-fajita-chicken-fillet-fried-with-bell-pepper-lavash-with-bread-slices-white-plate_23-2149141361\.jpg\'\)\] {
-    background-image: url("https://img.freepik.com/free-photo/chicken-fajita-chicken-fillet-fried-with-bell-pepper-lavash-with-bread-slices-white-plate_23-2149141361.jpg");
   }
 
   .bg-\[url\(\'https\:\/\/img\.freepik\.com\/free-photo\/margarita-pizza-with-tomato-olive-basil-top-view_141793-2381\.jpg\?t\=st\=1734794330\~exp\=1734797930\~hmac\=a89434674ccb82e68af71c7e840ba0fdc5cc1f8a28deee8524bfd81eefb904c0\&w\=900\'\)\] {
@@ -5450,16 +5408,6 @@
 
   .text-black {
     color: var(--color-black);
-  }
-
-  .text-black\/50 {
-    color: #00000080;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .text-black\/50 {
-      color: color-mix(in oklab, var(--color-black) 50%, transparent);
-    }
   }
 
   .text-black\/80 {
