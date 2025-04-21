@@ -39,10 +39,6 @@ const Login = () => {
           <p className="text-xs">Please login to your account</p>
         </div>
         <div className="w-[75%] grid grid-cols-12">
-          <div className="col-span-5 rounded-l-2xl">
-            <ImageShow></ImageShow>
-          </div>
-
           <div className="col-span-7 rounded-r-2xl">
             <div className=" md:rounded-tr-2xl md:rounded-br-2xl md:rounded-bl-none md:rounded-tl-none rounded-2xl px-8 bg-white">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -97,6 +93,10 @@ const Login = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="col-span-5 rounded-l-2xl">
+            <ImageShow></ImageShow>
           </div>
         </div>
       </div>

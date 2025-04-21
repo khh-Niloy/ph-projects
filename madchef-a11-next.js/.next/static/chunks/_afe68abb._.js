@@ -37,8 +37,10 @@ const AddFood = ()=>{
     const isPending = false;
     const navigate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     async function addFoodSubmit(data) {
-        // console.log(data)
-        const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post("/api/foods/add", data);
+        const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post("/api/foods/add", {
+            ...data,
+            addedDate: new Date()
+        });
         console.log(res);
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].success("added your item!");
         navigate.push("/foods");
@@ -56,12 +58,12 @@ const AddFood = ()=>{
                             children: "Add New Food"
                         }, void 0, false, {
                             fileName: "[project]/app/foods/add/page.jsx",
-                            lineNumber: 41,
+                            lineNumber: 43,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/foods/add/page.jsx",
-                        lineNumber: 40,
+                        lineNumber: 42,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -80,12 +82,12 @@ const AddFood = ()=>{
                                                 children: "Food Name"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/add/page.jsx",
-                                                lineNumber: 51,
+                                                lineNumber: 53,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 50,
+                                            lineNumber: 52,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -96,13 +98,13 @@ const AddFood = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 53,
+                                            lineNumber: 55,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/add/page.jsx",
-                                    lineNumber: 49,
+                                    lineNumber: 51,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -115,12 +117,12 @@ const AddFood = ()=>{
                                                 children: "Food Image"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/add/page.jsx",
-                                                lineNumber: 63,
+                                                lineNumber: 65,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 62,
+                                            lineNumber: 64,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -131,13 +133,13 @@ const AddFood = ()=>{
                                             required: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 65,
+                                            lineNumber: 67,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/add/page.jsx",
-                                    lineNumber: 61,
+                                    lineNumber: 63,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -153,12 +155,12 @@ const AddFood = ()=>{
                                                         children: "Food Origin"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/add/page.jsx",
-                                                        lineNumber: 76,
+                                                        lineNumber: 78,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 75,
+                                                    lineNumber: 77,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -169,13 +171,13 @@ const AddFood = ()=>{
                                                     required: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 80,
+                                                    lineNumber: 82,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 74,
+                                            lineNumber: 76,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -188,12 +190,12 @@ const AddFood = ()=>{
                                                         children: "Food Category"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/add/page.jsx",
-                                                        lineNumber: 90,
+                                                        lineNumber: 92,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 89,
+                                                    lineNumber: 91,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -204,13 +206,13 @@ const AddFood = ()=>{
                                                     required: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 94,
+                                                    lineNumber: 96,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 88,
+                                            lineNumber: 90,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -223,12 +225,12 @@ const AddFood = ()=>{
                                                         children: "Price"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/add/page.jsx",
-                                                        lineNumber: 104,
+                                                        lineNumber: 106,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 103,
+                                                    lineNumber: 105,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -242,19 +244,19 @@ const AddFood = ()=>{
                                                     required: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 106,
+                                                    lineNumber: 108,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 102,
+                                            lineNumber: 104,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/add/page.jsx",
-                                    lineNumber: 73,
+                                    lineNumber: 75,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -270,12 +272,12 @@ const AddFood = ()=>{
                                                         children: "User Name"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/add/page.jsx",
-                                                        lineNumber: 119,
+                                                        lineNumber: 121,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 118,
+                                                    lineNumber: 120,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -288,13 +290,13 @@ const AddFood = ()=>{
                                                     readOnly: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 123,
+                                                    lineNumber: 125,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 117,
+                                            lineNumber: 119,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -306,12 +308,12 @@ const AddFood = ()=>{
                                                         children: "User Email"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/add/page.jsx",
-                                                        lineNumber: 135,
+                                                        lineNumber: 137,
                                                         columnNumber: 21
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 134,
+                                                    lineNumber: 136,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -324,19 +326,19 @@ const AddFood = ()=>{
                                                     readOnly: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/add/page.jsx",
-                                                    lineNumber: 139,
+                                                    lineNumber: 141,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 133,
+                                            lineNumber: 135,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/add/page.jsx",
-                                    lineNumber: 116,
+                                    lineNumber: 118,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -349,12 +351,12 @@ const AddFood = ()=>{
                                                 children: "Description"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/add/page.jsx",
-                                                lineNumber: 152,
+                                                lineNumber: 154,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 151,
+                                            lineNumber: 153,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -364,13 +366,13 @@ const AddFood = ()=>{
                                             className: "border w-full mt-2 resize-none border-black/15 rounded-md p-3 focus:outline-black/5"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/add/page.jsx",
-                                            lineNumber: 156,
+                                            lineNumber: 158,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/add/page.jsx",
-                                    lineNumber: 150,
+                                    lineNumber: 152,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -382,39 +384,39 @@ const AddFood = ()=>{
                                         children: "Add Food"
                                     }, void 0, false, {
                                         fileName: "[project]/app/foods/add/page.jsx",
-                                        lineNumber: 171,
+                                        lineNumber: 173,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/foods/add/page.jsx",
-                                    lineNumber: 163,
+                                    lineNumber: 165,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/foods/add/page.jsx",
-                            lineNumber: 48,
+                            lineNumber: 50,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/foods/add/page.jsx",
-                        lineNumber: 43,
+                        lineNumber: 45,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/foods/add/page.jsx",
-                lineNumber: 39,
+                lineNumber: 41,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/foods/add/page.jsx",
-            lineNumber: 34,
+            lineNumber: 36,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/foods/add/page.jsx",
-        lineNumber: 33,
+        lineNumber: 35,
         columnNumber: 5
     }, this);
 };

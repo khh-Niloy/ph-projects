@@ -22,8 +22,10 @@ const AddFood = () => {
   const navigate = useRouter();
 
   async function addFoodSubmit(data) {
-    // console.log(data)
-    const res = await axios.post("/api/foods/add", data);
+    const res = await axios.post("/api/foods/add", {
+      ...data,
+      addedDate: new Date(),
+    });
     console.log(res);
     toast.success("added your item!");
     navigate.push("/foods");

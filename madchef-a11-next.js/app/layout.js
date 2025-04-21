@@ -23,7 +23,13 @@ export default function RootLayout({ children }) {
           <Navbar />
           <div className="pt-10">{children}</div>
         </AuthContextProvider>
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3000,
+          }}
+        />
       </body>
     </html>
   );

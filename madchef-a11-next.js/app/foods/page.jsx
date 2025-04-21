@@ -15,7 +15,7 @@ const AllFood = async () => {
         {foods.data.map((e) => (
           <div
             key={e._id}
-            className="card card-compact bg-base-100 shadow-xl hover:scale-[1.03] duration-300 transition-transform"
+            className="card card-compact bg-base-100 rounded-2xl shadow-xl hover:scale-[1.03] duration-300 transition-transform"
           >
             <figure className="h-[10rem] drop-shadow-xl rounded-2xl relative">
               <p
@@ -40,7 +40,7 @@ const AllFood = async () => {
                     className="hover:bg-[#FF2727] bg-[#191A23] text-white
                     rounded-lg w-full py-2 mt-3 font-normal cursor-pointer text-sm active:scale-95 transition-all"
                   >
-                    See More
+                    More Info
                   </Button>
                 </Link>
               </div>
