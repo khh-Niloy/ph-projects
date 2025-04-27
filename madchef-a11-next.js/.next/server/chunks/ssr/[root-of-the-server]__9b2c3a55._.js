@@ -118,6 +118,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 async function getFood(id) {
     const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"].get(`${process.env.BASE_URL}/api/foods/${id}`);
     const data = await res.data;
+    console.log(data);
     return data;
 }
 }}),

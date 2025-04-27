@@ -6,20 +6,27 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 
+import ModalBtn from "@/components/modalButton/ModalBtn";
+
 const MyFood = () => {
   const { user } = useContext(AuthContext);
   const [myFood, setmyFood] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(`/api/foods?userEmail=${user?.email}`);
+      const res = await axios.get(`/api/foods/my-foods/${user?.email}`);
       const data = await res.data;
+      console.log(data);
       setmyFood(data);
     }
     fetchData();
   }, [user?.email]);
 
+  // console.log(myFood);
+
   const isDarkMode = false;
+
+  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <div>
@@ -47,15 +54,26 @@ const MyFood = () => {
                 <th>Food Name</th>
                 <th>Price</th>
                 <th>Added On</th>
-                <th>origin</th>
-                <th>Seller Email</th>
-                <th>Seller Name</th>
+                <th>Update On</th>
+                <th>Total Purchases</th>
+                <th>Total Revenue</th>
                 <th>Actions: Update & Delete</th>
               </tr>
             </thead>
             <tbody>
               {myFood.map(
-                ({ photo, foodname, price, addedDate, origin, _id }, index) => (
+                (
+                  {
+                    photo,
+                    foodname,
+                    price,
+                    addedDate,
+                    updateDate,
+                    totalPurchase,
+                    _id,
+                  },
+                  index
+                ) => (
                   <tr
                     className={`${
                       isDarkMode ? "hover:bg-[black]/20" : "hover"
@@ -72,20 +90,28 @@ const MyFood = () => {
                     <td>{foodname}</td>
                     <td>${price}</td>
                     <td>{new Date(addedDate).toLocaleDateString()}</td>
-                    <td>{origin}</td>
-                    <td>{user?.email}</td>
-                    <td>{user?.displayName}</td>
-                    <td className="space-x-3"> 
-                      <Link href={`/updatefood/${_id}`}>
-                        <Button
-                          variant="outline"
-                          size="md"
-                          className="hover:bg-gradient-to-b from-[#3871FF]
-                           to-[#3036CC] text-white duration-500 bg-[#212121] px-3 py-2 text-xs"
-                        >
-                          Update
-                        </Button>
-                      </Link>
+                    <td className="text-center">{updateDate || "-"}</td>
+                    <td className="text-center">{totalPurchase}</td>
+                    <td className="text-center">${totalPurchase * price}</td>
+                    <td className="space-x-3">
+                      <Button
+                        onClick={() => {
+                          document.getElementById("my_modal_1").showModal();
+                          setIsClicked(!isClicked);
+                        }}
+                        variant="outline"
+                        size="md"
+                        className="hover:bg-gradient-to-b from-[#3871FF]
+                           to-[#3036CC] text-white hover:duration-300 bg-[#212121] px-3 py-2 text-xs"
+                      >
+                        Update
+                      </Button>
+                      <ModalBtn
+                        setIsClicked={setIsClicked}
+                        isClicked={isClicked}
+                        foodId={_id}
+                        modalId={"my_modal_1"}
+                      ></ModalBtn>
                       <Link href={`/updatefood/${_id}`}>
                         <Button
                           variant="outline"

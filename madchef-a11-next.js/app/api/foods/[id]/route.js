@@ -8,6 +8,7 @@ export async function GET(req, { params }) {
   try {
     const foodCollection = await getCollectionDB("food");
     const result = await foodCollection.findOne({ _id: new ObjectId(id) });
+    console.log(result)
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json({ error: error });

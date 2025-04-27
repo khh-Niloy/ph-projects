@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
@@ -12,21 +11,28 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 import ImageShow from "@/components/ImageShow";
+import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const { signInUser } = useContext(AuthContext);
+  // const { signInUser } = useContext(AuthContext);
   const navigate = useRouter();
+  const router = useRouter();
 
   async function onSubmit(data) {
     try {
-      const res = await axios.post("/api/user-login", data);
-      console.log(res);
-      if (res.data.passwordCheck) {
-        await signInUser(data.email, data.password);
-        navigate.push("/");
+      const res = await signIn("credentials", {
+        redirect: false,
+        ...data,
+      });
+
+      if (res?.ok) {
+        toast.success("Login successfull");
+        router.push("/");
       }
     } catch (error) {
+      toast.error("Login Failed");
       console.log(error);
     }
   }

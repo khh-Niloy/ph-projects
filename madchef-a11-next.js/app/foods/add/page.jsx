@@ -25,6 +25,8 @@ const AddFood = () => {
     const res = await axios.post("/api/foods/add", {
       ...data,
       addedDate: new Date(),
+      totalPurchase: 0,
+      isAvailable: true
     });
     console.log(res);
     toast.success("added your item!");

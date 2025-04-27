@@ -9,17 +9,19 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AuthContext } from "@/context/AuthContextProvider";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { getRole } from "@/lib/getRole";
 import Image from "next/image";
 import userImage from "@/public/images/user.png";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
-  const { signOutUser, user } = useContext(AuthContext);
   const navigate = useRouter();
   const [role, setRole] = useState(null);
+
+  const session = useSession();
+  console.log(session);
 
   const navLinks = [
     { label: "Home", link: "/" },
@@ -37,31 +39,32 @@ const Navbar = () => {
     return true;
   });
 
-  async function handleSignOut() {
-    await signOutUser();
-    navigate.push("/login");
-  }
+  // async function handleSignOut() {
+  //   await signOutUser();
+  //   navigate.push("/login");
+  // }
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await getRole(user?.email);
-      setRole(res.data.role);
-    }
-    fetchData();
-  }, [user?.email]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await getRole(user?.email);
+  //     setRole(res.data.role);
+  //   }
+  //   fetchData();
+  // }, [user?.email]);
 
-  const authButton = user ? (
+  const authButton = session?.data?.user ? (
     <Button
+      onClick={() => signOut()}
       variant="outline"
       size="sm"
       className="text-[#E8252E] cursor-pointer bg-white hover:bg-white hover:scale-[1.03] duration-300"
-      onClick={handleSignOut}
     >
       Logout
     </Button>
   ) : (
     <Link href={"/login"}>
       <Button
+        onClick={() => signIn()}
         variant="outline"
         size="sm"
         className="text-[#E8252E] cursor-pointer bg-white hover:bg-white hover:scale-[1.03] duration-300"
@@ -101,7 +104,7 @@ const Navbar = () => {
       </div>
       <div className="flex gap-3 items-center">
         {authButton}
-        {user && (
+        {/* {session.data.user && (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -109,7 +112,10 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img src={user?.photoURL} alt={user?.displayName}></img>
+                <img
+                  src={session.data.user?.photoURL}
+                  alt={user?.displayName}
+                ></img>
               </div>
             </div>
             <ul
@@ -119,7 +125,7 @@ const Navbar = () => {
               {profileItems}
             </ul>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
