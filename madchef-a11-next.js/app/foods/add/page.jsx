@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthContext } from "@/context/AuthContextProvider";
+// import { AuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -10,7 +11,8 @@ import toast from "react-hot-toast";
 
 const AddFood = () => {
   const { register, handleSubmit } = useForm();
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  const session = useSession();
 
   function addFoodSubmit(data) {
     console.log(data);
@@ -22,11 +24,11 @@ const AddFood = () => {
   const navigate = useRouter();
 
   async function addFoodSubmit(data) {
-    const res = await axios.post("/api/foods/add", {
+    const res = await axios.post("/api/foods", {
       ...data,
       addedDate: new Date(),
       totalPurchase: 0,
-      isAvailable: true
+      isAvailable: true,
     });
     console.log(res);
     toast.success("added your item!");
@@ -126,7 +128,7 @@ const AddFood = () => {
                   </label>
                   <input
                     type="text"
-                    value={user?.displayName}
+                    value={session?.data?.user?.name}
                     {...register("username")}
                     placeholder="Name"
                     className="input border border-black/15 w-full mt-2 rounded-lg"
@@ -143,7 +145,7 @@ const AddFood = () => {
                   <input
                     type="email"
                     {...register("useremail")}
-                    value={user?.email}
+                    value={session?.data?.user?.email}
                     placeholder="Email"
                     className="input border border-black/15 w-full mt-2 rounded-lg"
                     required

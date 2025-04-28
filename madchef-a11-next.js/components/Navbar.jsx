@@ -21,7 +21,7 @@ const Navbar = () => {
   const [role, setRole] = useState(null);
 
   const session = useSession();
-  console.log(session);
+  // console.log(session);
 
   const navLinks = [
     { label: "Home", link: "/" },
