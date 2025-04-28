@@ -27,12 +27,15 @@ const Login = () => {
         ...data,
       });
 
+      console.log(res);
       if (res?.ok) {
         toast.success("Login successfull");
         router.push("/");
+      } else if (!res?.ok) {
+        toast.error("Invalid email or password.");
       }
     } catch (error) {
-      toast.error("Login Failed");
+      // toast.error("Login Failed");
       console.log(error);
     }
   }

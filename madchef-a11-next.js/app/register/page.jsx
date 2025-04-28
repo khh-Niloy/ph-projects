@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import bcrypt from "bcryptjs";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import Link from "next/link";

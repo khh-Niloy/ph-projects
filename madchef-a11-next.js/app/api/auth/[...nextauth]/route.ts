@@ -13,38 +13,28 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // const res = await fetch("/your/endpoint", {
-        //   method: "POST",
-        //   body: JSON.stringify(credentials),
-        //   headers: { "Content-Type": "application/json" },
-        // });
-
         const { email, password } = credentials;
-
         const userCollection = await getDBCollectionName("user");
 
         try {
           const user = await userCollection.findOne({ email: email });
-          // console.log(result);
 
-          const isPasswordOK = bcrypt.compare(password, user.password);
-          console.log(password);
-          console.log(user.password);
-          console.log(isPasswordOK);
+          if (!user) {
+            return null;
+          }
 
-          if (isPasswordOK) return user;
-          return NextResponse.json({ error: "error " });
+          const isPasswordOK = await bcrypt.compare(password, user.password);
+          // console.log(password);
+          // console.log(user.password);
+          // console.log(isPasswordOK);
+
+          if (!isPasswordOK) {
+            return null;
+          }
+          return user;
         } catch (error) {
           return NextResponse.json({ error: error });
         }
-
-        // const user = await res.json();
-
-        // if (res.ok && user) {
-        //   return user;
-        // }
-        // return null;
-        // console.log(credentials);
       },
     }),
   ],

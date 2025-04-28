@@ -197,37 +197,28 @@ const handler = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
                 }
             },
             async authorize (credentials, req) {
-                // const res = await fetch("/your/endpoint", {
-                //   method: "POST",
-                //   body: JSON.stringify(credentials),
-                //   headers: { "Content-Type": "application/json" },
-                // });
                 const { email, password } = credentials;
                 const userCollection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$getDBCollectionName$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])("user");
                 try {
                     const user = await userCollection.findOne({
                         email: email
                     });
-                    // console.log(result);
-                    const isPasswordOK = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(password, user.password);
-                    console.log(password);
-                    console.log(user.password);
-                    console.log(isPasswordOK);
-                    if (isPasswordOK) return user;
-                    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-                        error: "error "
-                    });
+                    if (!user) {
+                        return null;
+                    }
+                    const isPasswordOK = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(password, user.password);
+                    // console.log(password);
+                    // console.log(user.password);
+                    // console.log(isPasswordOK);
+                    if (!isPasswordOK) {
+                        return null;
+                    }
+                    return user;
                 } catch (error) {
                     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                         error: error
                     });
                 }
-            // const user = await res.json();
-            // if (res.ok && user) {
-            //   return user;
-            // }
-            // return null;
-            // console.log(credentials);
             }
         })
     ],
