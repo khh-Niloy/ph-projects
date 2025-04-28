@@ -3246,6 +3246,19 @@
     grid-area: 1 / 1 / 6 / 4;
   }
 
+  .modal-backdrop {
+    color: #0000;
+    z-index: -1;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    place-self: stretch stretch;
+    display: grid;
+  }
+
+  .modal-backdrop button {
+    cursor: pointer;
+  }
+
   .z-0 {
     z-index: 0;
   }
@@ -5154,6 +5167,10 @@
 
   .bg-red-500 {
     background-color: var(--color-red-500);
+  }
+
+  .bg-red-600 {
+    background-color: var(--color-red-600);
   }
 
   .bg-secondary {

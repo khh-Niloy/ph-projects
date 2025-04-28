@@ -26,8 +26,10 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.jsx [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContextProvider$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/context/AuthContextProvider.jsx [app-ssr] (ecmascript)");
+// import { AuthContext } from "@/context/AuthContextProvider";
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$getFood$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/getFood.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/react/index.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot$2d$toast$2f$dist$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hot-toast/dist/index.mjs [app-ssr] (ecmascript)");
@@ -40,20 +42,17 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hot
 ;
 ;
 ;
-const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
+// setselectedFoodID
+const ModalBtn = ({ modalId, setselectedFoodID, isClicked, setIsClicked })=>{
     const { register, handleSubmit, setValue } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useForm"])();
-    const { user } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContextProvider$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AuthContext"]);
-    //   const [food, setfood] = useState({});
+    const session = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSession"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         if (isClicked) {
             const fetchData = async ()=>{
-                const foodData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$getFood$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getFood"])(foodId);
-                // setfood(foodData);
-                console.log(foodData);
+                const foodData = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$getFood$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getFood"])(setselectedFoodID);
                 setValue("foodname", foodData.foodname);
                 setValue("photo", foodData.photo);
                 setValue("category", foodData.category);
-                setValue("quantity", foodData.quantity);
                 setValue("price", foodData.price);
                 setValue("origin", foodData.origin);
                 setValue("description", foodData.description);
@@ -63,24 +62,22 @@ const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
         }
     }, [
         isClicked,
-        foodId,
+        setselectedFoodID,
         setValue
     ]);
     async function updateFoodSubmit(data) {
-    // console.log(data);
-    // const res = await axios.patch(`/api/foods/update-food/${data._id}`, {
-    //   ...data,
-    //   updateDate: new Date(),
-    // });
-    // console.log(res);
+        const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].patch(`http://localhost:3000/api/foods/${setselectedFoodID}`, {
+            ...data,
+            updateDate: new Date()
+        });
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("dialog", {
-        id: modalId,
+        id: "my_modal_2",
         className: "modal",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "modal-box bg-white rounded-lg",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "modal-box bg-white rounded-lg",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     onSubmit: handleSubmit(updateFoodSubmit),
                     className: "",
                     children: [
@@ -91,15 +88,18 @@ const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
                                     className: "label",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "label-text text-black",
-                                        children: "Food Name"
-                                    }, void 0, false, {
+                                        children: [
+                                            "Food Name $",
+                                            setselectedFoodID
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                                        lineNumber: 50,
+                                        lineNumber: 48,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                                    lineNumber: 49,
+                                    lineNumber: 47,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -116,7 +116,7 @@ const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                            lineNumber: 48,
+                            lineNumber: 46,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -294,7 +294,7 @@ const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "text",
-                                            value: user?.displayName,
+                                            value: session?.data?.user?.name,
                                             ...register("username"),
                                             placeholder: "Name",
                                             className: "input border border-black/15 w-full mt-2 rounded-lg",
@@ -331,7 +331,7 @@ const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                             type: "email",
                                             ...register("useremail"),
-                                            value: user?.email,
+                                            value: session?.data?.user?.email,
                                             placeholder: "Email",
                                             className: "input border border-black/15 w-full mt-2 rounded-lg",
                                             required: true,
@@ -386,53 +386,177 @@ const ModalBtn = ({ modalId, foodId, isClicked, setIsClicked })=>{
                             fileName: "[project]/components/modalButton/ModalBtn.jsx",
                             lineNumber: 143,
                             columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                    lineNumber: 47,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "modal-action w-full mt-4",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                        method: "dialog",
-                        className: "w-full",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
-                            type: "submit",
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                             variant: "outline",
                             size: "lg",
                             className: "w-full bg-[#2B3440] hover:border-none hover:bg-[#E8252E] duration-300 text-white",
                             children: "Save Changes"
                         }, void 0, false, {
                             fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                            lineNumber: 158,
-                            columnNumber: 13
+                            lineNumber: 154,
+                            columnNumber: 11
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                        lineNumber: 157,
-                        columnNumber: 11
-                    }, this)
-                }, void 0, false, {
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/components/modalButton/ModalBtn.jsx",
-                    lineNumber: 156,
+                    lineNumber: 45,
                     columnNumber: 9
                 }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/components/modalButton/ModalBtn.jsx",
-            lineNumber: 46,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
+            }, void 0, false, {
+                fileName: "[project]/components/modalButton/ModalBtn.jsx",
+                lineNumber: 44,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                method: "dialog",
+                className: "modal-backdrop",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    children: "close"
+                }, void 0, false, {
+                    fileName: "[project]/components/modalButton/ModalBtn.jsx",
+                    lineNumber: 164,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/modalButton/ModalBtn.jsx",
+                lineNumber: 163,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/components/modalButton/ModalBtn.jsx",
-        lineNumber: 45,
+        lineNumber: 43,
         columnNumber: 5
     }, this);
 };
 const __TURBOPACK__default__export__ = ModalBtn;
-}}),
+{
+/* <dialog id={modalId} className="modal">
+  <div className="modal-box bg-white rounded-lg">
+    <form onSubmit={handleSubmit(updateFoodSubmit)} className="">
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-black">Food Name</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Name"
+          {...register("foodname")}
+          className="input border border-black/15 w-full mt-2 rounded-lg"
+          required
+        />
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-black mt-2">Food Image</span>
+        </label>
+        <input
+          type="url"
+          placeholder="Image"
+          className="input border border-black/15 w-full mt-2 rounded-lg"
+          {...register("photo")}
+          required
+        />
+      </div>
+      <div className="flex gap-5">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-black mt-2">Food Origin</span>
+          </label>
+          <input
+            type="text"
+            {...register("origin")}
+            placeholder="Origin"
+            className="input border border-black/15 w-full mt-2 rounded-lg"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-black mt-2">
+              Food Category
+            </span>
+          </label>
+          <input
+            type="text"
+            {...register("category")}
+            placeholder="Category"
+            className="input border border-black/15 w-full mt-2 rounded-lg"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-black mt-2">Price</span>
+          </label>
+          <input
+            type="number"
+            {...register("price", { valueAsNumber: true })}
+            placeholder="Price"
+            className="input border border-black/15 w-full mt-2 rounded-lg"
+            step="any"
+            required
+          />
+        </div>
+      </div>
+      <div className="form-control flex gap-5">
+        <div className="">
+          <label className="label">
+            <span className="label-text text-black mt-2">User Name</span>
+          </label>
+          <input
+            type="text"
+            value={session?.data?.user?.name}
+            {...register("username")}
+            placeholder="Name"
+            className="input border border-black/15 w-full mt-2 rounded-lg"
+            required
+            readOnly
+          />
+        </div>
+        <div>
+          <label className="label">
+            <span className="label-text text-black mt-2">User Email</span>
+          </label>
+          <input
+            type="email"
+            {...register("useremail")}
+            value={session?.data?.user?.email}
+            placeholder="Email"
+            className="input border border-black/15 w-full mt-2 rounded-lg"
+            required
+            readOnly
+          />
+        </div>
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text text-black mt-2">Description</span>
+        </label>
+        <textarea
+          {...register("description")}
+          id=""
+          rows="2"
+          className="border w-full mt-2 resize-none border-black/15 rounded-md p-3 focus:outline-black/5"
+        ></textarea>
+      </div>
+    </form>
+
+    <div className="modal-action w-full mt-4">
+      <form method="dialog" className="w-full modal-backdrop">
+        <Button
+          type="submit"
+          variant="outline"
+          size="lg"
+          className="w-full bg-[#2B3440] hover:border-none hover:bg-[#E8252E] duration-300 text-white"
+        >
+          Save Changes
+        </Button>
+      </form>
+    </div>
+  </div>
+</dialog> */ }}}),
 "[project]/app/foods/my-foods/page.jsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -443,11 +567,11 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.jsx [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContextProvider$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/context/AuthContextProvider.jsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$modalButton$2f$ModalBtn$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/modalButton/ModalBtn.jsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/react/index.js [app-ssr] (ecmascript)");
 "use client";
 ;
 ;
@@ -457,18 +581,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$modalButton$2f
 ;
 ;
 const MyFood = ()=>{
-    const { user } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContextProvider$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AuthContext"]);
     const [myFood, setmyFood] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const session = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSession"])();
+    const [setselectedFoodID, setsetselectedFoodID] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         async function fetchData() {
-            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`/api/foods/my-foods/${user?.email}`);
-            const data = await res.data;
-            console.log(data);
+            const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`/api/foods?useremail=${session?.data?.user?.email}`);
+            const data = await res?.data;
             setmyFood(data);
         }
         fetchData();
     }, [
-        user?.email
+        session?.data?.user?.email
     ]);
     // console.log(myFood);
     const isDarkMode = false;
@@ -484,7 +608,7 @@ const MyFood = ()=>{
                             children: "My Food Items"
                         }, void 0, false, {
                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                            lineNumber: 37,
+                            lineNumber: 39,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -492,13 +616,13 @@ const MyFood = ()=>{
                             children: "Manage and review all the food items you've added to the menu."
                         }, void 0, false, {
                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                            lineNumber: 38,
+                            lineNumber: 40,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/foods/my-foods/page.jsx",
-                    lineNumber: 34,
+                    lineNumber: 36,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -512,74 +636,74 @@ const MyFood = ()=>{
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {}, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 52,
+                                            lineNumber: 53,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Image"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 53,
+                                            lineNumber: 54,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Food Name"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 54,
+                                            lineNumber: 55,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Price"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 55,
+                                            lineNumber: 56,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Added On"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 56,
+                                            lineNumber: 57,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Update On"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 57,
+                                            lineNumber: 58,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Total Purchases"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 58,
+                                            lineNumber: 59,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Total Revenue"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 59,
+                                            lineNumber: 60,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                             children: "Actions: Update & Delete"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                            lineNumber: 60,
+                                            lineNumber: 61,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/my-foods/page.jsx",
-                                    lineNumber: 51,
+                                    lineNumber: 52,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                lineNumber: 50,
+                                lineNumber: 51,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -590,7 +714,7 @@ const MyFood = ()=>{
                                                 children: index + 1
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 82,
+                                                lineNumber: 84,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -601,19 +725,19 @@ const MyFood = ()=>{
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                    lineNumber: 84,
+                                                    lineNumber: 86,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 83,
+                                                lineNumber: 85,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                 children: foodname
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 90,
+                                                lineNumber: 92,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -623,14 +747,14 @@ const MyFood = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 91,
+                                                lineNumber: 93,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                                 children: new Date(addedDate).toLocaleDateString()
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 92,
+                                                lineNumber: 94,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -638,7 +762,7 @@ const MyFood = ()=>{
                                                 children: updateDate || "-"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 93,
+                                                lineNumber: 95,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -646,7 +770,7 @@ const MyFood = ()=>{
                                                 children: totalPurchase
                                             }, void 0, false, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 94,
+                                                lineNumber: 96,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -657,7 +781,7 @@ const MyFood = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 95,
+                                                lineNumber: 97,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -665,7 +789,8 @@ const MyFood = ()=>{
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                                         onClick: ()=>{
-                                                            document.getElementById("my_modal_1").showModal();
+                                                            document.getElementById("my_modal_2").showModal();
+                                                            setsetselectedFoodID(_id);
                                                             setIsClicked(!isClicked);
                                                         },
                                                         variant: "outline",
@@ -674,17 +799,17 @@ const MyFood = ()=>{
                                                         children: "Update"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                        lineNumber: 97,
+                                                        lineNumber: 99,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$modalButton$2f$ModalBtn$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                                        setselectedFoodID: setselectedFoodID,
                                                         setIsClicked: setIsClicked,
                                                         isClicked: isClicked,
-                                                        foodId: _id,
-                                                        modalId: "my_modal_1"
+                                                        modalId: "my_modal_2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                        lineNumber: 109,
+                                                        lineNumber: 112,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -696,51 +821,51 @@ const MyFood = ()=>{
                                                             children: "Delete"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                            lineNumber: 116,
+                                                            lineNumber: 119,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                        lineNumber: 115,
+                                                        lineNumber: 118,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                                lineNumber: 96,
+                                                lineNumber: 98,
                                                 columnNumber: 21
                                             }, this)
                                         ]
-                                    }, void 0, true, {
+                                    }, _id, true, {
                                         fileName: "[project]/app/foods/my-foods/page.jsx",
-                                        lineNumber: 77,
+                                        lineNumber: 78,
                                         columnNumber: 19
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/app/foods/my-foods/page.jsx",
-                                lineNumber: 63,
+                                lineNumber: 64,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/foods/my-foods/page.jsx",
-                        lineNumber: 48,
+                        lineNumber: 50,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/foods/my-foods/page.jsx",
-                    lineNumber: 43,
+                    lineNumber: 45,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/foods/my-foods/page.jsx",
-            lineNumber: 33,
+            lineNumber: 35,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/foods/my-foods/page.jsx",
-        lineNumber: 32,
+        lineNumber: 34,
         columnNumber: 5
     }, this);
 };

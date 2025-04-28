@@ -1,9 +1,8 @@
 {
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/foods/[id]/route": "app/api/foods/[id]/route.js",
   "/api/foods/route": "app/api/foods/route.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/foods/add/page": "app/foods/add/page.js",
-  "/foods/page": "app/foods/page.js",
-  "/login/page": "app/login/page.js",
-  "/page": "app/page.js"
+  "/foods/my-foods/page": "app/foods/my-foods/page.js",
+  "/login/page": "app/login/page.js"
 }

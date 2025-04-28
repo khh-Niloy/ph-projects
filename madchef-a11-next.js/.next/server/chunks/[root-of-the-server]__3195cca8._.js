@@ -96,10 +96,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$getDBCollectionName$2
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 ;
 ;
-async function GET() {
+async function GET(req) {
+    const useremail = req.nextUrl.searchParams.get("useremail");
+    console.log(useremail);
+    let query = {};
+    if (useremail) {
+        query = {
+            useremail: useremail
+        };
+    }
     try {
         const foodCollection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$getDBCollectionName$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])("food");
-        const result = await foodCollection.find().toArray();
+        const result = await foodCollection.find(query).toArray();
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(result);
     } catch (error) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({

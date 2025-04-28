@@ -1,26 +1,28 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 
 import ModalBtn from "@/components/modalButton/ModalBtn";
+import { useSession } from "next-auth/react";
 
 const MyFood = () => {
-  const { user } = useContext(AuthContext);
   const [myFood, setmyFood] = useState([]);
+  const session = useSession();
+  const [setselectedFoodID, setsetselectedFoodID] = useState("");
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(`/api/foods/my-foods/${user?.email}`);
-      const data = await res.data;
-      console.log(data);
+      const res = await axios.get(
+        `/api/foods?useremail=${session?.data?.user?.email}`
+      );
+      const data = await res?.data;
       setmyFood(data);
     }
     fetchData();
-  }, [user?.email]);
+  }, [session?.data?.user?.email]);
 
   // console.log(myFood);
 
@@ -46,7 +48,6 @@ const MyFood = () => {
           } pt-10`}
         >
           <table className="table">
-            {/* head */}
             <thead>
               <tr className={`${isDarkMode ? "text-white" : "text-black/60"}`}>
                 <th></th>
@@ -75,6 +76,7 @@ const MyFood = () => {
                   index
                 ) => (
                   <tr
+                    key={_id}
                     className={`${
                       isDarkMode ? "hover:bg-[black]/20" : "hover"
                     }`}
@@ -96,7 +98,8 @@ const MyFood = () => {
                     <td className="space-x-3">
                       <Button
                         onClick={() => {
-                          document.getElementById("my_modal_1").showModal();
+                          document.getElementById("my_modal_2").showModal();
+                          setsetselectedFoodID(_id);
                           setIsClicked(!isClicked);
                         }}
                         variant="outline"
@@ -107,10 +110,10 @@ const MyFood = () => {
                         Update
                       </Button>
                       <ModalBtn
+                        setselectedFoodID={setselectedFoodID}
                         setIsClicked={setIsClicked}
                         isClicked={isClicked}
-                        foodId={_id}
-                        modalId={"my_modal_1"}
+                        modalId={"my_modal_2"}
                       ></ModalBtn>
                       <Link href={`/updatefood/${_id}`}>
                         <Button
