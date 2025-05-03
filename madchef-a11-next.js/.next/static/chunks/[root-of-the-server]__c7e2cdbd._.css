@@ -3557,6 +3557,10 @@
     scale: 0;
   }
 
+  .mx-5 {
+    margin-inline: calc(var(--spacing) * 5);
+  }
+
   .mx-auto {
     margin-inline: auto;
   }
@@ -4108,6 +4112,13 @@
     overflow: hidden;
   }
 
+  .line-clamp-3 {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+  }
+
   :root .prose {
     --tw-prose-body: var(--color-base-content);
     --tw-prose-headings: var(--color-base-content);
@@ -4332,6 +4343,10 @@
 
   .h-44 {
     height: calc(var(--spacing) * 44);
+  }
+
+  .h-52 {
+    height: calc(var(--spacing) * 52);
   }
 
   .h-56 {
@@ -5191,12 +5206,22 @@
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
+  .bg-gradient-to-t {
+    --tw-gradient-position: to top in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+
   .bg-\[url\(\'https\:\/\/img\.freepik\.com\/free-photo\/margarita-pizza-with-tomato-olive-basil-top-view_141793-2381\.jpg\?t\=st\=1734794330\~exp\=1734797930\~hmac\=a89434674ccb82e68af71c7e840ba0fdc5cc1f8a28deee8524bfd81eefb904c0\&w\=900\'\)\] {
     background-image: url("https://img.freepik.com/free-photo/margarita-pizza-with-tomato-olive-basil-top-view_141793-2381.jpg?t=st=1734794330~exp=1734797930~hmac=a89434674ccb82e68af71c7e840ba0fdc5cc1f8a28deee8524bfd81eefb904c0&w=900");
   }
 
   .bg-\[url\(\'https\:\/\/img\.freepik\.com\/free-photo\/side-view-fried-meat-with-french-fries-ketchup_141793-4908\.jpg\?t\=st\=1735155958\~exp\=1735159558\~hmac\=ac21c60014a4072f8e1d91e378ef64e152b728427161ad87a667522bccdc449b\&w\=900\'\)\] {
     background-image: url("https://img.freepik.com/free-photo/side-view-fried-meat-with-french-fries-ketchup_141793-4908.jpg?t=st=1735155958~exp=1735159558~hmac=ac21c60014a4072f8e1d91e378ef64e152b728427161ad87a667522bccdc449b&w=900");
+  }
+
+  .from-\[\#000000\] {
+    --tw-gradient-from: #000;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
   .from-\[\#3b82f6\] {
@@ -5231,6 +5256,11 @@
 
   .from-gray-50 {
     --tw-gradient-from: var(--color-gray-50);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
+  .to-\[\#00000055\] {
+    --tw-gradient-to: #0005;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -6148,6 +6178,15 @@
   }
 
   @media (hover: hover) {
+    .hover\:scale-105:hover {
+      --tw-scale-x: 105%;
+      --tw-scale-y: 105%;
+      --tw-scale-z: 105%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:scale-\[1\.01\]:hover {
       scale: 1.01;
     }
@@ -6442,6 +6481,12 @@
   @media (width >= 40rem) {
     .sm\:ml-5 {
       margin-left: calc(var(--spacing) * 5);
+    }
+  }
+
+  @media (width >= 40rem) {
+    .sm\:h-44 {
+      height: calc(var(--spacing) * 44);
     }
   }
 

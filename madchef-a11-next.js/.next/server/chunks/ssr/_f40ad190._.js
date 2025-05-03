@@ -87,7 +87,7 @@ const ImageShow = ()=>{
                     const copy = [
                         ...prev
                     ];
-                    copy[i] = false; // Start fading out
+                    copy[i] = false;
                     return copy;
                 });
                 setTimeout(()=>{
@@ -95,21 +95,21 @@ const ImageShow = ()=>{
                         const newIndexes = [
                             ...prev
                         ];
-                        newIndexes[i] = (newIndexes[i] + 1) % images[i].length; // Update the index
+                        newIndexes[i] = (newIndexes[i] + 1) % images[i].length;
                         return newIndexes;
                     });
                     setFadeStates((prev)=>{
                         const copy = [
                             ...prev
                         ];
-                        copy[i] = true; // Start fading in
+                        copy[i] = true;
                         return copy;
                     });
-                }, 500); // Delay image change by 500ms after fading out
+                }, 500);
             }, intervals[i]);
         });
-        return ()=>timers.forEach(clearInterval); // Cleanup intervals on component unmount
-    }, []); // Empty dependency array, runs only once
+        return ()=>timers.forEach(clearInterval);
+    }, []);
     const transitionClass = (fade)=>`${fade ? "opacity-100" : "opacity-0"} transition-all duration-300 ease-in-out`;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -125,12 +125,12 @@ const ImageShow = ()=>{
                             className: "object-cover w-full h-full rounded-xl"
                         }, void 0, false, {
                             fileName: "[project]/components/ImageShow.jsx",
-                            lineNumber: 99,
+                            lineNumber: 98,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ImageShow.jsx",
-                        lineNumber: 94,
+                        lineNumber: 93,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -141,12 +141,12 @@ const ImageShow = ()=>{
                             className: "object-cover w-full h-full rounded-xl"
                         }, void 0, false, {
                             fileName: "[project]/components/ImageShow.jsx",
-                            lineNumber: 112,
+                            lineNumber: 110,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ImageShow.jsx",
-                        lineNumber: 107,
+                        lineNumber: 105,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -157,12 +157,12 @@ const ImageShow = ()=>{
                             className: "object-cover w-full h-full rounded-xl"
                         }, void 0, false, {
                             fileName: "[project]/components/ImageShow.jsx",
-                            lineNumber: 125,
+                            lineNumber: 122,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ImageShow.jsx",
-                        lineNumber: 120,
+                        lineNumber: 117,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -173,12 +173,12 @@ const ImageShow = ()=>{
                             className: "object-cover w-full h-full rounded-xl"
                         }, void 0, false, {
                             fileName: "[project]/components/ImageShow.jsx",
-                            lineNumber: 138,
+                            lineNumber: 134,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ImageShow.jsx",
-                        lineNumber: 133,
+                        lineNumber: 129,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -188,7 +188,7 @@ const ImageShow = ()=>{
                         }
                     }, void 0, false, {
                         fileName: "[project]/components/ImageShow.jsx",
-                        lineNumber: 146,
+                        lineNumber: 141,
                         columnNumber: 11
                     }, this)
                 ]

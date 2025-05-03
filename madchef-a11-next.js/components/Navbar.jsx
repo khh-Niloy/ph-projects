@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -10,51 +10,27 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import { getRole } from "@/lib/getRole";
 import Image from "next/image";
 import userImage from "@/public/images/user.png";
 import { signIn, signOut, useSession } from "next-auth/react";
+import navbarMenu from "@/lib/navbarMenu";
 
 const Navbar = () => {
   const navigate = useRouter();
-  const [role, setRole] = useState(null);
-
+  const [roleBasedNav, setroleBasedNav] = useState([]);
   const session = useSession();
-  // console.log(session);
 
-  const navLinks = [
-    { label: "Home", link: "/" },
-    { label: "All Foods", link: "/foods" },
-    { label: "Gallery", link: "/gallery" },
-    { label: "Add Food", link: "/foods/add" },
-    { label: "My Orders", link: "/my-orders" },
-    { label: "My Food", link: "/foods/my-foods" },
-  ];
-
-  const roleBasedNav = navLinks.filter(({ label }) => {
-    if (role == "user" && (label == "Gallery" || label == "My Orders")) {
-      return false;
-    }
-    return true;
-  });
-
-  // async function handleSignOut() {
-  //   await signOutUser();
-  //   navigate.push("/login");
-  // }
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const res = await getRole(user?.email);
-  //     setRole(res.data.role);
-  //   }
-  //   fetchData();
-  // }, [user?.email]);
+  useEffect(() => {
+    let navItems = navbarMenu(session?.data?.user?.role);
+    setroleBasedNav(navItems);
+  }, [session?.data?.user?.role]);
 
   const authButton = session?.data?.user ? (
     <Button
-      onClick={() => signOut()}
+      onClick={() => {
+        signOut();
+        navigate.push("/login");
+      }}
       variant="outline"
       size="sm"
       className="text-[#E8252E] cursor-pointer bg-white hover:bg-white hover:scale-[1.03] duration-300"
@@ -104,7 +80,7 @@ const Navbar = () => {
       </div>
       <div className="flex gap-3 items-center">
         {authButton}
-        {/* {session.data.user && (
+        {session?.data?.user && (
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
@@ -112,10 +88,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  src={session.data.user?.photoURL}
-                  alt={user?.displayName}
-                ></img>
+                <img src={session?.data?.user?.photoURL}></img>
               </div>
             </div>
             <ul
@@ -125,7 +98,7 @@ const Navbar = () => {
               {profileItems}
             </ul>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

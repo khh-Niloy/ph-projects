@@ -59,28 +59,28 @@ const ImageShow = () => {
       return setInterval(() => {
         setFadeStates((prev) => {
           const copy = [...prev];
-          copy[i] = false; // Start fading out
+          copy[i] = false;
           return copy;
         });
 
         setTimeout(() => {
           setIndexes((prev) => {
             const newIndexes = [...prev];
-            newIndexes[i] = (newIndexes[i] + 1) % images[i].length; // Update the index
+            newIndexes[i] = (newIndexes[i] + 1) % images[i].length;
             return newIndexes;
           });
 
           setFadeStates((prev) => {
             const copy = [...prev];
-            copy[i] = true; // Start fading in
+            copy[i] = true;
             return copy;
           });
-        }, 500); // Delay image change by 500ms after fading out
+        }, 500);
       }, intervals[i]);
     });
 
-    return () => timers.forEach(clearInterval); // Cleanup intervals on component unmount
-  }, []); // Empty dependency array, runs only once
+    return () => timers.forEach(clearInterval);
+  }, []);
 
   const transitionClass = (fade) =>
     `${
@@ -90,7 +90,6 @@ const ImageShow = () => {
     <div>
       <div className="col-span-5 rounded-l-2xl overflow-hidden">
         <div className="grid grid-cols-6 grid-rows-6 gap-2">
-          {/* Big Image */}
           <div
             className={`col-span-3 row-span-4 w-full h-full rounded-xl shadow-md ${transitionClass(
               fadeStates[0]
@@ -103,7 +102,6 @@ const ImageShow = () => {
             />
           </div>
 
-          {/* Top Right */}
           <div
             className={`col-span-3 row-span-2 w-full h-full rounded-xl shadow-md ${transitionClass(
               fadeStates[1]
@@ -116,7 +114,6 @@ const ImageShow = () => {
             />
           </div>
 
-          {/* Middle */}
           <div
             className={`col-span-3 row-span-2 w-full h-full rounded-xl shadow-sm ${transitionClass(
               fadeStates[2]
@@ -129,7 +126,6 @@ const ImageShow = () => {
             />
           </div>
 
-          {/* Bottom Left */}
           <div
             className={`col-span-2 row-span-2 w-full h-full rounded-xl shadow-sm ${transitionClass(
               fadeStates[3]
@@ -142,7 +138,6 @@ const ImageShow = () => {
             />
           </div>
 
-          {/* Bottom Right (Background) */}
           <div
             className={`col-span-4 row-span-2 bg-cover bg-center w-full rounded-xl shadow-sm ${transitionClass(
               fadeStates[4]
