@@ -1,23 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import bcrypt from "bcryptjs";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 import ImageShow from "@/components/ImageShow";
 import { signIn } from "next-auth/react";
-// import { signIn } from "next-auth/react";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  // const { signInUser } = useContext(AuthContext);
-  const navigate = useRouter();
   const router = useRouter();
 
   async function onSubmit(data) {
@@ -35,7 +30,7 @@ const Login = () => {
         toast.error("Invalid email or password.");
       }
     } catch (error) {
-      // toast.error("Login Failed");
+      toast.error("Login Failed");
       console.log(error);
     }
   }

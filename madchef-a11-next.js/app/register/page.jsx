@@ -1,16 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { AuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 import ImageShow from "@/components/ImageShow";
+import bcrypt from "bcryptjs";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const {
@@ -19,15 +19,13 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, updateUserInfo } = useContext(AuthContext);
   const navigate = useRouter();
+
+  // You should hash the password in the API route (i.e., inside route.js), not on the frontend.
 
   async function onSubmit(data) {
     try {
       const { password, ...others } = data;
-      await createUser(data.email, password);
-      await updateUserInfo(data.name, data.photo);
-
       let hashedPassword = await bcrypt.hash(password, 10);
 
       const res = await axios.post("/api/user-register", {
@@ -36,16 +34,21 @@ const Register = () => {
         role: "user",
       });
       console.log(res);
-      if (res.data.insertedId) {
+
+      const LoginRes = await signIn("credentials", {
+        redirect: false,
+        ...data,
+      });
+
+      if (LoginRes?.ok) {
         toast.success("Created your account!");
         navigate.push("/");
       }
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   }
-
-  const isClicked = false;
 
   return (
     <div className="flex items-center flex-col justify-center pt-8 pb-32">
@@ -134,7 +137,7 @@ const Register = () => {
                 </h1>
                 <Link href="/login">
                   <h1 className="font-bold text-md text-[#E8252E] cursor-pointer">
-                    Register
+                    Login
                   </h1>
                 </Link>
               </div>

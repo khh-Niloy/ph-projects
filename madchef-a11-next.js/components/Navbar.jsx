@@ -38,16 +38,28 @@ const Navbar = () => {
       Logout
     </Button>
   ) : (
-    <Link href={"/login"}>
-      <Button
-        onClick={() => signIn()}
-        variant="outline"
-        size="sm"
-        className="text-[#E8252E] cursor-pointer bg-white hover:bg-white hover:scale-[1.03] duration-300"
-      >
-        Login
-      </Button>
-    </Link>
+    <>
+      <Link href={"/login"}>
+        <Button
+          onClick={() => signIn()}
+          variant="outline"
+          size="sm"
+          className="text-[#E8252E] cursor-pointer bg-white hover:bg-white hover:scale-[1.03] duration-300"
+        >
+          Login
+        </Button>
+      </Link>
+      <Link href={"/register"}>
+        <Button
+          onClick={() => navigate.push("/register")}
+          variant="outline"
+          size="sm"
+          className="text-[#E8252E] cursor-pointer bg-white hover:bg-white hover:scale-[1.03] duration-300"
+        >
+          Register
+        </Button>
+      </Link>
+    </>
   );
 
   const profileItems = (

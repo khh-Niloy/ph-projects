@@ -24,9 +24,6 @@ const handler = NextAuth({
           }
 
           const isPasswordOK = await bcrypt.compare(password, user.password);
-          // console.log(password);
-          // console.log(user.password);
-          // console.log(isPasswordOK);
 
           if (!isPasswordOK) {
             return null;

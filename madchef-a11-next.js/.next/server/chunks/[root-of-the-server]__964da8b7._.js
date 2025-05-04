@@ -207,9 +207,6 @@ const handler = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
                         return null;
                     }
                     const isPasswordOK = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(password, user.password);
-                    // console.log(password);
-                    // console.log(user.password);
-                    // console.log(isPasswordOK);
                     if (!isPasswordOK) {
                         return null;
                     }
