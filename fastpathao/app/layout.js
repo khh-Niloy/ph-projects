@@ -1,5 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import NextAuthSessionProvider from "@/provider/NextAuthSessionProvider";
+import Navbar from "@/components/Navbar";
+import toast, { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,7 +18,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <NextAuthSessionProvider>
+          <Navbar></Navbar>
+          <main className="pt-3">{children}</main>
+          <Toaster position="top-center" reverseOrder={false} />
+        </NextAuthSessionProvider>
+      </body>
     </html>
   );
 }
