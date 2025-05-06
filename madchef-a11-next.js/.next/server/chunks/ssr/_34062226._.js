@@ -46,11 +46,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 const AllFood = async ()=>{
     const foods = await getAllFood();
     const isDarkMode = false;
-    // function handleSort(){
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "w-[80%] mx-auto",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "w-[80%] mx-auto pb-20 pt-10 grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-5",
-            children: foods.data.map((e)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "pb-20 pt-10 grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-5",
+            children: foods.data.map(({ _id, price, photo, foodname, origin, description })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "card card-compact bg-base-100 rounded-2xl shadow-xl hover:scale-[1.03] duration-300 transition-transform",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("figure", {
@@ -60,101 +60,101 @@ const AllFood = async ()=>{
                                     className: "text-[9px] left-3   bottom-3 drop-shadow-xl absolute bg-[#FF2727] text-white px-3 py-1 rounded-lg font-medium",
                                     children: [
                                         "Price: $",
-                                        e.price
+                                        price
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/page.jsx",
-                                    lineNumber: 21,
-                                    columnNumber: 15
+                                    lineNumber: 20,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                     className: "object-cover h-[10rem] w-full",
-                                    src: e.photo,
+                                    src: photo,
                                     alt: "Shoes"
                                 }, void 0, false, {
                                     fileName: "[project]/app/foods/page.jsx",
-                                    lineNumber: 27,
-                                    columnNumber: 15
+                                    lineNumber: 26,
+                                    columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/foods/page.jsx",
-                            lineNumber: 20,
-                            columnNumber: 13
+                            lineNumber: 19,
+                            columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: `p-4 ${isDarkMode && "text-black"}`,
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                     className: "card-title",
-                                    children: e.foodname
+                                    children: foodname
                                 }, void 0, false, {
                                     fileName: "[project]/app/foods/page.jsx",
-                                    lineNumber: 34,
-                                    columnNumber: 15
+                                    lineNumber: 33,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-sm",
                                     children: [
                                         "Origin: ",
-                                        e.origin
+                                        origin
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/foods/page.jsx",
-                                    lineNumber: 35,
-                                    columnNumber: 15
+                                    lineNumber: 34,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "line-clamp-2 text-sm mt-1",
-                                    children: e.description
+                                    children: description
                                 }, void 0, false, {
                                     fileName: "[project]/app/foods/page.jsx",
-                                    lineNumber: 36,
-                                    columnNumber: 15
+                                    lineNumber: 35,
+                                    columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "card-actions justify-end",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
-                                        href: `/foods/${e._id}`,
+                                        href: `/foods/${_id}`,
                                         className: "w-full",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(Button, {
                                             className: "hover:bg-[#FF2727] bg-[#191A23] text-white   rounded-lg w-full py-2 mt-3 font-normal cursor-pointer text-sm active:scale-95 transition-all",
                                             children: "More Info"
                                         }, void 0, false, {
                                             fileName: "[project]/app/foods/page.jsx",
-                                            lineNumber: 39,
-                                            columnNumber: 19
+                                            lineNumber: 38,
+                                            columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/foods/page.jsx",
-                                        lineNumber: 38,
-                                        columnNumber: 17
+                                        lineNumber: 37,
+                                        columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/foods/page.jsx",
-                                    lineNumber: 37,
-                                    columnNumber: 15
+                                    lineNumber: 36,
+                                    columnNumber: 17
                                 }, this)
                             ]
-                        }, e._id, true, {
+                        }, _id, true, {
                             fileName: "[project]/app/foods/page.jsx",
-                            lineNumber: 33,
-                            columnNumber: 13
+                            lineNumber: 32,
+                            columnNumber: 15
                         }, this)
                     ]
-                }, e._id, true, {
+                }, _id, true, {
                     fileName: "[project]/app/foods/page.jsx",
-                    lineNumber: 16,
-                    columnNumber: 11
+                    lineNumber: 15,
+                    columnNumber: 13
                 }, this))
         }, void 0, false, {
             fileName: "[project]/app/foods/page.jsx",
-            lineNumber: 14,
+            lineNumber: 12,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/foods/page.jsx",
-        lineNumber: 13,
+        lineNumber: 11,
         columnNumber: 5
     }, this);
 };

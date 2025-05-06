@@ -598,17 +598,17 @@ function Slider() {
                                         className: "w-full lg:h-[15rem] md:h-[12rem] h-[9rem] object-cover rounded-xl"
                                     }, void 0, false, {
                                         fileName: "[project]/components/home/Slider.jsx",
-                                        lineNumber: 50,
+                                        lineNumber: 48,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/home/Slider.jsx",
-                                    lineNumber: 49,
+                                    lineNumber: 47,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/home/Slider.jsx",
-                                lineNumber: 48,
+                                lineNumber: 46,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SwiperSlide"], {
@@ -620,17 +620,17 @@ function Slider() {
                                         className: "w-full rounded-xl  lg:h-[15rem] md:h-[12rem] h-[9rem] object-cover"
                                     }, void 0, false, {
                                         fileName: "[project]/components/home/Slider.jsx",
-                                        lineNumber: 59,
+                                        lineNumber: 57,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/home/Slider.jsx",
-                                    lineNumber: 58,
+                                    lineNumber: 56,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/home/Slider.jsx",
-                                lineNumber: 57,
+                                lineNumber: 55,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SwiperSlide"], {
@@ -642,17 +642,17 @@ function Slider() {
                                         className: "w-full rounded-xl lg:h-[15rem] md:h-[12rem] h-[9rem] object-cover"
                                     }, void 0, false, {
                                         fileName: "[project]/components/home/Slider.jsx",
-                                        lineNumber: 68,
+                                        lineNumber: 66,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/home/Slider.jsx",
-                                    lineNumber: 67,
+                                    lineNumber: 65,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/home/Slider.jsx",
-                                lineNumber: 66,
+                                lineNumber: 64,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$swiper$2f$swiper$2d$react$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SwiperSlide"], {
@@ -664,23 +664,23 @@ function Slider() {
                                         className: "w-full rounded-xl lg:h-[15rem] md:h-[12rem] h-[9rem] object-cover"
                                     }, void 0, false, {
                                         fileName: "[project]/components/home/Slider.jsx",
-                                        lineNumber: 77,
+                                        lineNumber: 75,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/home/Slider.jsx",
-                                    lineNumber: 76,
+                                    lineNumber: 74,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/home/Slider.jsx",
-                                lineNumber: 75,
+                                lineNumber: 73,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/home/Slider.jsx",
-                        lineNumber: 39,
+                        lineNumber: 38,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -696,12 +696,12 @@ function Slider() {
                                         children: "<"
                                     }, void 0, false, {
                                         fileName: "[project]/components/home/Slider.jsx",
-                                        lineNumber: 96,
+                                        lineNumber: 94,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/home/Slider.jsx",
-                                    lineNumber: 88,
+                                    lineNumber: 86,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FiChevronRight"], {
@@ -712,23 +712,23 @@ function Slider() {
                                         children: ">"
                                     }, void 0, false, {
                                         fileName: "[project]/components/home/Slider.jsx",
-                                        lineNumber: 107,
+                                        lineNumber: 105,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/home/Slider.jsx",
-                                    lineNumber: 99,
+                                    lineNumber: 97,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/home/Slider.jsx",
-                            lineNumber: 87,
+                            lineNumber: 85,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/home/Slider.jsx",
-                        lineNumber: 86,
+                        lineNumber: 84,
                         columnNumber: 9
                     }, this)
                 ]

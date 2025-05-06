@@ -35,7 +35,6 @@ export default function Slider() {
         </p>
       </div>
       <div className="slider-container relative">
-        {/* Swiper */}
         <Swiper
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           slidesPerView={2}
@@ -44,7 +43,6 @@ export default function Slider() {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {/* Static slides */}
           <SwiperSlide>
             <div className="w-full rounded-xl lg:h-[15rem] border border-black overflow-hidden">
               <img
