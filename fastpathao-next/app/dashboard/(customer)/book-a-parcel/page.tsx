@@ -41,8 +41,9 @@ export default function ParcelBook() {
       bookingDate: new Date(),
       assignedDeliveryManID: null,
       paymentStatus: null,
+      approximateDeliveryDate: null,
     };
-    console.log(parcelInfo);
+    // console.log(parcelInfo);
 
     const response = await axios.post("/api/dashboard/book-parcel", parcelInfo);
     const data2 = await response.data;
@@ -80,6 +81,7 @@ export default function ParcelBook() {
         <input
           {...register("parcelWeight", { valueAsNumber: true })}
           type="number"
+          step="0.01"
           placeholder="Parcel Weight (kg)"
         />
         <input

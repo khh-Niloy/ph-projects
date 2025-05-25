@@ -18,10 +18,10 @@ export default function DashbaordLayout({
       <body>
         {/* <Navbar /> */}
         <main className="grid grid-cols-12">
-          <div className="col-span-4 h-screen bg-[#212121]">
+          <div className="col-span-2 h-screen bg-[#212121]">
             <Sidebar />
           </div>
-          <div className="col-span-8 h-screen bg-black border border-white">
+          <div className="col-span-10 h-screen bg-black border border-white">
             {children}
           </div>
         </main>
