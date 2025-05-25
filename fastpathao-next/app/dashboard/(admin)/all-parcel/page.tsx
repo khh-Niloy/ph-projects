@@ -1,0 +1,79 @@
+import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+import { getAllParcel } from "@/lib/admin/getAllParcel";
+import AssignButton from "./components/AssignButton";
+
+export default async function AllParcel() {
+  const tableHead = [
+    { id: 1, label: "Sender Name" },
+    { id: 2, label: "Sender PhoneNumber" },
+    { id: 3, label: "Receiver Name" },
+    { id: 4, label: "Receiver PhoneNumber" },
+    { id: 5, label: "Delivery Address" },
+    { id: 6, label: "Requested Delivery Date" },
+    { id: 7, label: "Booking Date" },
+    { id: 8, label: "Delivery Charge" },
+    { id: 9, label: "Delivery Status" },
+    { id: 10, label: "Actions" },
+  ];
+
+  const allParcelInfo = await getAllParcel();
+
+  return (
+    <div className="bg-white h-screen">
+      <h1>AllParcel</h1>
+
+      <Table>
+        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            {tableHead.map(({ id, label }) => (
+              <TableHead key={id}>{label}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            {allParcelInfo.map(
+              ({
+                senderName,
+                senderPhoneNumber,
+                receiverName,
+                receiverPhoneNumber,
+                deliveryAddress,
+                requestedDeliveryDate,
+                bookingDate,
+                deliveryCharge,
+                deliverystatus,
+              }) => (
+                <>
+                  <TableCell>{senderName}</TableCell>
+                  <TableCell>{senderPhoneNumber}</TableCell>
+                  <TableCell>{receiverName}</TableCell>
+                  <TableCell>{receiverPhoneNumber}</TableCell>
+                  <TableCell>{deliveryAddress}</TableCell>
+                  <TableCell>{requestedDeliveryDate}</TableCell>
+                  <TableCell>{bookingDate}</TableCell>
+                  <TableCell>{deliveryCharge}</TableCell>
+                  <TableCell>{deliverystatus}</TableCell>
+                  <TableCell>
+                    <AssignButton />
+                  </TableCell>
+                </>
+              )
+            )}
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
