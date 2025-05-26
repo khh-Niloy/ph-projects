@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const DeliveryManSchema = new mongoose.Schema(
+const CustomerSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,15 +18,16 @@ const DeliveryManSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    isAvailable: {
+    isAppliedForDeliveryman: {
       type: Boolean,
       require: true,
     },
-    number_of_parcel_delivered: {
+
+    number_of_parcel_booked: {
       type: Number,
       require: true,
     },
-    rating: {
+    total_spent_amount: {
       type: Number,
       require: true,
     },
@@ -42,6 +43,5 @@ const DeliveryManSchema = new mongoose.Schema(
   }
 );
 
-export const Deliverymen =
-  mongoose.models.Deliverymen ||
-  mongoose.model("Deliverymen", DeliveryManSchema);
+export const Customer =
+  mongoose.models.Customer || mongoose.model("Customer", CustomerSchema);
