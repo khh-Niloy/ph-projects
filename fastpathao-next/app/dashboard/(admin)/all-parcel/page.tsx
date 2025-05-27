@@ -42,20 +42,21 @@ export default async function AllParcel() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            {allParcelInfo.map(
-              ({
-                senderName,
-                senderPhoneNumber,
-                receiverName,
-                receiverPhoneNumber,
-                deliveryAddress,
-                requestedDeliveryDate,
-                bookingDate,
-                deliveryCharge,
-                deliverystatus,
-              }) => (
-                <>
+          {allParcelInfo.map(
+            ({
+              _id,
+              senderName,
+              senderPhoneNumber,
+              receiverName,
+              receiverPhoneNumber,
+              deliveryAddress,
+              requestedDeliveryDate,
+              bookingDate,
+              deliveryCharge,
+              deliverystatus,
+            }) => (
+              <>
+                <TableRow>
                   <TableCell>{senderName}</TableCell>
                   <TableCell>{senderPhoneNumber}</TableCell>
                   <TableCell>{receiverName}</TableCell>
@@ -66,12 +67,12 @@ export default async function AllParcel() {
                   <TableCell>{deliveryCharge}</TableCell>
                   <TableCell>{deliverystatus}</TableCell>
                   <TableCell>
-                    <AssignButton />
+                    <AssignButton parcelID={_id} />
                   </TableCell>
-                </>
-              )
-            )}
-          </TableRow>
+                </TableRow>
+              </>
+            )
+          )}
         </TableBody>
       </Table>
     </div>

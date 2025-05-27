@@ -27,8 +27,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { getAllDeliveryMen } from "@/lib/admin/getAllDeliveryMen";
+import axios from "axios";
 
-export default function AssignButton() {
+export default function AssignButton({ parcelID }) {
   // const availableDeliveryMenList = await getAllDeliveryMen();
   const [availableDeliveryMenList, setavailableDeliveryMenList] = useState([]);
   const [date, setDate] = React.useState<Date>();
@@ -42,16 +43,25 @@ export default function AssignButton() {
     fetchData();
   }, []);
 
-  function handleAssignedDeliveryMan(selectedDeliveryManID, date) {
+  async function handleAssignedDeliveryMan(selectedDeliveryManID, date) {
+    console.log(parcelID);
     // console.log(selectedDeliveryManID, date);
+    const response = await axios.patch(
+      `/api/dashboard/all-parcel/assign-delivery-man/${parcelID}`,
+      {
+        approximateDeliveryDate: date,
+        assignedDeliveryManID: selectedDeliveryManID,
+      }
+    );
+    const data = response.data;
+    console.log("response", data);
   }
 
   /* 
-    1. parcel info -> add deliveryman ID
-    2. delivery status -> assigned
+    r1. parcel info -> add deliveryman ID, r2. delivery status -> assigned
+    r5. deliveryman is available status -> false
     3. disable update and cancel button in the my parcel table
     4. appear pay button
-    5. deliveryman is available status -> false
     6. assigned button will be disabled
   */
 

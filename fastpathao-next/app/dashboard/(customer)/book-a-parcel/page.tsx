@@ -39,11 +39,8 @@ export default function ParcelBook() {
       deliveryAddressLongitude: lng,
       status: "pending",
       bookingDate: new Date(),
-      assignedDeliveryManID: null,
-      paymentStatus: null,
-      approximateDeliveryDate: null,
     };
-    // console.log(parcelInfo);
+    console.log(parcelInfo);
 
     const response = await axios.post("/api/dashboard/book-parcel", parcelInfo);
     const data2 = await response.data;

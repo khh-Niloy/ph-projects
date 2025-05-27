@@ -4,76 +4,76 @@ const parcelSchema = new mongoose.Schema(
   {
     senderName: {
       type: String,
-      require: true,
+      required: true,
     },
     senderEmail: {
       type: String,
-      require: true,
+      required: true,
     },
     senderPhoneNumber: {
       type: String,
-      require: true,
+      required: true,
     },
     receiverName: {
       type: String,
-      require: true,
+      required: true,
     },
     receiverEmail: {
       type: String,
-      require: true,
+      required: true,
     },
     receiverPhoneNumber: {
       type: String,
-      require: true,
+      required: true,
     },
     bookingDate: {
       type: Date,
-      require: true,
+      required: true,
     },
     requestedDeliveryDate: {
       type: Date,
-      require: true,
+      required: true,
     },
     deliveryAddress: {
       type: String,
-      require: true,
+      required: true,
     },
     deliveryAddressLatitude: {
       type: Number,
-      require: true,
+      required: true,
     },
     deliveryAddressLongitude: {
       type: Number,
-      require: true,
+      required: true,
     },
     parcelType: {
       type: String,
-      require: true,
+      required: true,
     },
     parcelWeight: {
       type: Number,
-      require: true,
+      required: true,
     },
     deliveryCharge: {
       type: Number,
-      require: true,
+      required: true,
     },
     deliverystatus: {
       type: String,
       enum: ["pending", "assigned", "picked", "delivered", "cancelled"],
       default: "pending",
-      require: true,
+      required: true,
     },
     paymentStatus: {
       type: String,
       enum: ["paid", "unpaid", null],
       default: null,
-      require: true,
     },
     assignedDeliveryManID: {
       type: String,
-      require: true,
-      default: null,
+    },
+    approximateDeliveryDate: {
+      type: Date,
     },
   },
   {
