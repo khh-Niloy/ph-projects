@@ -11,6 +11,7 @@ import {
 import { getParcelinfo } from "@/lib/customer/getParcelinfo";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import CancelButton from "./components/CancelButton";
 
 export default async function MyParcel() {
   const tableHead = [
@@ -80,20 +81,17 @@ export default async function MyParcel() {
             </TableCell>
             <TableCell>
               <div className="flex flex-col gap-5 items-start">
-                <Link href={`/dashboard/my-parcel/update-parcel/${_id}`}>
-                  <Button
-                    disabled={deliverystatus === "assigned"}
-                    variant="outline"
-                  >
+                {deliverystatus !== "pending" ? (
+                  <Button disabled variant="outline">
                     Update
                   </Button>
-                </Link>
-                <Button
-                  disabled={deliverystatus === "assigned"}
-                  variant="outline"
-                >
-                  Cancel
-                </Button>
+                ) : (
+                  <Link href={`/dashboard/my-parcel/update-parcel/${_id}`}>
+                    <Button variant="outline">Update</Button>
+                  </Link>
+                )}
+
+                <CancelButton deliverystatus={deliverystatus} _id={_id} />
               </div>
             </TableCell>
           </TableRow>

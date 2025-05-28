@@ -63,10 +63,16 @@ export default function AssignButton({ parcelID, deliverystatus }) {
 
   return (
     <Dialog>
-      <DialogTrigger disabled={deliverystatus === "assigned"}>
-        <Button disabled={deliverystatus === "assigned"}>{`${
-          deliverystatus === "assigned" ? "Assigned" : "Assign"
-        }`}</Button>
+      <DialogTrigger
+        disabled={
+          deliverystatus === "assigned" || deliverystatus === "cancelled"
+        }
+      >
+        <Button
+          disabled={
+            deliverystatus === "assigned" || deliverystatus === "cancelled"
+          }
+        >{`${deliverystatus === "assigned" ? "Assigned" : "Assign"}`}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

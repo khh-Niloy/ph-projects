@@ -93,19 +93,13 @@ export default function UpdateParcelInfo() {
       };
     }
 
-    console.log(updateParcel);
+    // console.log(updateParcel);
 
     const response = await axios.patch(
       `http://localhost:3000/api/dashboard/my-parcel/update-parcel/${parcelID}`,
       updateParcel
     );
     console.log(response.data);
-
-    // console.log(parcelInfo);
-
-    // const response = await axios.post("/api/dashboard/book-parcel", parcelInfo);
-    // const data2 = await response.data;
-    // console.log(data2);
   }
 
   return (
