@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
   const { email } = params;
   await connectDB();
-  const parcel = await Parcel.findOne({ senderEmail: email }).select(
+  const parcel = await Parcel.find({ senderEmail: email }).select(
     "-senderName -senderEmail -senderPhoneNumber -receiverEmail -deliveryAddressLatitude -deliveryAddressLongitude"
   );
   return NextResponse.json(parcel);

@@ -19,7 +19,7 @@ export default function Sidebar() {
     ],
   };
 
-  const role = "admin";
+  const role = "deliveryman";
   const navItems = navMenu[role] || [];
 
   return (

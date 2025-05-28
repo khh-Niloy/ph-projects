@@ -1,3 +1,4 @@
+import { getAllDeliveries } from "@/lib/deliveryman/getAllDeliveries";
 import React from "react";
 import {
   Table,
@@ -8,12 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getParcelinfo } from "@/lib/customer/getParcelinfo";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import CancelButton from "./components/CancelButton";
 
-export default async function MyParcel() {
+export default async function MyDelivery() {
   const tableHead = [
     { id: 1, label: "Receiver Name" },
     { id: 2, label: "Receiver PhoneNumber" },
@@ -25,19 +23,19 @@ export default async function MyParcel() {
     { id: 8, label: "Delivery Charge" },
     { id: 9, label: "Delivery Men ID" },
     { id: 10, label: "Delivery Status" },
-    { id: 11, label: "Pay" },
-    { id: 12, label: "Review" },
-    { id: 13, label: "Update & Cancel" },
+    { id: 11, label: "Location" },
+    { id: 13, label: "Actions" },
   ];
 
-  const email = "Hasib@gmail.com";
+  const email = "deliveryman_3@gmail.com";
 
-  const parcelInfo = await getParcelinfo(email);
-  // console.log(parcelInfo);
+  const allDeliveriesList = await getAllDeliveries(email);
+  console.log(allDeliveriesList);
 
   return (
     <div className="bg-white h-screen">
-      <h1>My Parcel</h1>
+      <h1>MyDelivery</h1>
+
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
@@ -48,9 +46,8 @@ export default async function MyParcel() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {parcelInfo.map(
+          {allDeliveriesList.map(
             ({
-              _id,
               receiverName,
               receiverPhoneNumber,
               requestedDeliveryDate,
@@ -75,27 +72,10 @@ export default async function MyParcel() {
                   <TableCell>{assignedDeliveryManID ?? "-"}</TableCell>
                   <TableCell>{deliverystatus}</TableCell>
                   <TableCell>
-                    <Button variant="outline">Pay</Button>
+                    <Button variant="outline">Location</Button>
                   </TableCell>
                   <TableCell>
-                    <Button variant="outline">Review</Button>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-col gap-5 items-start">
-                      {deliverystatus !== "pending" ? (
-                        <Button disabled variant="outline">
-                          Update
-                        </Button>
-                      ) : (
-                        <Link
-                          href={`/dashboard/my-parcel/update-parcel/${_id}`}
-                        >
-                          <Button variant="outline">Update</Button>
-                        </Link>
-                      )}
-
-                      <CancelButton deliverystatus={deliverystatus} _id={_id} />
-                    </div>
+                    <Button variant="outline">Mark as deliver</Button>
                   </TableCell>
                 </TableRow>
               </>
