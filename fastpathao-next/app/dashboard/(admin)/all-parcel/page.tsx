@@ -67,7 +67,10 @@ export default async function AllParcel() {
                   <TableCell>{deliveryCharge}</TableCell>
                   <TableCell>{deliverystatus}</TableCell>
                   <TableCell>
-                    <AssignButton parcelID={_id} />
+                    <AssignButton
+                      deliverystatus={deliverystatus}
+                      parcelID={_id}
+                    />
                   </TableCell>
                 </TableRow>
               </>

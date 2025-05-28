@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { getParcelinfo } from "@/lib/customer/getParcelinfo";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function MyParcel() {
   const tableHead = [
@@ -28,9 +29,10 @@ export default async function MyParcel() {
     { id: 13, label: "Update & Cancel" },
   ];
 
-  const email = "hasib@gmail.com";
+  const email = "Hasib@gmail.com";
 
   const {
+    _id,
     receiverName,
     receiverPhoneNumber,
     requestedDeliveryDate,
@@ -78,8 +80,20 @@ export default async function MyParcel() {
             </TableCell>
             <TableCell>
               <div className="flex flex-col gap-5 items-start">
-                <Button variant="outline">Update</Button>
-                <Button variant="outline">Cancel</Button>
+                <Link href={`/dashboard/my-parcel/update-parcel/${_id}`}>
+                  <Button
+                    disabled={deliverystatus === "assigned"}
+                    variant="outline"
+                  >
+                    Update
+                  </Button>
+                </Link>
+                <Button
+                  disabled={deliverystatus === "assigned"}
+                  variant="outline"
+                >
+                  Cancel
+                </Button>
               </div>
             </TableCell>
           </TableRow>

@@ -29,7 +29,7 @@ import {
 import { getAllDeliveryMen } from "@/lib/admin/getAllDeliveryMen";
 import axios from "axios";
 
-export default function AssignButton({ parcelID }) {
+export default function AssignButton({ parcelID, deliverystatus }) {
   // const availableDeliveryMenList = await getAllDeliveryMen();
   const [availableDeliveryMenList, setavailableDeliveryMenList] = useState([]);
   const [date, setDate] = React.useState<Date>();
@@ -58,17 +58,15 @@ export default function AssignButton({ parcelID }) {
   }
 
   /* 
-    r1. parcel info -> add deliveryman ID, r2. delivery status -> assigned
-    r5. deliveryman is available status -> false
-    3. disable update and cancel button in the my parcel table
     4. appear pay button
-    6. assigned button will be disabled
   */
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button>Assign</Button>
+      <DialogTrigger disabled={deliverystatus === "assigned"}>
+        <Button disabled={deliverystatus === "assigned"}>{`${
+          deliverystatus === "assigned" ? "Assigned" : "Assign"
+        }`}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
