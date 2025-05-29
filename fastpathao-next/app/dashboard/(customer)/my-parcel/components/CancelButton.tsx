@@ -17,7 +17,6 @@ export default function CancelButton({ deliverystatus, _id }) {
     <Button
       onClick={() => handleCancel(_id)}
       disabled={deliverystatus !== "pending"}
-      variant="outline"
     >
       {deliverystatus === "cancelled" ? "Cancelled" : "Cancel"}
     </Button>

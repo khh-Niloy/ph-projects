@@ -12,6 +12,7 @@ import { getParcelinfo } from "@/lib/customer/getParcelinfo";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import CancelButton from "./components/CancelButton";
+import Review from "./components/Review";
 
 export default async function MyParcel() {
   const tableHead = [
@@ -75,22 +76,20 @@ export default async function MyParcel() {
                   <TableCell>{assignedDeliveryManID ?? "-"}</TableCell>
                   <TableCell>{deliverystatus}</TableCell>
                   <TableCell>
-                    <Button variant="outline">Pay</Button>
+                    <Button>Pay</Button>
                   </TableCell>
                   <TableCell>
-                    <Button variant="outline">Review</Button>
+                    <Review _id={_id} />
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-col gap-5 items-start">
                       {deliverystatus !== "pending" ? (
-                        <Button disabled variant="outline">
-                          Update
-                        </Button>
+                        <Button disabled>Update</Button>
                       ) : (
                         <Link
                           href={`/dashboard/my-parcel/update-parcel/${_id}`}
                         >
-                          <Button variant="outline">Update</Button>
+                          <Button>Update</Button>
                         </Link>
                       )}
 
