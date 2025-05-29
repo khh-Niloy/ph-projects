@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+import MarkAsDeliver from "./components//MarkAsDeliver";
 
 export default async function MyDelivery() {
   const tableHead = [
@@ -30,7 +30,7 @@ export default async function MyDelivery() {
   const email = "deliveryman_3@gmail.com";
 
   const allDeliveriesList = await getAllDeliveries(email);
-  console.log(allDeliveriesList);
+  //   console.log(allDeliveriesList);
 
   return (
     <div className="bg-white h-screen">
@@ -48,6 +48,7 @@ export default async function MyDelivery() {
         <TableBody>
           {allDeliveriesList.map(
             ({
+              _id,
               receiverName,
               receiverPhoneNumber,
               requestedDeliveryDate,
@@ -58,9 +59,11 @@ export default async function MyDelivery() {
               parcelType,
               deliveryCharge,
               deliverystatus,
+              deliveryAddressLatitude,
+              deliveryAddressLongitude,
             }) => (
               <>
-                <TableRow>
+                <TableRow key={_id}>
                   <TableCell>{receiverName}</TableCell>
                   <TableCell>{receiverPhoneNumber}</TableCell>
                   <TableCell>{deliveryAddress}</TableCell>
@@ -72,10 +75,16 @@ export default async function MyDelivery() {
                   <TableCell>{assignedDeliveryManID ?? "-"}</TableCell>
                   <TableCell>{deliverystatus}</TableCell>
                   <TableCell>
-                    <Button variant="outline">Location</Button>
+                    {/* <DeliveryLocation
+                      deliveryAddressLatitude={deliveryAddressLatitude}
+                      deliveryAddressLongitude={deliveryAddressLongitude}
+                    /> */}
                   </TableCell>
                   <TableCell>
-                    <Button variant="outline">Mark as deliver</Button>
+                    <MarkAsDeliver
+                      _id={_id}
+                      assignedDeliveryManID={assignedDeliveryManID}
+                    />
                   </TableCell>
                 </TableRow>
               </>
