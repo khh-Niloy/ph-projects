@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getAllDeliveryMen() {
   const response = await axios.get(
-    `http://localhost:3000/api/dashboard/all-deliverymen`
+    `${process.env.BASE_URL}/api/dashboard/all-deliverymen`
   );
   const data = await response.data;
   return data;

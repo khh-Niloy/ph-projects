@@ -2,37 +2,50 @@
 
 import { getParcelByID } from "@/lib/customer/getParcelByID";
 import { getLocation } from "@/lib/getLocation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function UpdateParcelInfo() {
-  const [parcelInfoDB, setparcelInfoDB] = useState({});
+  type parcelInfo = {
+    senderName: string;
+    senderEmail: string;
+    senderPhoneNumber: string;
+    parcelType: string;
+    parcelWeight: number;
+    deliveryCharge?: number;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    receiverEmail: string;
+    deliveryAddress: string;
+    requestedDeliveryDate: string;
+  };
+  const [parcelInfoDB, setparcelInfoDB] = useState<parcelInfo | null>(null);
   const params = useParams();
   const parcelID = params?.id;
 
   useEffect(() => {
     async function fetchData() {
-      const parcelData = await getParcelByID(parcelID);
+      const parcelData = await getParcelByID(parcelID as string);
       setparcelInfoDB(parcelData);
     }
     fetchData();
-  }, []);
+  }, [parcelID]);
 
-  const {
-    senderName,
-    senderEmail,
-    senderPhoneNumber,
-    parcelType,
-    parcelWeight,
-    deliveryCharge,
-    receiverName,
-    receiverPhoneNumber,
-    receiverEmail,
-    deliveryAddress,
-    requestedDeliveryDate,
-  } = parcelInfoDB;
+  type ParcelFormInputs = {
+    senderName: string;
+    senderEmail: string;
+    senderPhoneNumber: string;
+    parcelType?: string;
+    parcelWeight: number;
+    deliveryCharge?: number;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    receiverEmail: string;
+    deliveryAddress: string;
+    requestedDeliveryDate: string;
+  };
 
   const {
     register,
@@ -41,7 +54,7 @@ export default function UpdateParcelInfo() {
     watch,
     getValues,
     formState: { dirtyFields },
-  } = useForm({});
+  } = useForm<ParcelFormInputs>({});
 
   useEffect(() => {
     setValue("senderName", senderName);
@@ -72,9 +85,25 @@ export default function UpdateParcelInfo() {
     }
 
     setValue("deliveryCharge", calcCharge);
-  }, [weight]);
+  }, [weight, setValue]);
 
-  async function submitBookParcel(data) {
+  if (!parcelInfoDB) return <p>Loading...</p>;
+
+  const {
+    senderName,
+    senderEmail,
+    senderPhoneNumber,
+    parcelType,
+    parcelWeight,
+    deliveryCharge,
+    receiverName,
+    receiverPhoneNumber,
+    receiverEmail,
+    deliveryAddress,
+    requestedDeliveryDate,
+  } = parcelInfoDB;
+
+  async function submitBookParcel(data: ParcelFormInputs) {
     // console.log("Modified fields:", dirtyFields);
 
     const dirtyData = Object.keys(dirtyFields).reduce((acc, key) => {
@@ -84,22 +113,26 @@ export default function UpdateParcelInfo() {
 
     let updateParcel = { ...dirtyData };
 
-    if (dirtyFields.deliveryAddress) {
-      const { lat, lng } = await getLocation(data.deliveryAddress);
-      updateParcel = {
-        ...dirtyData,
-        deliveryAddressLatitude: lat,
-        deliveryAddressLongitude: lng,
-      };
+    try {
+      if (dirtyFields.deliveryAddress) {
+        const { lat, lng } = await getLocation(data.deliveryAddress);
+        updateParcel = {
+          ...dirtyData,
+          deliveryAddressLatitude: lat,
+          deliveryAddressLongitude: lng,
+        };
+      }
+      // console.log(updateParcel);
+      const response = await axios.patch(
+        `${process.env.BASE_URL}/api/dashboard/my-parcel/update-parcel/${parcelID}`,
+        updateParcel
+      );
+      console.log(response.data);
+    } catch (error) {
+      const err = error as AxiosError;
+      console.error(err.message);
+      throw new Error("Failed to submit parcel");
     }
-
-    // console.log(updateParcel);
-
-    const response = await axios.patch(
-      `http://localhost:3000/api/dashboard/my-parcel/update-parcel/${parcelID}`,
-      updateParcel
-    );
-    console.log(response.data);
   }
 
   return (

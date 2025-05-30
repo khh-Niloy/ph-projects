@@ -3,7 +3,10 @@ import { Parcel } from "@/models/parcel.model";
 import { Review } from "@/models/review.model";
 import { NextResponse } from "next/server";
 
-export async function POST(request, { params }) {
+export async function POST(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
   const body = await request.json();
   await connectDB();

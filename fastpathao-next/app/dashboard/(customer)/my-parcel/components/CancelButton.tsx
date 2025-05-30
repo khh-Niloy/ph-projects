@@ -4,10 +4,15 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import React from "react";
 
-export default function CancelButton({ deliverystatus, _id }) {
-  async function handleCancel(_id) {
+type Props = {
+  deliverystatus: string;
+  _id: string;
+};
+
+export default function CancelButton({ deliverystatus, _id }: Props) {
+  async function handleCancel(_id: string) {
     const response = await axios.patch(
-      `http://localhost:3000/api/dashboard/my-parcel/cancel-parcel/${_id}`,
+      `${process.env.BASE_URL}/api/dashboard/my-parcel/cancel-parcel/${_id}`,
       { deliverystatus: "cancelled" }
     );
     console.log(response.data);

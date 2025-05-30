@@ -14,13 +14,17 @@ import {
 import axios from "axios";
 import { useState } from "react";
 
-export default function Review({ _id }) {
-  const [feedback, setfeedback] = useState("");
-  const [rating, setrating] = useState(null);
+type PropsType = {
+  _id: string;
+};
 
-  async function handleSubmitFeedback(_id) {
+export default function Review({ _id }: PropsType) {
+  const [feedback, setfeedback] = useState("");
+  const [rating, setrating] = useState<number | null>(null);
+
+  async function handleSubmitFeedback(_id: string) {
     const response = await axios.post(
-      `http://localhost:3000/api/dashboard/my-parcel/review/${_id}`,
+      `${process.env.BASE_URL}/api/dashboard/my-parcel/review/${_id}`,
       {
         feedback: feedback,
         rating: rating,
@@ -46,7 +50,7 @@ export default function Review({ _id }) {
                 className="border border-black"
               />
               <input
-                onChange={(e) => setrating(e.target.value)}
+                onChange={(e) => setrating(Number(e.target.value))}
                 type="text"
                 className="border border-black"
               />
