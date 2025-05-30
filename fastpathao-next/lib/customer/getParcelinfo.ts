@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getParcelinfo(email) {
+export async function getParcelinfo(email: string) {
   const response = await axios.get(
     `http://localhost:3000/api/dashboard/my-parcel/${email}`
   );

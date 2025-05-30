@@ -15,7 +15,12 @@ import CancelButton from "./components/CancelButton";
 import Review from "./components/Review";
 
 export default async function MyParcel() {
-  const tableHead = [
+  type tableHeadItems = {
+    id: number;
+    label: string;
+  };
+
+  const tableHead: tableHeadItems[] = [
     { id: 1, label: "Receiver Name" },
     { id: 2, label: "Receiver PhoneNumber" },
     { id: 3, label: "Delivery Address" },
@@ -33,8 +38,23 @@ export default async function MyParcel() {
 
   const email = "Hasib@gmail.com";
 
-  const parcelInfo = await getParcelinfo(email);
   // console.log(parcelInfo);
+
+  type ParcelInfo = {
+    _id: string;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    deliveryAddress: string;
+    parcelType: string;
+    requestedDeliveryDate: string;
+    bookingDate: string;
+    approximateDeliveryDate?: string;
+    deliveryCharge: number;
+    assignedDeliveryManID?: string;
+    deliverystatus: string;
+  };
+
+  const parcelInfo: ParcelInfo[] = await getParcelinfo(email);
 
   return (
     <div className="bg-white h-screen">
