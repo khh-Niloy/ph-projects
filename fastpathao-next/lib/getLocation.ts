@@ -1,4 +1,4 @@
-export async function getLocation(address) {
+export async function getLocation(address: string) {
   try {
     const response = await fetch(
       `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
