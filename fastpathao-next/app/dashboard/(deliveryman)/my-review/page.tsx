@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import getAllReviews from "@/lib/deliveryman/getAllReviews";
 import React from "react";
 

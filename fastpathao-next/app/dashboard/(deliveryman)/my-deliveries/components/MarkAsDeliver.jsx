@@ -16,7 +16,7 @@ import axios from "axios";
 export default function MarkAsDeliver({ _id, assignedDeliveryManID }) {
   async function handleDeliver(parcelID) {
     const response = await axios.patch(
-      `${process.env.BASE_URL}/api/dashboard/my-deliveries/update-deliver-status/${parcelID}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/my-deliveries/update-deliver-status/${parcelID}`,
       {
         deliverystatus: "delivered",
         assignedDeliveryManID: assignedDeliveryManID,
