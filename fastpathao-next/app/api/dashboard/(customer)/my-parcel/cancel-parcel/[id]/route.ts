@@ -2,7 +2,10 @@ import connectDB from "@/lib/db";
 import { Parcel } from "@/models/parcel.model";
 import { NextResponse } from "next/server";
 
-export async function PATCH(request, { params }) {
+export async function PATCH(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
 
   const body = await request.json();

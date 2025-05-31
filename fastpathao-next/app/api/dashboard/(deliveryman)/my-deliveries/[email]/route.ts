@@ -3,7 +3,10 @@ import { Deliverymen } from "@/models/deliverymen.model";
 import { Parcel } from "@/models/parcel.model";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }) {
+export async function GET(
+  request: Request,
+  { params }: { params: { email: string } }
+) {
   const { email } = params;
   connectDB();
 

@@ -4,7 +4,10 @@ import { Parcel } from "@/models/parcel.model";
 import { Review } from "@/models/review.model";
 import { NextResponse } from "next/server";
 
-export async function GET(request, { params }) {
+export async function GET(
+  request: Request,
+  { params }: { params: { email: string } }
+) {
   const { email } = params;
   connectDB();
   const deliverymen = await Deliverymen.findOne({ email: email });

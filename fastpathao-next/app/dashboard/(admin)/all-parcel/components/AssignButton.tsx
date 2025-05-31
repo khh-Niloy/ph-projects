@@ -29,7 +29,12 @@ import {
 import { getAllDeliveryMen } from "@/lib/admin/getAllDeliveryMen";
 import axios from "axios";
 
-export default function AssignButton({ parcelID, deliverystatus }) {
+type PropType = {
+  parcelID: string;
+  deliverystatus: string;
+};
+
+export default function AssignButton({ parcelID, deliverystatus }: PropType) {
   // const availableDeliveryMenList = await getAllDeliveryMen();
   const [availableDeliveryMenList, setavailableDeliveryMenList] = useState([]);
   const [date, setDate] = React.useState<Date>();
@@ -43,7 +48,10 @@ export default function AssignButton({ parcelID, deliverystatus }) {
     fetchData();
   }, []);
 
-  async function handleAssignedDeliveryMan(selectedDeliveryManID, date) {
+  async function handleAssignedDeliveryMan(
+    selectedDeliveryManID: string,
+    date: Date | undefined
+  ) {
     console.log(parcelID);
     // console.log(selectedDeliveryManID, date);
     const response = await axios.patch(

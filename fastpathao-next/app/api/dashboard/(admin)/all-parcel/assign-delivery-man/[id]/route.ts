@@ -7,7 +7,10 @@ import { NextResponse } from "next/server";
   r1. parcel info -> add deliveryman ID, add approximateDeliveryDate r2. delivery status -> assigned
   r5. deliveryman is available status -> false 
 */
-export async function PATCH(request, { params }) {
+export async function PATCH(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const { approximateDeliveryDate, assignedDeliveryManID } =
     await request.json();
 

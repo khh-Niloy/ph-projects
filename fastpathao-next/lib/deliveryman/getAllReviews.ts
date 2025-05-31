@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function getAllReviews(email) {
+export default async function getAllReviews(email: string) {
   const response = await axios.get(
     `${process.env.BASE_URL}/api/dashboard/my-review/${email}`
   );

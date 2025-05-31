@@ -12,7 +12,28 @@ import {
 import MarkAsDeliver from "./components//MarkAsDeliver";
 
 export default async function MyDelivery() {
-  const tableHead = [
+  type tableHeadItems = {
+    id: number;
+    label: string;
+  };
+
+  type DeliveryList = {
+    _id: string;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    requestedDeliveryDate: string;
+    bookingDate: string;
+    approximateDeliveryDate: string;
+    deliveryAddress: string;
+    assignedDeliveryManID: string;
+    parcelType: string;
+    deliveryCharge: number;
+    deliverystatus: string;
+    deliveryAddressLatitude: string;
+    deliveryAddressLongitude: string;
+  };
+
+  const tableHead: tableHeadItems[] = [
     { id: 1, label: "Receiver Name" },
     { id: 2, label: "Receiver PhoneNumber" },
     { id: 3, label: "Delivery Address" },
@@ -29,7 +50,7 @@ export default async function MyDelivery() {
 
   const email = "deliveryman_3@gmail.com";
 
-  const allDeliveriesList = await getAllDeliveries(email);
+  const allDeliveriesList: DeliveryList[] = await getAllDeliveries(email);
   //   console.log(allDeliveriesList);
 
   return (

@@ -4,7 +4,16 @@ import React from "react";
 export default async function page() {
   const email = "deliveryman_3@gmail.com";
 
-  const allReviews = await getAllReviews(email);
+  type Review = {
+    _id: string;
+    reviewerName: string;
+    reviewerPhoneNumber: string;
+    rating: number;
+    feedback: string;
+    review_giving_date: string;
+  };
+
+  const allReviews: Review[] = await getAllReviews(email);
   //   console.log(allReviews);
 
   return (

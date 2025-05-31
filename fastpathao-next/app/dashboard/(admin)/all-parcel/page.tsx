@@ -13,7 +13,25 @@ import { getAllParcel } from "@/lib/admin/getAllParcel";
 import AssignButton from "./components/AssignButton";
 
 export default async function AllParcel() {
-  const tableHead = [
+  type tableHeadItems = {
+    id: number;
+    label: string;
+  };
+
+  type AllParcelInfo = {
+    _id: string;
+    senderName: string;
+    senderPhoneNumber: string;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    deliveryAddress: string;
+    requestedDeliveryDate: string;
+    bookingDate: string;
+    deliveryCharge: number;
+    deliverystatus: string;
+  };
+
+  const tableHead: tableHeadItems[] = [
     { id: 1, label: "Sender Name" },
     { id: 2, label: "Sender PhoneNumber" },
     { id: 3, label: "Receiver Name" },
@@ -26,7 +44,7 @@ export default async function AllParcel() {
     { id: 10, label: "Actions" },
   ];
 
-  const allParcelInfo = await getAllParcel();
+  const allParcelInfo: AllParcelInfo[] = await getAllParcel();
 
   return (
     <div className="bg-white h-screen">
