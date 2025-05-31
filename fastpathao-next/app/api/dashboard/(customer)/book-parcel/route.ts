@@ -13,8 +13,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "added to db" }, { status: 201 });
   } catch (error) {
     console.log(error);
+    const err =
+      error instanceof Error ? error.message : "Something went wrong (post)";
     return NextResponse.json(
-      { message: "Error creating parcel", error: error.message },
+      { message: "Error creating parcel", error: err },
       { status: 400 }
     );
   }
