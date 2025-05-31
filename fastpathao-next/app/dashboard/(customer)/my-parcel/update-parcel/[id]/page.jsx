@@ -8,44 +8,17 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function UpdateParcelInfo() {
-  type parcelInfo = {
-    senderName: string;
-    senderEmail: string;
-    senderPhoneNumber: string;
-    parcelType: string;
-    parcelWeight: number;
-    deliveryCharge?: number;
-    receiverName: string;
-    receiverPhoneNumber: string;
-    receiverEmail: string;
-    deliveryAddress: string;
-    requestedDeliveryDate: string;
-  };
-  const [parcelInfoDB, setparcelInfoDB] = useState<parcelInfo | null>(null);
+  const [parcelInfoDB, setparcelInfoDB] = useState(null);
   const params = useParams();
   const parcelID = params?.id;
 
   useEffect(() => {
     async function fetchData() {
-      const parcelData = await getParcelByID(parcelID as string);
+      const parcelData = await getParcelByID(parcelID);
       setparcelInfoDB(parcelData);
     }
     fetchData();
   }, [parcelID]);
-
-  type ParcelFormInputs = {
-    senderName: string;
-    senderEmail: string;
-    senderPhoneNumber: string;
-    parcelType?: string;
-    parcelWeight: number;
-    deliveryCharge?: number;
-    receiverName: string;
-    receiverPhoneNumber: string;
-    receiverEmail: string;
-    deliveryAddress: string;
-    requestedDeliveryDate: string;
-  };
 
   const {
     register,
@@ -54,7 +27,7 @@ export default function UpdateParcelInfo() {
     watch,
     getValues,
     formState: { dirtyFields },
-  } = useForm<ParcelFormInputs>({});
+  } = useForm({});
 
   useEffect(() => {
     setValue("senderName", senderName);
@@ -103,13 +76,16 @@ export default function UpdateParcelInfo() {
     requestedDeliveryDate,
   } = parcelInfoDB;
 
-  async function submitBookParcel(data: ParcelFormInputs) {
+  async function submitBookParcel(data) {
     // console.log("Modified fields:", dirtyFields);
 
-    const dirtyData = Object.keys(dirtyFields).reduce((acc, key) => {
-      acc[key] = getValues(key);
-      return acc;
-    }, {});
+    const dirtyData =
+      Object.keys(dirtyFields).reduc <
+      ((acc, key) => {
+        acc[key] = getValues(key);
+        return acc;
+      },
+      {});
 
     let updateParcel = { ...dirtyData };
 
@@ -129,7 +105,6 @@ export default function UpdateParcelInfo() {
       );
       console.log(response.data);
     } catch (error) {
-      const err = error as AxiosError;
       console.error(err.message);
       throw new Error("Failed to submit parcel");
     }
