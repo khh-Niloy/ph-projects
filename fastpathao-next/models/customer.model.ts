@@ -31,12 +31,15 @@ const CustomerSchema = new mongoose.Schema(
       type: Number,
       require: true,
     },
-    // role: {
-    //   type: String,
-    //   require: true,
-    //   enum: ["deliverymen"],
-    //   default: "deliverymen",
-    // },
+    role: {
+      type: String,
+      enum: ["customer"],
+      default: "deliverymen",
+    },
+    refreshToken: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,

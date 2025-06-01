@@ -55,7 +55,7 @@ export default function AssignButton({ parcelID, deliverystatus }: PropType) {
     console.log(parcelID);
     // console.log(selectedDeliveryManID, date);
     const response = await axios.patch(
-      `/api/dashboard/all-parcel/assign-delivery-man/${parcelID}`,
+      `/api/dashboard/admin/all-parcel/assign-delivery-man/${parcelID}`,
       {
         approximateDeliveryDate: date,
         assignedDeliveryManID: selectedDeliveryManID,

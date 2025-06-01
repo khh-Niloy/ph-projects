@@ -86,7 +86,7 @@ export default async function MyParcel() {
               deliverystatus,
             }) => (
               <>
-                <TableRow>
+                <TableRow key={_id}>
                   <TableCell>{receiverName}</TableCell>
                   <TableCell>{receiverPhoneNumber}</TableCell>
                   <TableCell>{deliveryAddress}</TableCell>
@@ -109,7 +109,7 @@ export default async function MyParcel() {
                         <Button disabled>Update</Button>
                       ) : (
                         <Link
-                          href={`/dashboard/my-parcel/update-parcel/${_id}`}
+                          href={`/dashboard/customer/my-parcel/update-parcel/${_id}`}
                         >
                           <Button>Update</Button>
                         </Link>

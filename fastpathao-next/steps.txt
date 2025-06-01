@@ -1,0 +1,20 @@
+registration 
+
+take info from user
+generate access and refresh token 
+store the user info and refresh token it on db
+
+
+
+login
+
+take info 
+verify user
+if verified -> generate access and refresh token 
+store refresh token it on db
+
+
+
+logout 
+
+remove all tokens from storage and DB

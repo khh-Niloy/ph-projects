@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   await connectDB();
   try {
     const parcel = await Parcel.create(body);
-    revalidatePath("/dashboard/all-parcel");
+    revalidatePath("/dashboard/admin/all-parcel");
 
     return NextResponse.json({ message: "added to db" }, { status: 201 });
   } catch (error) {

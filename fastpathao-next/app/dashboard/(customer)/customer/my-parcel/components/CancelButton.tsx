@@ -12,7 +12,7 @@ type Props = {
 export default function CancelButton({ deliverystatus, _id }: Props) {
   async function handleCancel(_id: string) {
     const response = await axios.patch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/my-parcel/cancel-parcel/${_id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/customer/my-parcel/cancel-parcel/${_id}`,
       { deliverystatus: "cancelled" }
     );
     console.log(response.data);

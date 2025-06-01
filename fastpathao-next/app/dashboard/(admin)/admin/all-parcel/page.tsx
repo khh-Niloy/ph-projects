@@ -76,7 +76,7 @@ export default async function AllParcel() {
               deliverystatus,
             }) => (
               <>
-                <TableRow>
+                <TableRow key={_id}>
                   <TableCell>{senderName}</TableCell>
                   <TableCell>{senderPhoneNumber}</TableCell>
                   <TableCell>{receiverName}</TableCell>

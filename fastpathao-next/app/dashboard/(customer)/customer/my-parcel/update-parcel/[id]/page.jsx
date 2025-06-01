@@ -100,7 +100,7 @@ export default function UpdateParcelInfo() {
       }
       // console.log(updateParcel);
       const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/my-parcel/update-parcel/${parcelID}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/customer/my-parcel/update-parcel/${parcelID}`,
         updateParcel
       );
       console.log(response.data);

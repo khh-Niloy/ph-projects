@@ -24,7 +24,7 @@ export default function Review({ _id }: PropsType) {
 
   async function handleSubmitFeedback(_id: string) {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/my-parcel/review/${_id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboard/customer/my-parcel/review/${_id}`,
       {
         feedback: feedback,
         rating: rating,
