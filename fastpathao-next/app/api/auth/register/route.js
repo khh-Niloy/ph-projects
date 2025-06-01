@@ -2,6 +2,7 @@ import { Customer } from "@/models/customer.model";
 import createAccessToken from "@/lib/token/createAccessToken";
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
+import { cookies } from "next/headers";
 
 export async function POST(request) {
   const body = await request.json();
@@ -26,10 +27,9 @@ export async function POST(request) {
 
   const accessToken = await createAccessToken(userPlayload);
 
+  cookies().set("access-token", accessToken);
+
   console.log(accessToken);
 
-  return NextResponse.json(
-    { message: "user added to db", accessToken: accessToken },
-    { status: 201 }
-  );
+  return NextResponse.json({ message: "user added to db" }, { status: 201 });
 }

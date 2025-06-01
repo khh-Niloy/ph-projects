@@ -45,7 +45,7 @@ export default function Register() {
       const responseData = await response.json();
       console.log(responseData);
 
-      localStorage.setItem("access-token", responseData.accessToken);
+      // localStorage.setItem("access-token", responseData.accessToken);
 
       console.log(responseData);
     } catch (error) {
