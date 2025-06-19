@@ -77,8 +77,8 @@ const AddEquipment = () => {
 
         <div className="hero">
           <div className="hero-content flex-col sm:w-[90%]">
-            <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
-              <form onSubmit={handleSubmit} className="card-body text-black">
+            <div className="card bg-[#12131a] w-full shrink-0 shadow-2xl">
+              <form onSubmit={handleSubmit} className="card-body text-white">
                 <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
                   <div className="form-control lg:col-span-3">
                     <label className="label">
@@ -147,7 +147,7 @@ const AddEquipment = () => {
                     </label>
                     <textarea
                       name="description"
-                      className="border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
+                      className="bg-[#191A23] border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
                       id=""
                       cols="30"
                       rows="3"
@@ -207,7 +207,7 @@ const AddEquipment = () => {
                       </span>
                     </label>
                     <textarea
-                      className="border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
+                      className="bg-[#191A23] border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
                       name="customization"
                       id=""
                       cols="30"
@@ -224,7 +224,7 @@ const AddEquipment = () => {
                     </label>
                     <textarea
                       name="briefdescription"
-                      className="border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
+                      className="bg-[#191A23] border border-black/15 rounded-xl resize-none p-3 focus:outline-black/5"
                       id=""
                       cols="30"
                       rows="3"

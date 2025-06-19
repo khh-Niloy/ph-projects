@@ -194,9 +194,9 @@ const Navbar = () => {
             alt=""
           />
 
-          <button onClick={toggleDarkMode} className="text-xl mr-3">
+          {/* <button onClick={toggleDarkMode} className="text-xl mr-3">
             {isDarkMode ? <PiSunFill></PiSunFill> : <IoMoon></IoMoon>}
-          </button>
+          </button> */}
         </div>
       </div>
       <Tooltip id="my-tooltip" className="z-50" />

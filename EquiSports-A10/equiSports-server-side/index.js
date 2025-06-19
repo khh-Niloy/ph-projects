@@ -5,10 +5,14 @@ var cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.m65dh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://khhniloy0:xWHroCdA4S4fsrqg@cluster0.m65dh.mongodb.net/equiSports-react?retryWrites=true&w=majority&appName=Cluster0`;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -39,7 +43,7 @@ async function run() {
       const result = await equipmentCollcetion.findOne(query);
       res.send(result);
     });
-    
+
     //Dynamic mail
     app.get("/equipments/userEmail/:userEmail", async (req, res) => {
       const userEmail = req.params.userEmail;

@@ -4,7 +4,6 @@ import { AuthContext } from "../Context/AuthContextProvider";
 import { DarkModeContext } from "../DarkModeProvider/DarkModeProvider";
 import { Helmet } from "react-helmet";
 
-
 const Update = () => {
   const data = useLoaderData();
   const { user, toastShow } = useContext(AuthContext);

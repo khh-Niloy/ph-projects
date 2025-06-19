@@ -48,7 +48,7 @@ const AllEquipements = () => {
           {tableData.map((e) => (
             <div
               key={e._id}
-              className={`hover:scale-[1.03] duration-300 card card-compact ${
+              className={`flex flex-col justify-between hover:scale-[1.03] duration-300 card card-compact ${
                 isDarkMode ? "bg-[#242532]" : "bg-base-100"
               } shadow-xl`}
             >
@@ -77,14 +77,14 @@ const AllEquipements = () => {
                     Price: ${e.price}
                   </h2>
                   <h2 className="text-sm font-normal leading-[1.4] line-clamp-3">
-                  Rating: {e.rating}/5
+                    Rating: {e.rating}/5
                   </h2>
                 </div>
                 <h2 className="text-sm font-normal leading-[1.4] line-clamp-3">
                   {e.stockStatus} available
                 </h2>
                 <h2 className="text-sm font-normal leading-[1.4] line-clamp-3">
-                Processing Time: {e.processingTime} days
+                  Processing Time: {e.processingTime} days
                 </h2>
                 <Link to={`/detailes/${e._id}`}>
                   <button

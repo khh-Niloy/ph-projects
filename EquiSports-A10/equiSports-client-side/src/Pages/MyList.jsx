@@ -9,10 +9,11 @@ const MyList = () => {
   const { user } = useContext(AuthContext);
   const [equipementData, setequipementData] = useState([]);
   const { toggleDarkMode, isDarkMode } = useContext(DarkModeContext);
+  console.log(user?.email);
 
   useEffect(() => {
     fetch(
-      `https://equi-sports-server-side.vercel.app/equipments/userEmail/${user.email}`
+      `https://equi-sports-server-side.vercel.app/equipments/userEmail/${user?.email}`
     )
       .then((res) => res.json())
       .then((data) => setequipementData(data));

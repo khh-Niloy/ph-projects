@@ -177,7 +177,7 @@ const Home = () => {
                   <img
                     src={e.image}
                     alt="Shoes"
-                    className="w-full object-cover"
+                    className="w-full object-cover h-full"
                   />
                 </div>
               </figure>

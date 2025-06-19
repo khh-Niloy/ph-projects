@@ -1,9 +1,9 @@
 import React from "react";
 
 const TopSelling = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   const grid = data.slice(0, 4);
-  console.log(grid);
+  // console.log(grid);
   return (
     <div className="grid sm:grid-cols-4 grid-cols-1 gap-2 sm:gap-0 w-full mx-auto">
       {grid.map((e) => (
