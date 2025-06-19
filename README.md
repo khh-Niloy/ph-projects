@@ -16,7 +16,7 @@ A Full-Stack Restaurant Management Platform Built with **React.js**, **React Rou
 
 # EquiSports – Redefining Sports Management
 A Comprehensive Sports Management Platform Built with **React**, **React Router**, **Firebase**, **Tailwind CSS**, **Context API**, and **NPM Packages** on the Client Side, Offering Secure Authentication, Dynamic Features, and a Fully **Responsive** Design. Powered by **Express.js**, **Middleware (CORS)**, and **MongoDB** on the Server Side, Deployed to Vercel for Seamless Performance Across All Devices.
-## Live site: [EquiSports](https://reliable-beijinho-b77bf7.netlify.app/) | Source Code: [EquiSports](https://github.com/khh-Niloy/ph-projects/tree/main/EquiSports-A10)
+## Live site: [EquiSports](https://equisports-1c3a0.web.app/) | Source Code: [EquiSports](https://github.com/khh-Niloy/ph-projects/tree/main/EquiSports-A10)
 ![Screenshot](thumb-images/EquiSports.png)
 
 <hr/>
