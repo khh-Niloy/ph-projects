@@ -4,9 +4,7 @@ EquiSports is a dynamic online platform for sports enthusiasts, offering a seaml
 
 ## Live Demo
 
-- [Firebase-1](https://nextstep-5556e.web.app/)
-- [Firebase-2](https://nextstep-5556e.firebaseapp.com/)
-- [Netlify](https://reliable-beijinho-b77bf7.netlify.app/)
+- [Firebase](https://equisports-1c3a0.web.app/)
 
 ![Screenshot](EquiSports.png)
 
